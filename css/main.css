@@ -369,7 +369,7 @@ img[lazyload] {
   --post-link-color: #0366d6;
   --link-hover-color: #30a9de;
   --link-hover-bg-color: #f8f9fa;
-  --navbar-bg-color: #6D7993;
+  --navbar-bg-color: #494e6b;
   --navbar-text-color: #fff;
   --scrollbar-color: #c4c6c9;
   --scrollbar-hover-color: #a6a6a6;
@@ -438,6 +438,22 @@ img[lazyload] {
   :root:not([data-user-color-scheme]) .markdown-body hr {
     border-top-color: #435266;
     transition: border-top-color 0.2s ease-in-out;
+  }
+  @supports (-webkit-backdrop-filter: blur(3px)) or (backdrop-filter: blur(3px)) {
+    :root:not([data-user-color-scheme]) .navbar .dropdown-collapse,
+    :root:not([data-user-color-scheme]) .top-nav-collapse,
+    :root:not([data-user-color-scheme]) .navbar-col-show {
+      background: rgba(6,47,79,0.8);
+      -webkit-backdrop-filter: blur(3px);
+      backdrop-filter: blur(3px);
+    }
+  }
+  @supports not ((-webkit-backdrop-filter: blur(3px)) or (backdrop-filter: blur(3px))) {
+    :root:not([data-user-color-scheme]) .navbar .dropdown-collapse,
+    :root:not([data-user-color-scheme]) .top-nav-collapse,
+    :root:not([data-user-color-scheme]) .navbar-col-show {
+      background: #062f4f;
+    }
   }
   :root:not([data-user-color-scheme]) .note :not(pre) > code {
     background-color: rgba(27,31,35,0.05);
@@ -511,6 +527,22 @@ img[lazyload] {
 [data-user-color-scheme='dark'] .markdown-body hr {
   border-top-color: #435266;
   transition: border-top-color 0.2s ease-in-out;
+}
+@supports (-webkit-backdrop-filter: blur(3px)) or (backdrop-filter: blur(3px)) {
+  [data-user-color-scheme='dark'] .navbar .dropdown-collapse,
+  [data-user-color-scheme='dark'] .top-nav-collapse,
+  [data-user-color-scheme='dark'] .navbar-col-show {
+    background: rgba(6,47,79,0.8);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
+}
+@supports not ((-webkit-backdrop-filter: blur(3px)) or (backdrop-filter: blur(3px))) {
+  [data-user-color-scheme='dark'] .navbar .dropdown-collapse,
+  [data-user-color-scheme='dark'] .top-nav-collapse,
+  [data-user-color-scheme='dark'] .navbar-col-show {
+    background: #062f4f;
+  }
 }
 [data-user-color-scheme='dark'] .note :not(pre) > code {
   background-color: rgba(27,31,35,0.05);
@@ -876,10 +908,21 @@ img[lazyload] {
   -o-transform: rotate(-135deg);
   transform: rotate(-135deg);
 }
-.navbar .dropdown-collapse,
-.top-nav-collapse,
-.navbar-col-show {
-  background-color: var(--navbar-bg-color);
+@supports (-webkit-backdrop-filter: blur(3px)) or (backdrop-filter: blur(3px)) {
+  .navbar .dropdown-collapse,
+  .top-nav-collapse,
+  .navbar-col-show {
+    background: rgba(73,78,107,0.8);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
+}
+@supports not ((-webkit-backdrop-filter: blur(3px)) or (backdrop-filter: blur(3px))) {
+  .navbar .dropdown-collapse,
+  .top-nav-collapse,
+  .navbar-col-show {
+    background: #494e6b;
+  }
 }
 @media (max-width: 767px) {
   .navbar {
