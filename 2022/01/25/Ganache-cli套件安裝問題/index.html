@@ -19,13 +19,13 @@
     <meta name="description" content="背景最近在學solidity，主要是用在以太坊的開發上 這是一個相對比較新的語言，很多套件都還處在快速更新期 所以在學習時很多資源其實多少都會跟不上最新的版本更新 常常會遇到奇怪的bug 因此想要整理一下我在學習的過程中遇到那些困難 又用了哪些方法來workaround 如果你覺得有更好的解法，務必隨時跟我反應 (可以直接用messanger敲我ヽ(✿ﾟ▽ﾟ)ノ，在「關於我」那邊)  這一個月會持">
 <meta property="og:type" content="article">
 <meta property="og:title" content="那些在Solidity中碰上的意外">
-<meta property="og:url" content="https://lzydaphne.github.io/2022/01/25/%E9%82%A3%E4%BA%9B%E5%9C%A8Solidity%E4%B8%AD%E7%A2%B0%E4%B8%8A%E7%9A%84%E6%84%8F%E5%A4%96/index.html">
+<meta property="og:url" content="https://lzydaphne.github.io/2022/01/25/Ganache-cli%E5%A5%97%E4%BB%B6%E5%AE%89%E8%A3%9D%E5%95%8F%E9%A1%8C/index.html">
 <meta property="og:site_name" content="On the Road">
 <meta property="og:description" content="背景最近在學solidity，主要是用在以太坊的開發上 這是一個相對比較新的語言，很多套件都還處在快速更新期 所以在學習時很多資源其實多少都會跟不上最新的版本更新 常常會遇到奇怪的bug 因此想要整理一下我在學習的過程中遇到那些困難 又用了哪些方法來workaround 如果你覺得有更好的解法，務必隨時跟我反應 (可以直接用messanger敲我ヽ(✿ﾟ▽ﾟ)ノ，在「關於我」那邊)  這一個月會持">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://lzydaphne.github.io/assets/solidity.jpg">
 <meta property="article:published_time" content="2022-01-25T07:53:28.000Z">
-<meta property="article:modified_time" content="2022-01-26T14:19:08.156Z">
+<meta property="article:modified_time" content="2022-01-25T13:58:08.626Z">
 <meta property="article:author" content="lzydaphne">
 <meta property="article:tag" content="Solidity">
 <meta property="article:tag" content="Ganache">
@@ -205,7 +205,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.6k 字
+      1.6k 字
     </span>
   
 
@@ -214,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      22 分鐘
+      14 分鐘
     </span>
   
 
@@ -247,7 +247,7 @@
             
               <p class="note note-info">
                 
-                  本文最後更新於：2022年1月26日 晚上
+                  本文最後更新於：2022年1月25日 晚上
                 
               </p>
             
@@ -297,41 +297,7 @@
 <p><a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows/issues/708"><code>nvm use</code> reports that the version was not installed or could not be found · Issue #708 · coreybutler/nvm-windows (github.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://ethereum.stackexchange.com/questions/102330/error-cannot-find-module-ganache-cli">contract deployment - Error: Cannot find module ‘ganache-cli’ - Ethereum Stack Exchange</a></p>
 <p><a target="_blank" rel="noopener" href="https://ethereum.stackexchange.com/questions/119134/brownie-unable-to-launch-local-rpc-client">Brownie: Unable to launch local RPC client - Ethereum Stack Exchange</a></p>
-<h2 id="3-Brownie匯入github的外部合約，compile後出現報錯"><a href="#3-Brownie匯入github的外部合約，compile後出現報錯" class="headerlink" title="3. Brownie匯入github的外部合約，compile後出現報錯"></a>3. Brownie匯入github的外部合約，compile後出現報錯</h2><p>首先是因為匯入的<code>pragma</code>版本問題，需要確定這個外部合約使用的是什麼版本的solidity</p>
-<p>我自己出錯的原因可能是因為這項:</p>
-<blockquote>
-<p>When the compiler version is not explicitly declared, Brownie looks at the <a target="_blank" rel="noopener" href="https://solidity.readthedocs.io/en/latest/layout-of-source-files.html#version-pragma">version pragma</a> of each contract and <strong>uses the latest matching compiler version that has been installed</strong>. </p>
-</blockquote>
-<p>我本地的電腦已經安裝了最新的v0.8.11，</p>
-<p>但是嘗試過後發現，似乎無法利用問題1的解法(手動改變編譯版本)來解決</p>
-<p>目前推測是因為在「沒有在<code>brownie-config.yaml</code>中指定版本」的情況下，Brownie會直接選取已安裝的最新編譯器，也就是我的v0.8.11來進行編譯</p>
-<p>解決辦法: <code>brownie-config.yaml</code>中設定版本</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">compiler:</span><br>    <span class="hljs-attr">solc:</span><br>        <span class="hljs-attr">version:</span> <span class="hljs-number">0.</span><span class="hljs-string">x.y</span><br></code></pre></td></tr></table></figure>
-
-
-
-<p>其他學到的知識點:</p>
-<ol>
-<li><p>Brownie可以處理多種版本的import，solidity不行</p>
-<ul>
-<li><p>以v0.6編譯的合約，如果import進v0.8，solidity會報錯</p>
-</li>
-<li><p>以v0.6編譯的合約，import進以v0.8編譯的合約，solidity不會報錯</p>
-</li>
-</ul>
-</li>
-<li><p>Brownie會先在interface的<code>pragma</code> config中找到最新的版本，優先順序是在<code>brownie-config.yaml</code>之前的，所以本來的<code>brownie-config.yaml</code>設置可能會被覆蓋</p>
-</li>
-<li><p>同時，comment起來的<code>pragma</code> config還是會被編譯，這是Brownie的bug</p>
-</li>
-<li><p>如果在<code>brownie-config.yaml</code>中設定明確的版本，整個合約都會用那個版本來編譯</p>
-</li>
-</ol>
-<p>資料來源:</p>
-<p><a target="_blank" rel="noopener" href="https://eth-brownie.readthedocs.io/en/stable/compile.html">Compiling Contracts — Brownie 1.17.2 documentation (eth-brownie.readthedocs.io)</a></p>
-<p><a target="_blank" rel="noopener" href="https://ethereum.stackexchange.com/questions/102470/brownie-compile-using-different-compiler-version-than-specified-in-configurati">‘Brownie compile’ using different compiler version than specified in configuration file - Ethereum Stack Exchange</a></p>
-<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/69819748/v0-8-aggregatorv3interface-sol-its-available-in-chainlink-contracts">brownie - v0.8 AggregatorV3Interface.sol , its available in @chainlink/contracts? - Stack Overflow</a></p>
-<h2 id="4-安裝Truffle報錯"><a href="#4-安裝Truffle報錯" class="headerlink" title="4. 安裝Truffle報錯"></a>4. 安裝Truffle報錯</h2><p>待解決…</p>
+<h2 id="3-安裝Truffle報錯"><a href="#3-安裝Truffle報錯" class="headerlink" title="3. 安裝Truffle報錯"></a>3. 安裝Truffle報錯</h2><p>待解決…</p>
 
             </div>
             <hr>
@@ -364,18 +330,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/25/Ganache-cli%E5%A5%97%E4%BB%B6%E5%AE%89%E8%A3%9D%E5%95%8F%E9%A1%8C/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">那些在Solidity中碰上的意外</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/01/21/build-hexo-blog/">
-                        <span class="hidden-mobile">build_hexo_blog</span>
+                      <a href="/2022/01/25/%E9%82%A3%E4%BA%9B%E5%9C%A8Solidity%E4%B8%AD%E7%A2%B0%E4%B8%8A%E7%9A%84%E6%84%8F%E5%A4%96/">
+                        <span class="hidden-mobile">那些在Solidity中碰上的意外</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
