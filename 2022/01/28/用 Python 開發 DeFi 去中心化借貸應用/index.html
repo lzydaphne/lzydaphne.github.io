@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://lzydaphne.github.io/assets/DeFi.jpg">
 <meta property="article:published_time" content="2022-01-28T15:35:59.000Z">
-<meta property="article:modified_time" content="2022-01-28T16:05:27.848Z">
+<meta property="article:modified_time" content="2022-01-28T16:09:23.357Z">
 <meta property="article:author" content="lzydaphne">
 <meta property="article:tag" content="Solidity">
 <meta property="article:tag" content="Python">
@@ -361,13 +361,13 @@
 </ol>
 </li>
 <li>您應該會看到您的 MetaMask 餘額減少。這是因為我們正在<strong>將 ETH 換成 WETH。</strong></li>
-<li>為了查看我們的新余額，進入 MetaMask，然後點擊添加令牌。然後，在自定義令牌下輸入地址 0xd0a1e359811322d97991e03f863a0c30c2cf029c。<ol>
+<li>為了查看我們的新餘額，進入 MetaMask，然後點擊添加令牌。然後，在自定義令牌下輸入地址 0xd0a1e359811322d97991e03f863a0c30c2cf029c。<ol>
 <li>這是 Kovan 測試網上 Wrapped Ether 代幣的合約地址。</li>
 <li>你會注意到現在總共不到 2 個 ETH (1 + 0.99 != 2)。這是因為每次在區塊鏈上進行交易時，都需要支付一點 gas。<ol>
 <li>gas 是一種向礦工和驗證者支付少量交易費用的方式。有兩種 gas：<ol>
 <li>TransactionGas2、</li>
 <li>OracleGas</li>
-<li>在本教程中，我們只需要關注 transaction gas。</li>
+<li>在這個專案中，我們只需要關注 transaction gas。</li>
 </ol>
 </li>
 </ol>
@@ -643,7 +643,7 @@
 <p>我們可以從 Aave 文檔中了解更多關於智能合約中的存款功能。</p>
 <h3 id="Etherscan-上-Kovan-測試網的例子"><a href="#Etherscan-上-Kovan-測試網的例子" class="headerlink" title="Etherscan 上 Kovan 測試網的例子"></a>Etherscan 上 Kovan 測試網的例子</h3><p>如果你正確地完成了這部分，你會得到一個交易哈希，它會告訴你發生了什麼。</p>
 <p>讓我們看一個關於 Etherscan 上 Kovan 測試網的例子。</p>
-<p><img src="C:/Users/daphn/AppData/Roaming/Typora/typora-user-images/image-20220129000032424.png" srcset="/img/loading.gif" lazyload alt="image-20220129000032424"></p>
+<p><img src="/assets/t3.png" srcset="/img/loading.gif" lazyload alt="image-20220129000032424"></p>
 <p>如果我們查看 Tokens Transferred 部分，我們可以看到 <strong>1 筆存款交易發生了 3 筆交易</strong>。</p>
 <p>按順序，這些是：</p>
 <ul>
@@ -677,7 +677,7 @@
 <li>您的健康因素是您貸款的抵押品數量。</li>
 <li>假設我存入了 1 ETH，借了 0.5 ETH。如果清算閾值為 1，那麼我的健康係數將為 2。</li>
 </ul>
-<p><img src="C:/Users/daphn/AppData/Roaming/Typora/typora-user-images/image-20220129000045954.png" srcset="/img/loading.gif" lazyload alt="image-20220129000045954"></p>
+<p><img src="/assets/t2.png" srcset="/img/loading.gif" lazyload alt="image-20220129000045954"></p>
 <p><strong>清算門檻( liquidation threshold  )<strong>是貸款</strong>被定義為抵押不足的百分比</strong>。</p>
 <ul>
 <li><p>例如，清算門檻為 80% 意味著如果<strong>價值超過抵押品的 80%，則貸款抵押不足，可以清算</strong>。</p>
@@ -791,7 +791,8 @@
 <li>onBehalfOf 值，即誰將承擔債務</li>
 </ul>
 <p>讓我們看一下 Etherscan 上這筆交易的樣本，以了解剛剛發生的事情。</p>
-<p><img src="C:/Users/daphn/AppData/Roaming/Typora/typora-user-images/image-20220129000101990.png" srcset="/img/loading.gif" lazyload alt="image-20220129000101990"></p>
+<p><img src="/assets/post1.PNG" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="/assets/t1.png" srcset="/img/loading.gif" lazyload alt="image-20220129000101990"></p>
 <p>按順序，代幣轉移的方向是：</p>
 <ul>
 <li>Aave 協議正在鑄造一些 aDAI</li>
@@ -839,9 +840,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Side-Project/">Side Project</a>
-                    
                       <a class="hover-with-bg" href="/categories/Code/">Code</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Side-Project/">Side Project</a>
                     
                       <a class="hover-with-bg" href="/categories/Crypto/">Crypto</a>
                     
