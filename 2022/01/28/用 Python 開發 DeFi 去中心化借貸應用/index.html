@@ -25,11 +25,11 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://lzydaphne.github.io/assets/DeFi.jpg">
 <meta property="article:published_time" content="2022-01-28T15:35:59.000Z">
-<meta property="article:modified_time" content="2022-01-28T15:56:12.632Z">
+<meta property="article:modified_time" content="2022-01-28T16:05:27.848Z">
 <meta property="article:author" content="lzydaphne">
 <meta property="article:tag" content="Solidity">
-<meta property="article:tag" content="Brownie">
 <meta property="article:tag" content="Python">
+<meta property="article:tag" content="Brownie">
 <meta property="article:tag" content="Defi">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://lzydaphne.github.io/assets/DeFi.jpg">
@@ -215,7 +215,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      144 分鐘
+      139 分鐘
     </span>
   
 
@@ -248,7 +248,7 @@
             
               <p class="note note-info">
                 
-                  本文最後更新於：2022年1月28日 晚上
+                  本文最後更新於：2022年1月29日 凌晨
                 
               </p>
             
@@ -283,8 +283,8 @@
 <ol>
 <li>把ETH存進WETH 合約會讓你拿到WETH Token</li>
 <li>所以我們需要先呼叫WETH 合約的deposit()<ol>
-<li>如何呼叫合約呢? 透過==合約地址和合約abi==</li>
-<li>怎麼取得合約地址和合約abi?   ==abi = interface(address)==<ol>
+<li>如何呼叫合約呢? 透過合約地址和合約abi</li>
+<li>怎麼取得合約地址和合約abi?   abi = interface(address)<ol>
 <li>透過「本地自定或config」(地址)以及「 WETH 的 Interface (<code>IWeth.sol</code>)」(abi)!</li>
 <li>先取得address，再利用address取得abi</li>
 <li><code>IWeth.sol</code> 裡面包含了 <code>ERC20</code> 合約的所有方法</li>
@@ -352,8 +352,7 @@
 
 
 
-<h2 id="1-將ETH換成-WETH-By-AAVE"><a href="#1-將ETH換成-WETH-By-AAVE" class="headerlink" title="1. 將ETH換成 WETH(By AAVE)"></a>1. 將ETH換成 WETH(By AAVE)</h2><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAxMjUyNDQ5OA==&mid=2653576511&idx=1&sn=f801e6fd57da1609a8a4f361d8fbc6cb&chksm=806e7382b719fa94b728a56f3034317036624771ca2ce60db4715b808cfcf3c1af5b21e7aa35&scene=21#wechat_redirect">用 Python 开发 DeFi 去中心化借贷应用 (qq.com)</a></p>
-<blockquote>
+<h2 id="1-將ETH換成-WETH-By-AAVE"><a href="#1-將ETH換成-WETH-By-AAVE" class="headerlink" title="1. 將ETH換成 WETH(By AAVE)"></a>1. 將ETH換成 WETH(By AAVE)</h2><blockquote>
 <p>我們使用 <code>./scripts/get_weth.py</code> 腳本中的 <code>get_weth</code> 函數完成了此操作。</p>
 </blockquote>
 <h3 id="測試網上的第一筆交易！"><a href="#測試網上的第一筆交易！" class="headerlink" title="測試網上的第一筆交易！"></a>測試網上的第一筆交易！</h3><ol>
@@ -396,7 +395,7 @@
 <li>我們可以<strong>使用該interfaces 接口，因為它可以編譯為 ABI</strong>。<ol>
 <li>編譯後的項目將合約放入 build 文件夾中。</li>
 <li>如果我們查看 build 下的 interfaces 文件夾，我們可以看到一個名為 WethInterface.json 的文件。在該文件夾中，有一個名為 abi 的密鑰。<ul>
-<li>==ABI 代表 APP 二進制接口，是<strong>程序了解如何與合約交互的標準方式</strong>，簡單來說，就是每個合約的「使用手冊」==</li>
+<li>ABI 代表 APP 二進制接口，是<strong>程序了解如何與合約交互的標準方式</strong>，簡單來說，就是每個合約的「使用手冊」</li>
 </ul>
 </li>
 <li>我們可以通過創建一個這樣的 <strong>weth 變數</strong>來<strong>將地址和 ABI 添加到一個對像</strong>中以供我們交互</li>
@@ -439,20 +438,60 @@
 </li>
 </ol>
 <h4 id="2-何謂interface接口"><a href="#2-何謂interface接口" class="headerlink" title="2.何謂interface接口?"></a><strong>2.何謂interface接口?</strong></h4><ol>
-<li><p>接口就是一組「可以面向外部的共同的調用方法」</p>
+<li>接口就是一組「可以面向外部的共同的調用方法」</li>
+<li>對於外部程序來說，如果繼承了這個接口，那麼這個合約一定包含接口中的方法和實現</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">pragma solidity ^<span class="hljs-number">0.4</span><span class="hljs-number">.19</span>;<br>interface Cash &#123;<br>    function receive(address recipient, uint amount) external;<br>    function getRemain(address cashAccount) external;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-函式的modifier宣告的順序"><a href="#3-函式的modifier宣告的順序" class="headerlink" title="3.函式的modifier宣告的順序"></a>3.函式的modifier宣告的順序</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.soliditylang.org/en/v0.8.11/style-guide.html?highlight=constructor#function-declaration">Style Guide — Solidity 0.8.11 documentation (soliditylang.org)</a></li>
+</ul>
+<ol>
+<li>Visibility</li>
+<li>Mutability</li>
+<li>Virtual</li>
+<li>Override</li>
+<li>Custom modifiers</li>
+</ol>
+<h4 id="4-Constructor-怎麼用"><a href="#4-Constructor-怎麼用" class="headerlink" title="4.Constructor 怎麼用?"></a>4.<code>Constructor</code> 怎麼用?</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www-tutorialspoint-com.translate.goog/solidity/solidity_constructors.htm?_x_tr_sl=en&_x_tr_tl=zh-TW&_x_tr_hl=zh-TW&_x_tr_pto=op,sc">Solidity - Constructors (www-tutorialspoint-com.translate.goog)</a></li>
+</ul>
+<ol>
+<li>用來初始化該合約的state variable</li>
+<li>是選擇性使用的<ol>
+<li>有用<ol>
+<li>每個合約只能有一個</li>
+<li>當該合約被建立，<code>Constructor</code> 就會執行</li>
+</ol>
 </li>
-<li><p>對於外部程序來說，==如果繼承了這個接口，那麼這個合約一定包含接口中的方法和實現==</p>
+<li>沒用<ol>
+<li>一個default constructor 會自動出現在合約</li>
+</ol>
 </li>
-<li><p>```python<br>pragma solidity ^0.4.19;<br>interface Cash {</p>
-<div class="code-wrapper"><pre><code class="hljs">function receive(address recipient, uint amount) external;
-function getRemain(address cashAccount) external;
-</code></pre></div>
-<p>}</p>
-<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs oxygene"><br><span class="hljs-number">4</span>. [(<span class="hljs-number">6</span>条消息) 区块链笔记：智能合约高级特性: 事件、接口、函数修改器_Johnny的专栏-CSDN博客](https:<span class="hljs-comment">//blog.csdn.net/Tyro_java/article/details/105007589)</span><br><br>#### <span class="hljs-number">3</span>.函式的modifier宣告的順序<br><br>- [Style Guide — Solidity <span class="hljs-number">0.8</span>.<span class="hljs-number">11</span> documentation (soliditylang.org)](https:<span class="hljs-comment">//docs.soliditylang.org/en/v0.8.11/style-guide.html?highlight=constructor#function-declaration)</span><br><br><span class="hljs-number">1</span>. Visibility<br><span class="hljs-number">2</span>. Mutability<br><span class="hljs-number">3</span>. <span class="hljs-keyword">Virtual</span><br><span class="hljs-number">4</span>. <span class="hljs-keyword">Override</span><br><span class="hljs-number">5</span>. Custom modifiers<br><br>#### <span class="hljs-number">4</span>.`<span class="hljs-function"><span class="hljs-keyword">Constructor</span>` 怎麼用?</span><br><span class="hljs-function"></span><br><span class="hljs-function">- [<span class="hljs-title">Solidity</span> - <span class="hljs-title">Constructors</span> <span class="hljs-params">(www-tutorialspoint-com.translate.goog)</span>]<span class="hljs-params">(https://www-tutorialspoint-com.translate.goog/solidity/solidity_constructors.htm?_x_tr_sl=en&amp;_x_tr_tl=zh-TW&amp;_x_tr_hl=zh-TW&amp;_x_tr_pto=op,sc)</span></span><br><span class="hljs-function"></span><br><span class="hljs-function">1. 用來初始化該合約的<span class="hljs-title">state</span> <span class="hljs-title">variable</span></span><br><span class="hljs-function">2. 是選擇性使用的</span><br><span class="hljs-function">   1. 有用</span><br><span class="hljs-function">      1. 每個合約只能有一個</span><br><span class="hljs-function">      2. 當該合約被建立，`<span class="hljs-title">Constructor</span>` 就會執行</span><br><span class="hljs-function">   2. 沒用</span><br><span class="hljs-function">      1. 一個<span class="hljs-title">default</span> <span class="hljs-title">constructor</span> 會自動出現在合約</span><br><span class="hljs-function">3. 執行完畢，`<span class="hljs-title">final</span> <span class="hljs-title">code</span>`會被部屬到鏈上</span><br><span class="hljs-function">   1. <span class="hljs-title">YES</span>:</span> `<span class="hljs-keyword">public</span>` <span class="hljs-function"><span class="hljs-keyword">function</span>  + `<span class="hljs-title">code</span> <span class="hljs-title">reachable</span> <span class="hljs-title">through</span> <span class="hljs-title">public</span> <span class="hljs-title">functions</span>`</span><br><span class="hljs-function">   2. <span class="hljs-title">NO</span>:</span>  `<span class="hljs-function"><span class="hljs-keyword">Constructor</span> <span class="hljs-title">code</span>` + `<span class="hljs-title">any</span> <span class="hljs-title">internal</span> <span class="hljs-title">method</span> <span class="hljs-title">used</span> <span class="hljs-title">only</span> <span class="hljs-title">by</span> <span class="hljs-title">constructor</span>`</span><br><span class="hljs-function">4. 可見度:</span> `<span class="hljs-keyword">public</span> ` 或 `internal`<br>   <span class="hljs-number">1</span>. 如果是 `internal` ，代表這是「抽象合約」<br><span class="hljs-number">5</span>. 如果繼承來的合約(父合約)的 `<span class="hljs-function"><span class="hljs-keyword">Constructor</span>` 有參數，那「子合約」也要輸入參數</span><br><span class="hljs-function">   1. 有兩種方法可以使用</span><br><span class="hljs-function">   2. 注意:</span> (父合約)本人不能用這兩種方法來初始化<br><br>```js<br>pragma solidity ^<span class="hljs-number">0.5</span>.<span class="hljs-number">0</span>;<br><br>contract Base <span class="hljs-comment">&#123;</span><br><span class="hljs-comment">   uint data;</span><br><span class="hljs-comment">   constructor(uint _data) public &#123;</span><br><span class="hljs-comment">      data = _data;   </span><br><span class="hljs-comment">   &#125;</span><br>&#125;<br><span class="hljs-comment">// 第一種直接的方法</span><br>contract Derived <span class="hljs-keyword">is</span> Base (<span class="hljs-number">5</span>) <span class="hljs-comment">&#123;</span><br><span class="hljs-comment">   constructor() public &#123;&#125;</span><br>&#125;<br><span class="hljs-comment">// 第二種間接的方法</span><br>contract Derived <span class="hljs-keyword">is</span> Base <span class="hljs-comment">&#123;</span><br><span class="hljs-comment">   constructor(uint _info) Base(_info * _info) public &#123;&#125;</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
-<li><p>若「子合約」沒有輸入參數，會被視為「抽象合約」</p>
+</ol>
 </li>
-<li><p>如何建立可以在腳本中使用的帳戶? 如何用PYTHON獲得交易所需的帳戶?</p>
-<ul>
+<li>執行完畢，<code>final code</code>會被部屬到鏈上<ol>
+<li>YES: <code>public</code> function  + <code>code reachable through public functions</code></li>
+<li>NO:  <code>Constructor code</code> + <code>any internal method used only by constructor</code></li>
+</ol>
+</li>
+<li>可見度: <code>public </code> 或 <code>internal</code><ol>
+<li>如果是 <code>internal</code> ，代表這是「抽象合約」</li>
+</ol>
+</li>
+<li>如果繼承來的合約(父合約)的 <code>Constructor</code> 有參數，那「子合約」也要輸入參數<ol>
+<li>有兩種方法可以使用</li>
+<li>注意: (父合約)本人不能用這兩種方法來初始化</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs js">pragma solidity ^<span class="hljs-number">0.5</span><span class="hljs-number">.0</span>;<br><br>contract Base &#123;<br>   uint data;<br>   <span class="hljs-title">constructor</span>(<span class="hljs-params">uint _data</span>) <span class="hljs-title">public</span> &#123;<br>      data = _data;   <br>   &#125;<br>&#125;<br><span class="hljs-comment">// 第一種直接的方法</span><br>contract Derived is Base (<span class="hljs-number">5</span>) &#123;<br>   <span class="hljs-title">constructor</span>(<span class="hljs-params"></span>) <span class="hljs-title">public</span> &#123;&#125;<br>&#125;<br><span class="hljs-comment">// 第二種間接的方法</span><br>contract Derived is Base &#123;<br>   <span class="hljs-title">constructor</span>(<span class="hljs-params">uint _info</span>) <span class="hljs-title">Base</span>(<span class="hljs-params">_info * _info</span>) <span class="hljs-title">public</span> &#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>若「子合約」沒有輸入參數，會被視為「抽象合約」</li>
+<li>如何建立可以在腳本中使用的帳戶? 如何用PYTHON獲得交易所需的帳戶?<ul>
 <li>位於 <code>brownie-config.yaml</code>。使用我們的 <code>PRIVATE_KEY</code> 環境變量。</li>
 </ul>
 </li>
@@ -493,7 +532,7 @@ function getRemain(address cashAccount) external;
 </ol>
 <h3 id="2-我們也從配置文件中獲取-WETH-令牌的地址"><a href="#2-我們也從配置文件中獲取-WETH-令牌的地址" class="headerlink" title="2. 我們也從配置文件中獲取 WETH 令牌的地址"></a>2. 我們也從配置文件中獲取 WETH 令牌的地址</h3><ul>
 <li>如果我們在本地鏈上，我們調用之前調用的相同 get_weth 函數。<ul>
-<li>這是為了==確保如果我們使用本地鏈，我們的錢包中有 WETH。==</li>
+<li>這是為了確保如果我們使用本地鏈，我們的錢包中有 WETH。</li>
 </ul>
 </li>
 </ul>
@@ -516,9 +555,9 @@ function getRemain(address cashAccount) external;
 <p>如果您要print(type(lending_pool))，我們會得到這種類型</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">&lt;<span class="hljs-keyword">class</span> &#x27;brownie.network.<span class="hljs-keyword">contract</span>.<span class="hljs-keyword">Contract</span>&#x27;&gt;<br></code></pre></td></tr></table></figure>
 
-<p>這意味著==借貸池是一個合約==，就像 WETH 一樣！</p>
+<p>這意味著借貸池是一個合約，就像 WETH 一樣！</p>
 <h4 id="get-lending-pool-函數"><a href="#get-lending-pool-函數" class="headerlink" title="get_lending_pool() 函數"></a><code>get_lending_pool()</code> 函數</h4><ul>
-<li>我們的 <code>get_lending_pool()</code> 函數實際上做了一些額外的步驟來==<strong>獲取貸款池合約</strong><code>lending_pool</code> :== </li>
+<li>我們的 <code>get_lending_pool()</code> 函數實際上做了一些額外的步驟來<strong>獲取貸款池合約</strong><code>lending_pool</code> :</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_lending_pool</span>():</span><br>    <span class="hljs-comment"># address</span><br>    lending_pool_addresses_provider = interface.ILendingPoolAddressesProvider(<br>        config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;lending_pool_addresses_provider&quot;</span>])<br>    lending_pool_address = lending_pool_addresses_provider.getLendingPool()<br><br>    <span class="hljs-comment"># abi = interface(address)</span><br>    lending_pool = interface.ILendingPool(lending_pool_address)<br>    <span class="hljs-keyword">return</span> lending_pool<br></code></pre></td></tr></table></figure>
 
@@ -532,7 +571,7 @@ function getRemain(address cashAccount) external;
 </li>
 </ol>
 <ul>
-<li>==為了讓我們獲得借貸池的地址，我們必須透過 **LendingPoolAddressesProvider 的地址==**。<ul>
+<li>為了讓我們獲得借貸池的地址，我們必須透過 <strong>LendingPoolAddressesProvider 的地址</strong>。<ul>
 <li>這是一個鏈上合約，其中<strong>包含 Aave 借貸池的所有地址</strong>。<ul>
 <li>有時，出借池地址發生變化，但出借池提供者地址永遠不會改變，因此我們始終可以使用該合約的地址來獲取出借池地址。</li>
 <li>你會看到我們在<code>lenting_pool_addresses_provider</code> 變量上調用了 <code>getLendingPool</code> 函數</li>
@@ -550,7 +589,7 @@ function getRemain(address cashAccount) external;
 <li><p>取出貸款: 我們只有在有足夠的抵押品的情況下才能貸款/借入。 </p>
 <ul>
 <li>超額抵押貸款<ul>
-<li>Aave 有一個名為 <code>Liquidationcall</code> 的函數，==如果您沒有足夠的抵押品，任何人都可以調用該函數並獲得獎勵。抵押品的價值必須保持大於貸款的價值==，</li>
+<li>Aave 有一個名為 <code>Liquidationcall</code> 的函數，如果您沒有足夠的抵押品，任何人都可以調用該函數並獲得獎勵。抵押品的價值必須保持大於貸款的價值，</li>
 </ul>
 </li>
 </ul>
@@ -558,7 +597,7 @@ function getRemain(address cashAccount) external;
 <li><p>流動性挖礦 = 用戶存入抵押品增加流動性，該合約會提供獎勵</p>
 <ul>
 <li>也稱為收益耕作，讓用戶能夠<strong>以治理govermance或其他類型代幣的形式獲得獎勵</strong>，<strong>以向協議提供流動性</strong>。</li>
-<li>但是，為了讓我們存入一些代幣，我們必須==批准智能合約==才能將代幣從我們的錢包中取出。</li>
+<li>但是，為了讓我們存入一些代幣，我們必須<strong>批准智能合約</strong>才能將代幣從我們的錢包中取出。</li>
 <li>我們將把我們的 WETH 作為抵押品。</li>
 </ul>
 </li>
@@ -604,7 +643,7 @@ function getRemain(address cashAccount) external;
 <p>我們可以從 Aave 文檔中了解更多關於智能合約中的存款功能。</p>
 <h3 id="Etherscan-上-Kovan-測試網的例子"><a href="#Etherscan-上-Kovan-測試網的例子" class="headerlink" title="Etherscan 上 Kovan 測試網的例子"></a>Etherscan 上 Kovan 測試網的例子</h3><p>如果你正確地完成了這部分，你會得到一個交易哈希，它會告訴你發生了什麼。</p>
 <p>讓我們看一個關於 Etherscan 上 Kovan 測試網的例子。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/5mt0ewv9OS1TuQJvdhPerBlBpH11F4dWfqgapCmiclTAutKdbknaglV4fvgVX1L1C5icFOYlaia1jVwiaEqfZ2flMg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" srcset="/img/loading.gif" lazyload alt="图片"></p>
+<p><img src="C:/Users/daphn/AppData/Roaming/Typora/typora-user-images/image-20220129000032424.png" srcset="/img/loading.gif" lazyload alt="image-20220129000032424"></p>
 <p>如果我們查看 Tokens Transferred 部分，我們可以看到 <strong>1 筆存款交易發生了 3 筆交易</strong>。</p>
 <p>按順序，這些是：</p>
 <ul>
@@ -633,13 +672,13 @@ function getRemain(address cashAccount) external;
 <li>無摩擦賣空</li>
 <li>無需平倉即可獲得流動性</li>
 </ul>
-<h3 id="健康系數"><a href="#健康系數" class="headerlink" title="健康系數"></a>健康系數</h3><p>您可以<strong>借入資產以保持對標的抵押品的敞口</strong>，同時還可以用另一種資產進行交易或支付。只要確保將您的==健康係數==保持在 1 以上。</p>
+<h3 id="健康系數"><a href="#健康系數" class="headerlink" title="健康系數"></a>健康系數</h3><p>您可以<strong>借入資產以保持對標的抵押品的敞口</strong>，同時還可以用另一種資產進行交易或支付。只要確保將您的健康係數保持在 1 以上。</p>
 <ul>
 <li>您的健康因素是您貸款的抵押品數量。</li>
 <li>假設我存入了 1 ETH，借了 0.5 ETH。如果清算閾值為 1，那麼我的健康係數將為 2。</li>
 </ul>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/5mt0ewv9OS1TuQJvdhPerBlBpH11F4dWyxSZz168B2TKY7nyeyLIvjMibVq0HggepiawoNt1L776MLnQ5epIHhjQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" srcset="/img/loading.gif" lazyload alt="图片"></p>
-<p>==清算門檻( liquidation threshold  )==是貸款<strong>被定義為抵押不足的百分比</strong>。</p>
+<p><img src="C:/Users/daphn/AppData/Roaming/Typora/typora-user-images/image-20220129000045954.png" srcset="/img/loading.gif" lazyload alt="image-20220129000045954"></p>
+<p><strong>清算門檻( liquidation threshold  )<strong>是貸款</strong>被定義為抵押不足的百分比</strong>。</p>
 <ul>
 <li><p>例如，清算門檻為 80% 意味著如果<strong>價值超過抵押品的 80%，則貸款抵押不足，可以清算</strong>。</p>
 </li>
@@ -674,11 +713,11 @@ function getRemain(address cashAccount) external;
 <li>視圖函數 view</li>
 <li>純函數</li>
 </ul>
-<p>這些函數==不會修改區塊鏈的狀態，因此我們可以調用它們==，因為我們只是在讀取智能合約的狀態。</p>
+<p>這些函數<strong>不會修改區塊鏈的狀態，因此我們可以調用它們</strong>，因為我們只是在讀取智能合約的狀態。</p>
 <blockquote>
 <p>請記住，如果您修改區塊鏈的狀態，它只會花費 gas。</p>
 </blockquote>
-<h3 id="獲取可借資產價值"><a href="#獲取可借資產價值" class="headerlink" title="獲取可借資產價值"></a>獲取可借資產價值</h3><p>目的: ==借不同種類的代幣，需要得到「資產VS目標代幣的匯率」==</p>
+<h3 id="獲取可借資產價值"><a href="#獲取可借資產價值" class="headerlink" title="獲取可借資產價值"></a>獲取可借資產價值</h3><p>目的: 借不同種類的代幣，需要得到「資產VS目標代幣的匯率」</p>
 <ul>
 <li>現在，當我們借款時，我們會被告知我們<strong>擁有的以 ETH 表示的資產數量</strong>。然而，也許我們想借用一個不同的代幣，比如 DAI。如果我們要以 ETH 為抵押借入 DAI，我們首先要得到 ETH -&gt; DAI 的兌換率。</li>
 </ul>
@@ -752,7 +791,7 @@ function getRemain(address cashAccount) external;
 <li>onBehalfOf 值，即誰將承擔債務</li>
 </ul>
 <p>讓我們看一下 Etherscan 上這筆交易的樣本，以了解剛剛發生的事情。</p>
-<p><img src="https://filescdn.proginn.com/df3f350335cd494a3cb46c4c024e45c9/73098da031adb8c58aeae186cbf7abbd.webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="C:/Users/daphn/AppData/Roaming/Typora/typora-user-images/image-20220129000101990.png" srcset="/img/loading.gif" lazyload alt="image-20220129000101990"></p>
 <p>按順序，代幣轉移的方向是：</p>
 <ul>
 <li>Aave 協議正在鑄造一些 aDAI</li>
@@ -814,9 +853,9 @@ function getRemain(address cashAccount) external;
                     
                       <a class="hover-with-bg" href="/tags/Solidity/">Solidity</a>
                     
-                      <a class="hover-with-bg" href="/tags/Brownie/">Brownie</a>
-                    
                       <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Brownie/">Brownie</a>
                     
                       <a class="hover-with-bg" href="/tags/Defi/">Defi</a>
                     
