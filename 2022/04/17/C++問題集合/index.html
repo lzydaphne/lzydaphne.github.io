@@ -16,23 +16,22 @@
   <meta name="author" content="lzydaphne">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Weekly Review #5 2022&#x2F;03&#x2F;14~03&#x2F;20  Courses &#x2F; Life最近這周在準備期中考 蠻多事情都先暫停推進了 有時會頗為羨慕那些課業不重的人 他們可以比較有足夠的時間去學習感興趣的領域 當然我也在學習用長期思維的角度去想像 如果說牛熊一直會循環 那我怎會怕眼前這一兩年沒有累積呢 我應該就是人家說的那種很窮但是很努力的類型(笑)  然後也在這學期擺進一些活動，營隊">
+    <meta name="description" content="C++問題集合在 cin&gt;&gt; 後呼叫 getline 會遇到 buffer 沒有清空總結: 多次使用cin&gt;&gt;，cin.getline(), getline()  每次使用了cin&gt;&gt;之後，都會在緩衝區中多出來一個換行符(因為會敲下enter，代表輸入資料時，一個  \n會被插入到輸入流之中 )，所以每次使用了cin&gt;&gt;之後都需要利用「cin.ign">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Weekly-Review-5">
-<meta property="og:url" content="https://lzydaphne.github.io/2022/03/20/Weekly-Review-5/index.html">
+<meta property="og:title" content="C++問題集合">
+<meta property="og:url" content="https://lzydaphne.github.io/2022/04/17/C++%E5%95%8F%E9%A1%8C%E9%9B%86%E5%90%88/index.html">
 <meta property="og:site_name" content="On the Road">
-<meta property="og:description" content="Weekly Review #5 2022&#x2F;03&#x2F;14~03&#x2F;20  Courses &#x2F; Life最近這周在準備期中考 蠻多事情都先暫停推進了 有時會頗為羨慕那些課業不重的人 他們可以比較有足夠的時間去學習感興趣的領域 當然我也在學習用長期思維的角度去想像 如果說牛熊一直會循環 那我怎會怕眼前這一兩年沒有累積呢 我應該就是人家說的那種很窮但是很努力的類型(笑)  然後也在這學期擺進一些活動，營隊">
+<meta property="og:description" content="C++問題集合在 cin&gt;&gt; 後呼叫 getline 會遇到 buffer 沒有清空總結: 多次使用cin&gt;&gt;，cin.getline(), getline()  每次使用了cin&gt;&gt;之後，都會在緩衝區中多出來一個換行符(因為會敲下enter，代表輸入資料時，一個  \n會被插入到輸入流之中 )，所以每次使用了cin&gt;&gt;之後都需要利用「cin.ign">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://lzydaphne.github.io/assets/220321.jpg">
-<meta property="article:published_time" content="2022-03-20T15:20:29.000Z">
-<meta property="article:modified_time" content="2022-03-21T00:31:34.866Z">
+<meta property="og:image" content="https://4.bp.blogspot.com/-w-ve19kTAQo/WCfcSAhtKkI/AAAAAAAATv4/cbkewvEA_WQoBZyBs-_4WYVUuZbDCRmLQCLcB/s320/Image%2B3.png">
+<meta property="article:published_time" content="2022-04-17T07:03:04.000Z">
+<meta property="article:modified_time" content="2022-04-17T07:53:28.707Z">
 <meta property="article:author" content="lzydaphne">
-<meta property="article:tag" content="Weekly">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://lzydaphne.github.io/assets/220321.jpg">
+<meta name="twitter:image" content="https://4.bp.blogspot.com/-w-ve19kTAQo/WCfcSAhtKkI/AAAAAAAATv4/cbkewvEA_WQoBZyBs-_4WYVUuZbDCRmLQCLcB/s320/Image%2B3.png">
   
   
-  <title>Weekly-Review-5 | On the Road</title>
+  <title>C++問題集合 | On the Road</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -182,7 +181,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Weekly-Review-5">
+            <span class="h2" id="subtitle" title="C++問題集合">
               
             </span>
 
@@ -192,8 +191,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-20 23:20" pubdate>
-        2022年3月20日 晚上
+      <time datetime="2022-04-17 15:03" pubdate>
+        2022年4月17日 下午
       </time>
     </span>
   
@@ -203,7 +202,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      665 字
+      2.3k 字
     </span>
   
 
@@ -212,7 +211,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6 分鐘
+      20 分鐘
     </span>
   
 
@@ -241,74 +240,116 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Weekly-Review-5</h1>
+            <h1 style="display: none">C++問題集合</h1>
             
               <p class="note note-info">
                 
-                  本文最後更新於：2022年3月21日 早上
+                  本文最後更新於：2022年4月17日 下午
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="Weekly-Review-5"><a href="#Weekly-Review-5" class="headerlink" title="Weekly Review #5"></a>Weekly Review #5</h1><blockquote>
-<p>2022/03/14~03/20</p>
-</blockquote>
-<h2 id="Courses-Life"><a href="#Courses-Life" class="headerlink" title="Courses / Life"></a>Courses / Life</h2><p>最近這周在準備期中考</p>
-<p>蠻多事情都先暫停推進了</p>
-<p>有時會頗為羨慕那些課業不重的人</p>
-<p>他們可以比較有足夠的時間去學習感興趣的領域</p>
-<p>當然我也在學習用長期思維的角度去想像</p>
-<p>如果說牛熊一直會循環</p>
-<p>那我怎會怕眼前這一兩年沒有累積呢</p>
-<p>我應該就是人家說的那種很窮但是很努力的類型(笑)</p>
-<hr>
-<p>然後也在這學期擺進一些活動，營隊 *2 ﹑區塊鏈專題 *2﹑資安比賽……</p>
-<p>目前看還是還好</p>
-<p>但我覺得期末鐵定爆炸，不能像在期初一樣悠閒了，</p>
-<p>至少每周都要確保課程和專題都有在規劃的時程中推進</p>
-<p>算是充實又忙碌，不過可能就要等明年暑假再來實習</p>
-<p>先來體驗大學生的生活也不錯</p>
-<p>反正很多事情不需要迫切的急於一時，在當下的階段就好好體驗</p>
-<p>畢竟未來也沒機會讓你重溫</p>
-<p>生活嘛，總是要有些新體驗</p>
-<h2 id="Books-Blog"><a href="#Books-Blog" class="headerlink" title="Books / Blog"></a>Books / Blog</h2><p>最近投入比較多時間閱讀的是<strong>米爾格蘭的&lt;服從權威&gt;</strong></p>
-<p>有了之前佛洛姆的基礎之後</p>
-<p>對服從這件事情有了更完整的理解</p>
-<p>環境﹑對權威的感知﹑甚至自我的「代理人心態」都是促使個體服從權威的因素</p>
-<p>簡單整理成一份mind map來幫助理解:</p>
-<p><img src="/assets/book0321.png" srcset="/img/loading.gif" lazyload alt="服從權威的因素"></p>
-<p>之後或許再把碎片點整理一下放上來</p>
-<p>不過最後分享一下篇末看到的心靈雞湯:</p>
-<p>Q: 為何無法將信念化為行動?如何才能克服心理障礙?</p>
-<p>A: 「一旦真的做到不服從之後，所有的壓力、焦慮與恐懼全不翼而飛。」</p>
-<p>沒錯，90%的困難都是想像的!</p>
-<h2 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h2><p>這周花很多時間理解prefix和infix/ preorder 和 inorder等等</p>
-<p>還有tree/BST等等</p>
-<p>要時常提醒自己</p>
+              <h1 id="C-問題集合"><a href="#C-問題集合" class="headerlink" title="C++問題集合"></a>C++問題集合</h1><h3 id="在-cin-gt-gt-後呼叫-getline-會遇到-buffer-沒有清空"><a href="#在-cin-gt-gt-後呼叫-getline-會遇到-buffer-沒有清空" class="headerlink" title="在 cin&gt;&gt; 後呼叫 getline 會遇到 buffer 沒有清空"></a>在 cin&gt;&gt; 後呼叫 getline 會遇到 buffer 沒有清空</h3><p>總結:</p>
+<p>多次使用cin&gt;&gt;，cin.getline(), getline()</p>
+<ul>
+<li>每次使用了cin&gt;&gt;之後，都會在緩衝區中多出來一個換行符(因為會敲下enter，代表輸入資料時，一個  <code>\n</code>會被插入到輸入流之中 )，所以每次使用了cin&gt;&gt;之後都需要利用「<code>cin.ignore()</code>」將多出來的換行符處理掉；</li>
+</ul>
+<p>如果連續兩次都是cin&gt;&gt;，就不需要將多出來的換行符去掉了。</p>
+<p>因為cin的時候，並不是只要讀取到換行符就執行完cin，而是必須要讀取到相對應的類型的內容從鍵盤敲入，才會真正執行完cin</p>
+<ul>
+<li><strong>cin不允許輸入為空</strong><ul>
+<li>所以cin&gt;&gt;在等待鍵盤敲入時，就算先敲換行符，cin&gt;&gt;語句也不會執行結束。</li>
+</ul>
+</li>
+<li>簡單來說，cin一定要吃到資料，並且在遇到換行符時結束(不會吃進換行符)</li>
+</ul>
+<p>但是cin.getline()函數和getline()函數，它們都<strong>是以換行符作為唯一的標準</strong></p>
+<ul>
+<li>getline()允許輸入為空，也就是說直接一個換行符就結束，<ul>
+<li>也可以吃進 「包含空白符的字串」，直到遇到換行符</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://4.bp.blogspot.com/-w-ve19kTAQo/WCfcSAhtKkI/AAAAAAAATv4/cbkewvEA_WQoBZyBs-_4WYVUuZbDCRmLQCLcB/s320/Image%2B3.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>原因:</p>
+<p><code>cin &gt;&gt; value</code>; cin會在遇到換行符時停止，這個換行符會被留在鍵盤緩衝區中</p>
+<p>而 「從鍵盤讀取數值的輸入語句，只在鍵盤緩衝區為空時，才會等待用戶輸入值」</p>
+<p><strong>然後我們在鍵盤上鍵入 2，然後敲一個 enter。</strong></p>
+<p>這個時候，我們的電腦其實得到的是底下的資訊:</p>
+<p>緩衝區中有一個 2，還有一個斷行。<br><strong>那第8行再讀時，只會把 2 讀出來</strong>（因為我們要求讀一個整數，而 endl 不是整數，所以不會被讀出來）。</p>
+<p>所以最後，緩衝區中會遺留一個 endl 在那兒。於是下次我們呼叫 getline 時，由於 C++ 偵測到緩衝區中還有資料，所以會先把那個 endl 讀出來。這就是為什麼我們只能讀到一個字串的原因。</p>
+<p>解決的方法有很多，最常見的有兩個：</p>
 <ol>
-<li>覺得困難就是在學習</li>
-<li>Paul Graham: 去解決困難的問題!</li>
+<li>在 cin 後，要是我們知道要呼叫 getline，那就「多呼叫一次 getline」，把緩衝區清空。</li>
 </ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs c++">cin &gt;&gt; value;<br>string strtmp;<br><span class="hljs-built_in">getline</span>(cin, strtmp); <span class="hljs-comment">//strtmp 只是把緩衝區清空，沒有其他的作用</span><br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>使用cin.get()</p>
+<ul>
+<li>get 函數讀取單個字符，包括任何white space字符</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">char</span> ch;<br>cin.<span class="hljs-built_in">get</span>(ch);<span class="hljs-comment">//法一</span><br>cin.<span class="hljs-built_in">get</span>();<span class="hljs-comment">//法二</span><br></code></pre></td></tr></table></figure></li>
+<li><p>呼叫 cin.ignore() 把緩衝區清空。</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">cin &gt;&gt; value;<br>cin.<span class="hljs-built_in">ignore</span>(); <span class="hljs-comment">//呼叫 ignore 忽略緩衝區的資料</span><br></code></pre></td></tr></table></figure>
+
+<p>該預設版本的ignore 會清空緩衝區，直到底下的兩個條件，其中一個滿足為止！</p>
+<ol>
+<li><strong>清空 1 個字元。</strong></li>
+<li>讀到 endl。</li>
+</ol>
+<p>所以如果多了一些意外出現的字元，還是會無法把endl清理掉!</p>
+<p>改良版本:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++">cin &gt;&gt; value;<br>	<span class="hljs-comment">/**ignore 的運作方式如下：</span><br><span class="hljs-comment">	 * 清空 1000 個字元(第1個參數)，</span><br><span class="hljs-comment">	 * 或是清空緩衝區，直到遇到 \n (new line)</span><br><span class="hljs-comment">	 * 那就停止</span><br><span class="hljs-comment">	 */</span><br>cin.<span class="hljs-built_in">ignore</span>(<span class="hljs-number">1000</span>, <span class="hljs-string">&#x27;\n&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>參考資料:</p>
+<p>[<a target="_blank" rel="noopener" href="http://justimchung.blogspot.com/2016/11/c-cin-getline.html">C++]在 cin 後呼叫 getline 所遇到的問題 (justimchung.blogspot.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/leowinbow/article/details/82190631">(6条消息) C++中的cin, cin.getline, getline等混合使用时不能输入直接执行下一行的问题_Leonardo Liu的博客-CSDN博客_c++ cin getline</a></p>
+<h3 id="endl-和-n的區別"><a href="#endl-和-n的區別" class="headerlink" title="endl  和 \n的區別"></a><code>endl</code>  和 <code>\n</code>的區別</h3><p>\n只代表換行的轉義字符;</p>
+<ul>
+<li>輸出’\n’是實際輸出了的’\10’，往輸出流裡添加了訊息</li>
+</ul>
+<p>endl除了代表換行，還緊跟著清出緩衝槽</p>
+<ul>
+<li>endl是C＋＋中使用的io流換行</li>
+<li>輸出endl不會往輸出流裡添加東西，只會簡單的刷新流並換行</li>
+</ul>
+<p>參考資料:</p>
+<p><em><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011675745/article/details/51939094">https://blog.csdn.net/u011675745/article/details/51939094</a></em></p>
+<h3 id="命名空間namespace"><a href="#命名空間namespace" class="headerlink" title="命名空間namespace"></a>命名空間namespace</h3><p>C++標準為了和C區別開，也為了正確地使用名稱空間，規定標頭檔案不使用字尾.h*當使用<iostream>時，該標頭檔案沒有定義全域性名稱空間，必須使用namespace std，指明在哪裡的名稱空間，這樣才能使用類似於cout這樣的C++識別符號。</p>
+<ul>
+<li>如果你的應用程式是多個團隊共同合作，如果沒有定義名稱空間，名稱預設都是位於全域名域空間，以類別定義來說，那麼若 A 部門寫了個 Account 類別，B 部門寫了個 Account 類別，當他們要將應用程式整合時，就會發生名稱衝突的問題。</li>
+</ul>
+<p><em><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1547346090.html">https://www.itread01.com/content/1547346090.html</a></em></p>
+<p>由於namespace的概念，使用C++標準程式庫的任何識別符號時，可以有三種選擇：</p>
+<ol>
+<li>直接指定識別符號</li>
+</ol>
+<p><em>例如：</em></p>
+<p><em>std::iostream而不是iostream。完整語句如下： std::cout &lt;&lt; std::hex &lt;&lt; 3.4 &lt;&lt; std::endl;</em></p>
+<ol start="2">
+<li>使用using關鍵字</li>
+</ol>
+<p><em>例如：</em></p>
+<p><em>using std::cout; using std::endl; using std::cin; 以上程式可以寫成如下程式碼：</em></p>
+<p><em>using std::cout &lt;&lt;using std::hex &lt;&lt; 3.4 &lt;&lt;using std:: endl;</em></p>
+<ol start="3">
+<li>使用using namespace std</li>
+</ol>
+<p><em>例如：</em></p>
+<p><em>#include<iostream></em></p>
+<p><em>#include<sstream></em></p>
+<p><em>#include<string></em></p>
+<p><em>using namespace std;</em></p>
+<p><em>這樣名稱空間std內定義的所有識別符號都有效（曝光）。就好像它們被宣告為全域性變數一樣。</em></p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Review/">Review</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Weekly/">Weekly</a>
-                    
-                  </div>
                 
               </div>
               
@@ -317,9 +358,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/17/C++%E5%95%8F%E9%A1%8C%E9%9B%86%E5%90%88/">
+                      <a href="/2022/06/05/%E6%AF%8F%E5%A4%A9%E5%81%9A%E9%BB%9E%E5%B0%8F%E7%A9%8D%E6%9C%A8/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C++問題集合</span>
+                        <span class="hidden-mobile">每天做些小積木</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -327,8 +368,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/14/weekly-review-4/">
-                        <span class="hidden-mobile">Weekly-review-#4</span>
+                      <a href="/2022/03/20/Weekly-Review-5/">
+                        <span class="hidden-mobile">Weekly-Review-5</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
