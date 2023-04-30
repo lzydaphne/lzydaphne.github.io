@@ -1,0 +1,1014 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/run.png">
+  <link rel="icon" href="/assets/run.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#494e6b">
+  <meta name="author" content="lzydaphne">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="去中心化樂透前言: 這是寒假完成的第3個side project(其實還有其他的不過比較小所以忽略不計) 本來想說可以繼續把其他目標一一完成 結果看到…有…寒假…作業…_(┐ ◟;ﾟдﾟ)ノ 這操作我也是認了，不知道還能不能再生一個專案出來 – 包含敲代碼和寫筆記，耗時約15小時(粗略估算的，實際只會更多) 同時也發現，先理解邏輯比實際語法怎麼實現更重要一點 是個蠻好的學習方向，決定多試試幾次!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="去中心化樂透solidity應用">
+<meta property="og:url" content="https://lzydaphne.github.io/2022/01/30/Decentralized-Lottery-App/index.html">
+<meta property="og:site_name" content="On the Road">
+<meta property="og:description" content="去中心化樂透前言: 這是寒假完成的第3個side project(其實還有其他的不過比較小所以忽略不計) 本來想說可以繼續把其他目標一一完成 結果看到…有…寒假…作業…_(┐ ◟;ﾟдﾟ)ノ 這操作我也是認了，不知道還能不能再生一個專案出來 – 包含敲代碼和寫筆記，耗時約15小時(粗略估算的，實際只會更多) 同時也發現，先理解邏輯比實際語法怎麼實現更重要一點 是個蠻好的學習方向，決定多試試幾次!">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://lzydaphne.github.io/assets/01305.jpeg">
+<meta property="article:published_time" content="2022-01-30T08:58:21.000Z">
+<meta property="article:modified_time" content="2022-01-30T09:11:20.000Z">
+<meta property="article:author" content="lzydaphne">
+<meta property="article:tag" content="Solidity">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Brownie">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lzydaphne.github.io/assets/01305.jpeg">
+  
+  
+  
+  <title>去中心化樂透solidity應用 | On the Road</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lzydaphne.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="On the Road" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>On the Road</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Articles</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/page.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="去中心化樂透solidity應用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-01-30 16:58" pubdate>
+          2022年1月30日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          18k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          146 分鐘
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">去中心化樂透solidity應用</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最後更新於：2022年1月30日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="去中心化樂透"><a href="#去中心化樂透" class="headerlink" title="去中心化樂透"></a>去中心化樂透</h1><p>前言:</p>
+<p>這是寒假完成的第3個side project(其實還有其他的不過比較小所以忽略不計)</p>
+<p>本來想說可以繼續把其他目標一一完成</p>
+<p>結果看到…有…寒假…作業…_(┐ ◟;ﾟдﾟ)ノ</p>
+<p>這操作我也是認了，不知道還能不能再生一個專案出來</p>
+<p>–</p>
+<p>包含敲代碼和寫筆記，耗時約15小時(粗略估算的，實際只會更多)</p>
+<p>同時也發現，先理解邏輯比實際語法怎麼實現更重要一點</p>
+<p>是個蠻好的學習方向，決定多試試幾次!</p>
+<p>–</p>
+<p>目的:</p>
+<blockquote>
+<p>由管理者admin開啟樂透 <code>startLottery</code>，可以開始入場 <code>enter</code> ，配合 <code>getEntranceFee</code>檢查是否符合參加條件，再由管理者決定何時關閉樂透<code>endLottery</code></p>
+</blockquote>
+<p>規則:</p>
+<ul>
+<li><p>玩家可以使用ETH進場</p>
+</li>
+<li><p>管理者可以決定何時結束遊戲</p>
+<ul>
+<li>若要完全去中心化，可以使用 <code>Chainlink Keepers</code></li>
+</ul>
+</li>
+<li><p>樂透會隨機選出贏家</p>
+</li>
+</ul>
+<h1 id="1-創建合約結構-Lottery-sol"><a href="#1-創建合約結構-Lottery-sol" class="headerlink" title="1. 創建合約結構 Lottery.sol"></a>1. 創建合約結構 <code>Lottery.sol</code></h1><h2 id="Main-Functions"><a href="#Main-Functions" class="headerlink" title="Main Functions"></a>Main Functions</h2><h3 id="a-入場函數enter"><a href="#a-入場函數enter" class="headerlink" title="a.入場函數enter() "></a>a.入場函數<code>enter() </code></h3><ul>
+<li>為了能夠使用「收款功能」 要使用payable (can receive <code>ether</code> into the contract.)</li>
+<li>蒐集玩家名單 <code>players</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs solidity">address payable[] public players;<br>// 資料型別-資料特性(可接受付款的陣列)-可見度-變數名<br><br>function enter() public payable &#123;<br>        // 入場要求 1.遊戲開放  2.足夠入場費 <br>        require(lottery_state == LOTTERY_STATE.OPEN);<br>        require(msg.value &gt;= getEntranceFee(), &quot;Not Enough ETH!&quot;);<br>    	//成功入場後，加入玩家清單<br>        players.push(msg.sender);<br>    &#125;<br><br>function getEntranceFee() public view returns (uint256) &#123;<br>       ...<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="b-constructor"><a href="#b-constructor" class="headerlink" title="b.constructor"></a>b.<code>constructor</code></h3><ul>
+<li><p>有些值想要在合約部屬時就先設定好: <code>constructor</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs solidity">contract Lottery &#123;<br>    // state variable<br>    address payable[] public players;<br>    uint256 public usdEntryFee;<br>    AggregatorV3Interface internal ethUsdPriceFeed;//函數和狀態變量只能是內部訪問（即從**當前合約內部**或**從它派生的合約訪問**）<br>    enum LOTTERY_STATE &#123;<br>        OPEN, // 0<br>        CLOSED, // 1<br>        CALCULATING_WINNER // 2<br>    &#125;<br>    LOTTERY_STATE public lottery_state;<br>    uint256 public fee;<br>    bytes32 public keyhash;<br>    <br>    //把我們所需要的參數&quot;parameterize&quot;<br>    onstructor(<br>        address _priceFeedAddress, //代表「不同鏈上的Aggregator(ETH/USD)的address」<br>        address _vrfCoordinator,<br>        address _link, //chainlink token<br>        uint256 _fee,<br>        bytes32 _keyhash<br>    ) public VRFConsumerBase(_vrfCoordinator, _link) &#123;<br>        usdEntryFee = 50 * (10**18); //內部預設單位=wei<br>        ethUsdPriceFeed = AggregatorV3Interface(_priceFeedAddress);//1個eth轉換多少usd<br>        lottery_state = LOTTERY_STATE.CLOSED;//<br>        fee = _fee;<br>        keyhash = _keyhash;<br>    &#125;<br>    ....<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>相關合約/接口</p>
+<ol>
+<li><p><code>AggregatorV3Interface </code> <a target="_blank" rel="noopener" href="https://docs.chain.link/docs/get-the-latest-price/#solidity">Using Data Feeds | Chainlink Documentation</a></p>
+<ol>
+<li><p>目標: 獲取外部資訊</p>
+</li>
+<li><p><code>import &quot;@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol&quot;;</code></p>
+</li>
+<li><p>到config file設定dependencies和remapping</p>
+</li>
+<li><p>宣告state variable <code>AggregatorV3Interface internal ethUsdPriceFeed;</code></p>
+</li>
+<li><p>constructor把不同鏈上的Aggregator address參數化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs solidity">onstructor(<br>        //代表「不同鏈上的Aggregator(ETH/USD)的address」<br>        address _priceFeedAddress, <br>        &#125;<br></code></pre></td></tr></table></figure></li>
+<li><p><code> ethUsdPriceFeed = AggregatorV3Interface(_priceFeedAddress)</code></p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="c-入場費函數-getEntranceFee"><a href="#c-入場費函數-getEntranceFee" class="headerlink" title="c.入場費函數 getEntranceFee()"></a>c.入場費函數 <code>getEntranceFee()</code></h3><p>目的: 入場費用是多少?</p>
+<ul>
+<li></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs solidity">function getEntranceFee() public view returns (uint256) &#123;<br>        (, int256 price, , , ) = ethUsdPriceFeed.latestRoundData();//把PriceFeed的資料都抓下來之後，只取用price的部分<br>        uint256 adjustedPrice = uint256(price) * 10**10; //total 18decimals, price originally has 8 decimals<br>        uint256 costToEnter = (usdEntryFee * 10**18) / adjustedPrice;<br>        // 1 usd = 10^18/ ethToUsd-price<br>        return costToEnter;//單位是wei<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p><img src="/assets/01301.png" srcset="/img/loading.gif" lazyload alt="image-20220129120859993"></p>
+</li>
+<li><p>為了得到usd→eth的結果:</p>
+<ul>
+<li><code>usdEntryFee = 50 * (10**18); //內部預設單位=wei</code> </li>
+<li>得到匯率 <code>price</code> ，調整單位到wei後是 <code>adjustedPrice</code></li>
+<li>因為內部計算單位是wei。數字計算要保持10^18<ul>
+<li><code>costToEnter</code> 我們的入場費從美元轉換為eth(wei)是多少?</li>
+<li><code>uint256 costToEnter = (usdEntryFee * 10**18) / adjustedPrice;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="quick-and-dirty-test-測試-test-lottery-py"><a href="#quick-and-dirty-test-測試-test-lottery-py" class="headerlink" title="quick and dirty test: 測試 test_lottery.py"></a>quick and dirty test: 測試 <code>test_lottery.py</code></h4><ul>
+<li><p>場景: 數學運算多的函數</p>
+</li>
+<li><p>怎麼做?</p>
+<ol>
+<li> <code>mainnet-fork</code></li>
+<li> <code>development</code> with mocks</li>
+<li> <code>testnet</code></li>
+</ol>
+</li>
+<li><p>注意該合約的constructor是否有參數</p>
+<ul>
+<li>這邊我們使用 <code>mainnet-fork</code>，所以直接從主網上抓取 <code>ETH/USD</code> 的地址放在config</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs solidity">Lottery.deploy( #部屬合約<br>        config[&quot;networks&quot;][network.show_active()][&quot;eth_usd_price_feed&quot;],<br>        &#123;&quot;from&quot;: account&#125;,)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> brownie <span class="hljs-keyword">import</span> Lottery, accounts, config, network, exceptions<br><span class="hljs-keyword">from</span> web3 <span class="hljs-keyword">import</span> Web3<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_get_entrance_fee</span>():<br>    account = accounts[<span class="hljs-number">0</span>] <span class="hljs-comment">#獲取本地帳戶</span><br>    lottery = Lottery.deploy( <span class="hljs-comment">#部屬合約</span><br>        config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;eth_usd_price_feed&quot;</span>],<br>        &#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;,<br>    )<br>    <span class="hljs-keyword">assert</span> lottery.getEntranceFee() &gt; Web3.toWei(<span class="hljs-number">0.022</span>, <span class="hljs-string">&quot;ether&quot;</span>)<br>    <span class="hljs-keyword">assert</span> lottery.getEntranceFee() &lt; Web3.toWei(<span class="hljs-number">0.026</span>, <span class="hljs-string">&quot;ether&quot;</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    test_get_entrance_fee()<br><br></code></pre></td></tr></table></figure>
+
+<h5 id="如何新增一條新的鍊-新增-mainnet-fork"><a href="#如何新增一條新的鍊-新增-mainnet-fork" class="headerlink" title="如何新增一條新的鍊? 新增 mainnet-fork"></a>如何新增一條新的鍊? 新增 <code>mainnet-fork</code></h5><ul>
+<li><code>delete networks</code><ul>
+<li><code>brownie networks delete mainnet-fork</code></li>
+</ul>
+</li>
+<li>利用Alchemy的project id建立自己的 <code>mainnet-fork</code></li>
+</ul>
+<p><code>brownie networks add development mainnet-fork cmd=ganache-cli host=http://127.0.0.1 fork=https://eth-mainnet.alchemyapi.io/v2/ThSv1D7C37bH7HJMWpfDhjZm3A4I3LMw accounts=10 mnemonic=brownie port=8545</code></p>
+<ul>
+<li>測試<ul>
+<li><code>brownie test --network mainnet-fork</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="enum"><a href="#enum" class="headerlink" title="enum"></a>enum</h4><ul>
+<li>目的: 在已知的不同狀態之間切換</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs solidity">contract Lottery is VRFConsumerBase, Ownable &#123;<br>    // state variable<br>    enum LOTTERY_STATE &#123;<br>        OPEN, // 0<br>        CLOSED, // 1<br>        CALCULATING_WINNER // 2<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="d-開獎函數-startLottery"><a href="#d-開獎函數-startLottery" class="headerlink" title="d.開獎函數 startLottery()"></a>d.開獎函數 <code>startLottery()</code></h3><p>目的:</p>
+<ul>
+<li>讓管理者開始樂透抽獎，<code>onlyOwner</code> modifier確保只能由管理者來使用這個函數</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs solidity">function startLottery() public onlyOwner &#123;<br>        require(<br>            lottery_state == LOTTERY_STATE.CLOSED,<br>            &quot;cant start a new lottery yet!&quot;<br>        );<br>        lottery_state = LOTTERY_STATE.OPEN;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="onlyOwner-modifier"><a href="#onlyOwner-modifier" class="headerlink" title="onlyOwner modifier"></a><code>onlyOwner</code> modifier</h4><ul>
+<li>可以藉由import <code>import &quot;@openzeppelin/contracts/access/Ownable.sol&quot;;</code>來直接使用<ul>
+<li>記得加入dependencies和remapping</li>
+</ul>
+</li>
+<li>在contract那邊繼承 Ownable.sol   <code>contract Lottery is Ownable &#123; ... &#125;</code></li>
+</ul>
+<p><img src="/assets/01302.png" srcset="/img/loading.gif" lazyload alt="image-20220129200236561"></p>
+<h3 id="e-結束樂透函數-endLottery"><a href="#e-結束樂透函數-endLottery" class="headerlink" title="e. 結束樂透函數 endLottery()"></a>e. 結束樂透函數 <code>endLottery()</code></h3><h4 id="你的隨機真的隨機嗎"><a href="#你的隨機真的隨機嗎" class="headerlink" title="你的隨機真的隨機嗎?"></a>你的隨機真的隨機嗎?</h4><blockquote>
+<p>你想要在「deterministic的系統中(即區塊鍊)」獲取「隨機性」是不可能的!</p>
+<p>所以必須透過外部的預言機oracle來輔助獲取外部資料取的隨機值</p>
+</blockquote>
+<ul>
+<li>「使用全域變數再進行hash」，基本上是「偽隨機Pseudorandomness」<ul>
+<li>例如 block.difficulty，看起來是隨機的，但其實可以被礦工控制</li>
+</ul>
+</li>
+<li>必須使用oracle來輔助，Chainlink! <a target="_blank" rel="noopener" href="https://docs.chain.link/docs/get-a-random-number/">Get a Random Number | Chainlink Documentation</a></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs solidity">function endLottery() public &#123;<br> //方法1:容易被駭<br>        // uint256(<br>        //  keccack256(<br>        //    abi.encodePacked(<br>        //      nonce, // nonce is preditable (aka, transaction number)<br>        //      msg.sender, // msg.sender is predictable<br>        //      block.difficulty, // can actually be manipulated by the miners!<br>        //      block.timestamp // timestamp is predictable<br>        //         )<br>        //     )<br>        // ) % players.length;<br>        //方法2:調用oracle<br>        lottery_state = LOTTERY_STATE.CALCULATING_WINNER;<br>        bytes32 requestId = requestRandomness(keyhash, fee);//requestRandomness是VRFConsumerBase.sol的內部函數，所以可以直接調用<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="使用Chainlink-VRF取得隨機值"><a href="#使用Chainlink-VRF取得隨機值" class="headerlink" title="使用Chainlink VRF取得隨機值"></a>使用Chainlink VRF取得隨機值</h4><h5 id="VRFConsumerBase"><a href="#VRFConsumerBase" class="headerlink" title="VRFConsumerBase"></a><code>VRFConsumerBase</code></h5><ul>
+<li><code>import &quot;@chainlink/contracts/src/v0.6/VRFConsumerBase.sol&quot;;</code></li>
+<li><code>contract Lottery is VRFConsumerBase, Ownable &#123;...&#125;</code> </li>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/M576WGiDBdQ?t=24853">影片示範</a></li>
+</ul>
+<blockquote>
+<p>To consume randomness, your contract should inherit from <a target="_blank" rel="noopener" href="https://github.com/smartcontractkit/chainlink/blob/master/contracts/src/v0.8/VRFConsumerBase.sol"><code>VRFConsumerBase</code></a> and define two required functions:</p>
+<ul>
+<li><code>requestRandomness</code>, which makes the <strong>initial request for randomness.</strong></li>
+<li><code>fulfillRandomness</code>, which is the function that <strong>receives and does something</strong> with verified randomness.</li>
+</ul>
+</blockquote>
+<ul>
+<li>注意事項:<ul>
+<li>合約必須擁有足夠多的LINK token來支付費用 </li>
+<li>Faucet <a target="_blank" rel="noopener" href="https://faucets.chain.link/?_ga=2.264615757.359649141.1643427674-1461744466.1642988664">Faucets | Chainlink</a></li>
+</ul>
+</li>
+<li>格式:<ul>
+<li><code>LINK Token</code> - LINK token address on the corresponding network (Ethereum, Polygon, BSC, etc)，用來給提供服務的node支付token</li>
+<li><code>VRF Coordinator</code> - address of the Chainlink VRF Coordinator，是位在鍊上的合約，負責檢查隨機值是否真的隨機</li>
+<li><code>Key Hash</code> - public key against which randomness is generated，唯一地識別了我們要使用的chainlink node，</li>
+<li><code>Fee</code> - fee required to fulfill a VRF request，我們要支付多少LINK Token費用給提供我們服務的node</li>
+</ul>
+</li>
+</ul>
+<h5 id="當你繼承來的合約-母合約-它裡面自己有constructor，怎麼辦"><a href="#當你繼承來的合約-母合約-它裡面自己有constructor，怎麼辦" class="headerlink" title="當你繼承來的合約(母合約)它裡面自己有constructor，怎麼辦?"></a>當你繼承來的合約(母合約)它裡面自己有constructor，怎麼辦?</h5><ul>
+<li>可以直接使用在「子constructor裡面」!</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs solidity">constructor() //子合約的constructor<br>     VRFConsumerBase( //母合約的constructor<br>         0xdD3782915140c8f3b190B5D67eAc6dc5760C46E9, // VRF Coordinator<br>         0xa36085F69e2889c224210F603D836748e7dC0088  // LINK Token<br>       )<br>    &#123;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>實戰:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs solidity">constructor(<br>        address _priceFeedAddress,<br>        address _vrfCoordinator, //鏈上的合約，確保隨機值真的是隨機的<br>        address _link, //address of chainlink token<br>        uint256 _fee,<br>        bytes32 _keyhash<br>    ) public VRFConsumerBase(_vrfCoordinator, _link) &#123;<br>        usdEntryFee = 50 * (10**18);<br>        ethUsdPriceFeed = AggregatorV3Interface(_priceFeedAddress);<br>        lottery_state = LOTTERY_STATE.CLOSED;<br>        fee = _fee;<br>        keyhash = _keyhash;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>綜合<ul>
+<li>主要是注意「母合約」參數的宣告 以及 「子合約」參數的宣告</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs solidity">contract Lottery is VRFConsumerBase, Ownable &#123;<br>    // state variable<br>    address payable[] public players;<br>    address payable public recentWinner;<br>    uint256 public randomness;<br>    uint256 public usdEntryFee;<br>    AggregatorV3Interface internal ethUsdPriceFeed;<br>    enum LOTTERY_STATE &#123;<br>        OPEN, // 0<br>        CLOSED, // 1<br>        CALCULATING_WINNER // 2<br>    &#125;<br>    LOTTERY_STATE public lottery_state;<br>    uint256 public fee;<br>    bytes32 public keyhash;<br><br>    // you can put your parent&#x27;s contructor into your own<br>    constructor(<br>        address _priceFeedAddress,<br>        address _vrfCoordinator, //鏈上的合約，確保隨機值真的是隨機的<br>        address _link, //address of chainlink token<br>        uint256 _fee,<br>        bytes32 _keyhash<br>    ) public VRFConsumerBase(_vrfCoordinator, _link) &#123;<br>        usdEntryFee = 50 * (10**18);<br>        ethUsdPriceFeed = AggregatorV3Interface(_priceFeedAddress);<br>        lottery_state = LOTTERY_STATE.CLOSED;<br>        fee = _fee;<br>        keyhash = _keyhash;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="Oracle-Gas-amp-amp-Tx-Gas"><a href="#Oracle-Gas-amp-amp-Tx-Gas" class="headerlink" title="Oracle Gas &amp;&amp; Tx Gas"></a>Oracle Gas &amp;&amp; Tx Gas</h5><ul>
+<li>Oracle Gas  是支付token給 提供服務的oracle</li>
+<li>Tx Gas 是支付token給礦工</li>
+</ul>
+<h4 id="取得隨機值的機制-Request-and-Receive"><a href="#取得隨機值的機制-Request-and-Receive" class="headerlink" title="取得隨機值的機制 = Request and Receive"></a>取得隨機值的機制 = Request and Receive</h4><ol>
+<li>總共會有兩筆非同步交易<ol>
+<li>從合約對chainlink oracle發出request( 給我隨機數! ) <code>requestRandomness(keyhash, fee)</code></li>
+<li>chainlink oracle (呼叫函數  <code>VRFCoordinator</code>  ，再呼叫<code>fulfillRandomness</code>)，並回傳隨機數</li>
+</ol>
+</li>
+<li>需要先確保你的合約帳戶有足夠的錢支付Oracle Gas</li>
+</ol>
+<h5 id="fulfillRandomness"><a href="#fulfillRandomness" class="headerlink" title="fulfillRandomness()"></a><code>fulfillRandomness()</code></h5><ul>
+<li>目的: chainlink node 回傳data到這個合約，</li>
+</ul>
+<h6 id="override"><a href="#override" class="headerlink" title="override"></a><code>override</code></h6><ul>
+<li>覆蓋原本 <code>fulfillRandomness()</code>的宣告</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs solidity">//second callback tx = chainlink node return the data to this contract into another function (fulfilledRandomness)<br>function fulfillRandomness(bytes32 _requestId, uint256 _randomness)<br>        internal<br>        override<br>    &#123;<br>        require(<br>            lottery_state == LOTTERY_STATE.CALCULATING_WINNER,<br>            &quot;You arent there yet&quot;<br>        );<br>        require(_randomness &gt; 0, &quot;random-not-found&quot;);<br>        uint256 indexOfWinner = _randomness % players.length;<br>        recentWinner = players[indexOfWinner];<br>        recentWinner.transfer(address(this).balance); //pay the winner all the money gathered by enter() in this address<br>        //recentWinner should be a 「payable」variable!<br><br>        //reset<br>        players = new address payable[](0); // size 0<br>        lottery_state = LOTTERY_STATE.CLOSED;<br>        randomness = _randomness;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-開始部屬-deploy-lottery-py"><a href="#2-開始部屬-deploy-lottery-py" class="headerlink" title="2. 開始部屬 deploy_lottery.py"></a>2. 開始部屬 <code>deploy_lottery.py</code></h1><ul>
+<li>記得要建立 <code>__init.py__</code></li>
+<li>key_hash和fee<a target="_blank" rel="noopener" href="https://youtu.be/M576WGiDBdQ?t=26881">的設定</a></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> scripts.helpful_scripts <span class="hljs-keyword">import</span> get_account, get_contract<br><span class="hljs-keyword">from</span> brownie <span class="hljs-keyword">import</span> Lottery, network, config<br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">deploy_lottery</span>():<br>    account = get_account() <span class="hljs-comment">#部屬合約的第一步:拿到帳號</span><br>    lottery = Lottery.deploy(<br>        get_contract(<span class="hljs-string">&quot;eth_usd_price_feed&quot;</span>).address,<br>        get_contract(<span class="hljs-string">&quot;vrf_coordinator&quot;</span>).address,<br>        get_contract(<span class="hljs-string">&quot;link_token&quot;</span>).address,<br>        config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;fee&quot;</span>],<br>        config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;keyhash&quot;</span>],<br>        &#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;,<br>        publish_source=config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()].get(<span class="hljs-string">&quot;verify&quot;</span>, <span class="hljs-literal">False</span>),<br>    )<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Deployed lottery!&quot;</span>)<br>    <span class="hljs-keyword">return</span> lottery<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    deploy_lottery()<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-1-helpful-scripts-py"><a href="#2-1-helpful-scripts-py" class="headerlink" title="2-1 helpful_scripts.py"></a>2-1 <code>helpful_scripts.py</code></h2><ul>
+<li>可以藉由 <code>brownie accounts list</code> 查看目前總帳戶狀況</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> brownie <span class="hljs-keyword">import</span> ( accounts,network,config,)<br><br>FORKED_LOCAL_ENVIRONMENTS = [<span class="hljs-string">&quot;mainnet-fork&quot;</span>, <span class="hljs-string">&quot;mainnet-fork-dev&quot;</span>]<br>LOCAL_BLOCKCHAIN_ENVIRONMENTS = [<span class="hljs-string">&quot;development&quot;</span>, <span class="hljs-string">&quot;ganache-local&quot;</span>]<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_account</span>(<span class="hljs-params">index=<span class="hljs-literal">None</span>, <span class="hljs-built_in">id</span>=<span class="hljs-literal">None</span></span>):<br>    <span class="hljs-comment">#  3 ways to get account</span><br>    <span class="hljs-comment"># accounts[0]→ brownie&#x27;s ganache account</span><br>    <span class="hljs-comment"># accounts.add(&quot;env&quot;)→ env variable</span><br>    <span class="hljs-comment"># accounts.load(&quot;id&quot;)</span><br>    <span class="hljs-keyword">if</span> index:<br>        <span class="hljs-keyword">return</span> accounts[index]<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">id</span>:<br>        <span class="hljs-keyword">return</span> accounts.load(<span class="hljs-built_in">id</span>)<br>    <span class="hljs-keyword">if</span> (<br>        network.show_active() <span class="hljs-keyword">in</span> LOCAL_BLOCKCHAIN_ENVIRONMENTS<br>        <span class="hljs-keyword">or</span> network.show_active() <span class="hljs-keyword">in</span> FORKED_LOCAL_ENVIRONMENTS<br>    ):<br>        <span class="hljs-keyword">return</span> accounts[<span class="hljs-number">0</span>] <span class="hljs-comment">#local</span><br>    <span class="hljs-keyword">return</span> accounts.add(config[<span class="hljs-string">&quot;wallets&quot;</span>][<span class="hljs-string">&quot;from_key&quot;</span>])<span class="hljs-comment">#default</span><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="2-2-get-contracts-mapping"><a href="#2-2-get-contracts-mapping" class="headerlink" title="2.2 get_contracts() + mapping"></a>2.2 <code>get_contracts()</code> + mapping</h2><ul>
+<li>目的: 把「檢查在哪一條鏈上」和「部屬mock」合在一起<ul>
+<li>這個函數會從brownie config抓取「合約地址」(如果已經有定義)，</li>
+<li>否則他會部屬「mock version」的合約並回傳該合約</li>
+</ul>
+</li>
+<li>mapping<ul>
+<li>是一個動態大小的陣列，key和value可以自己設定</li>
+<li>每個key都是一個外部合約，所以需要到其他地方設定 <a target="_blank" rel="noopener" href="https://youtu.be/M576WGiDBdQ?t=26881">影片示範</a><ol>
+<li><code>contracts/test</code>增加.sol</li>
+<li>brownie config的network</li>
+<li> 在會使用到的合約上方<code>from brownie import xxx.sol</code> </li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs python">contract_to_mock = &#123;<span class="hljs-comment">#mapping，是一個動態大小的陣列，key和value可以自己設定</span><br>    <span class="hljs-string">&quot;eth_usd_price_feed&quot;</span>: MockV3Aggregator,<span class="hljs-comment">#local</span><br>    <span class="hljs-string">&quot;vrf_coordinator&quot;</span>: VRFCoordinatorMock,<span class="hljs-comment">#live</span><br>    <span class="hljs-string">&quot;link_token&quot;</span>: LinkToken,<br>&#125;<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_contract</span>(<span class="hljs-params">contract_name</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">     You&#x27;ll see examples like the &#x27;link_token&#x27;.</span><br><span class="hljs-string">            This script will then either:</span><br><span class="hljs-string">              - Get a address from the config</span><br><span class="hljs-string">             - Or deploy a mock to use for a network that doesn&#x27;t have it</span><br><span class="hljs-string">            Args:(要部屬的合約地址)</span><br><span class="hljs-string">        contract_name (string): This is the name that is referred to in the</span><br><span class="hljs-string">                brownie config and &#x27;contract_to_mock&#x27; variable.</span><br><span class="hljs-string">            Returns:(回傳brownie.network.contract.PorjectContract，也就是該合約最新發布的版本，可能是mock或real )</span><br><span class="hljs-string">      brownie.network.contract.ProjectContract: The most recently deployed    Contract of the type specificed by the dictionary. This could be either</span><br><span class="hljs-string">    a mock or the &#x27;real&#x27; contract on a live network.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>    contract_type = contract_to_mock[contract_name] <span class="hljs-comment">#回傳地址</span><br>    <br>    <span class="hljs-keyword">if</span> network.show_active() <span class="hljs-keyword">in</span> LOCAL_BLOCKCHAIN_ENVIRONMENTS:<span class="hljs-comment">#in development(檢查鍊)</span><br>        <span class="hljs-comment">#如果過去還沒部屬過mock contract，就來部屬一次，整個運行也只需要一個合約!</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(contract_type) &lt;= <span class="hljs-number">0</span>:  <span class="hljs-comment"># MockV3Aggregator.length</span><br>            deploy_mocks()<br>        contract = contract_type[-<span class="hljs-number">1</span>]  <span class="hljs-comment"># latest one(get the mock contract)</span><br>        <span class="hljs-comment"># MockV3Aggregator[-1](獲得合約)</span><br>    <span class="hljs-keyword">else</span>:<span class="hljs-comment"># in test net(檢查鍊)/real network</span><br>        contract_address = config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][contract_name]<span class="hljs-comment">#獲得實際存在的地址</span><br>        <span class="hljs-comment">#這邊為了獲得mock合約，會需要address和ABI(獲得合約)</span><br>        contract = Contract.from_abi(<br>            contract_type._name, contract_address, contract_type.abi<br>        )<span class="hljs-comment">#會回傳mock合約(擁有和原本合約一樣的函數功能所以可以直接使用含數)</span><br>        <span class="hljs-comment"># MockV3Aggregator.abi</span><br>    <span class="hljs-keyword">return</span> contract<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-3-deploy-mocks"><a href="#2-3-deploy-mocks" class="headerlink" title="2.3 deploy_mocks()"></a>2.3 <code>deploy_mocks()</code></h2><ul>
+<li>目的: development或ganache-local的環境中需要</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">deploy_mocks</span>(<span class="hljs-params">decimals=DECIMALS, initial_value=INITIAL_VALUE</span>):<br>    account = get_account()<br>    <br>    MockV3Aggregator.deploy(decimals, initial_value, &#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;)<br>    <br>    link_token = LinkToken.deploy(&#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;)<br>    VRFCoordinatorMock.deploy(link_token.address, &#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Deployed!&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-實際-開始遊戲-進入遊戲-結束遊戲"><a href="#3-實際-開始遊戲-進入遊戲-結束遊戲" class="headerlink" title="3. 實際 開始遊戲/進入遊戲/結束遊戲"></a>3. 實際 開始遊戲/進入遊戲/結束遊戲</h1><h2 id="startLottery"><a href="#startLottery" class="headerlink" title="startLottery()"></a><code>startLottery()</code></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">start_lottery</span>():<br>    account = get_account()<br>    lottery = Lottery[-<span class="hljs-number">1</span>]  <span class="hljs-comment"># most recent deployment of lottery</span><br>    starting_tx = lottery.startLottery(&#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;)<br>    starting_tx.wait(<span class="hljs-number">1</span>)  <span class="hljs-comment"># wait for last tx to go through</span><br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;The lottery is started!&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="enter-lottery"><a href="#enter-lottery" class="headerlink" title="enter_lottery()"></a><code>enter_lottery()</code></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">enter_lottery</span>():<br>    account = get_account()<br>    lottery = Lottery[-<span class="hljs-number">1</span>]<br>    value = lottery.getEntranceFee() + <span class="hljs-number">100000000</span><br>    tx = lottery.enter(&#123;<span class="hljs-string">&quot;from&quot;</span>: account, <span class="hljs-string">&quot;value&quot;</span>: value&#125;)<br>    tx.wait(<span class="hljs-number">1</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;You entered the lottery!&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="end-lottery"><a href="#end-lottery" class="headerlink" title="end_lottery()"></a><code>end_lottery()</code></h2><ul>
+<li>在實際關閉遊戲之前，會需要一些LINK TOKEN存在此遊戲合約中<ul>
+<li>因為我們的<code>end_lottery()</code> 會用到 <code>requestRandomness</code> (chainlink node/ fuifilledRandomness())</li>
+</ul>
+</li>
+</ul>
+<h3 id="fund-with-link"><a href="#fund-with-link" class="headerlink" title="fund_with_link()"></a><code>fund_with_link()</code></h3><ul>
+<li>目的:fund the contract + end the lottery</li>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/M576WGiDBdQ?t=27658">影片示範</a></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">end_lottery</span>():<br>    account = get_account()<br>    lottery = Lottery[-<span class="hljs-number">1</span>]<br><br>    <span class="hljs-comment"># 用fund_with_link()來fund the contract + end the lottery</span><br>    tx = fund_with_link(lottery.address)<br>    tx.wait(<span class="hljs-number">1</span>)<br>    <br>    <span class="hljs-comment">#結束遊戲</span><br>    ending_transaction = lottery.endLottery(&#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;)<br>    ending_transaction.wait(<span class="hljs-number">1</span>)<span class="hljs-comment">#等待chainlink node</span><br>    time.sleep(<span class="hljs-number">180</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;lottery.recentWinner()&#125;</span> is the new winner!&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">fund_with_link</span>(<span class="hljs-params"></span><br><span class="hljs-params">    contract_address, account=<span class="hljs-literal">None</span>, link_token=<span class="hljs-literal">None</span>, amount=<span class="hljs-number">100000000000000000</span></span><br><span class="hljs-params"></span>):  <span class="hljs-comment"># 0.1 LINK</span><br>    account = account <span class="hljs-keyword">if</span> account <span class="hljs-keyword">else</span> get_account()<br>    link_token = link_token <span class="hljs-keyword">if</span> link_token <span class="hljs-keyword">else</span> get_contract(<span class="hljs-string">&quot;link_token&quot;</span>)<br>    tx = link_token.transfer(contract_address, amount, &#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;)<br>    <span class="hljs-comment">#way2: 使用interface:</span><br>    <span class="hljs-comment"># link_ token_contract = interface.LinkTokenInterface(link_token.address)</span><br>    <span class="hljs-comment"># tx = link_token_contract.transfer(contract_address, amount, &#123;&quot;from&quot;: account&#125;)</span><br>    tx.wait(<span class="hljs-number">1</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Fund contract!&quot;</span>)<br>    <span class="hljs-keyword">return</span> tx<br></code></pre></td></tr></table></figure>
+
+<h2 id="法2-interface-with-transfer-來和合約進行交互-LinkTokenInterface-sol"><a href="#法2-interface-with-transfer-來和合約進行交互-LinkTokenInterface-sol" class="headerlink" title="法2: interface with transfer(來和合約進行交互) LinkTokenInterface.sol"></a>法2: interface with transfer(來和合約進行交互) <code>LinkTokenInterface.sol</code></h2><ul>
+<li>interface也會在幕後compile down to abi</li>
+<li>所以我們在使用過程直接取用就好</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">link_ token_contract = interface.LinkTokenInterface(link_token.address)<br>tx = link_token_contract.transfer(contract_address, amount, &#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;)<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="法1-直接compile-down-to-ABI"><a href="#法1-直接compile-down-to-ABI" class="headerlink" title="法1:直接compile down to ABI"></a>法1:直接compile down to ABI</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">contract = Contract.from_abi(<br>            contract_type._name, contract_address, contract_type.abi<br>        )<br></code></pre></td></tr></table></figure>
+
+<h3 id="實際測驗…development上不能使用chainlink-node"><a href="#實際測驗…development上不能使用chainlink-node" class="headerlink" title="實際測驗…development上不能使用chainlink node!"></a>實際測驗…development上不能使用chainlink node!</h3><h1 id="4-測試"><a href="#4-測試" class="headerlink" title="4. 測試!"></a>4. 測試!</h1><p><a target="_blank" rel="noopener" href="https://youtu.be/M576WGiDBdQ?t=28404">影片示範</a></p>
+<p><a target="_blank" rel="noopener" href="https://eth-brownie.readthedocs.io/en/v1.3.0/tests.html#handling-reverted-transactions">pytest例子</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.pytest.org/en/latest/reference/reference.html#pytest.raises">pytest.raise</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/23337471/how-to-properly-assert-that-an-exception-gets-raised-in-pytest">python - How to properly assert that an exception gets raised in pytest? - Stack Overflow</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38374974/article/details/107245534">(6条消息) pytest 测试框架学习（11）：pytest.raises_mokwing-CSDN博客_pytest.raises</a></p>
+<ul>
+<li>Use <code>pytest.raises</code> as a context manager, which will capture the exception of the given type</li>
+<li>If the code block does not raise the expected exception (<code>ZeroDivisionError</code> in the example above), or no exception at all, the check will fail instead.<ul>
+<li>使用 raises 捕獲匹配到的異常，可以繼續讓代碼正常運行。</li>
+</ul>
+</li>
+</ul>
+<p>​    </p>
+<ul>
+<li>只會想在local-dev環境下使用</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> network.show_active() <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> LOCAL_BLOCKCHAIN_ENVIRONMENTS:<br>       pytest.skip()<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>測試寫法</li>
+</ul>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">brownie test -k test_get_entrance_fee <span class="hljs-comment">--network rinkeby</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="assert"><a href="#assert" class="headerlink" title="assert"></a>assert</h2><p><a target="_blank" rel="noopener" href="https://openhome.cc/Gossip/Python/Assert.html">使用 assert (openhome.cc)</a></p>
+<p>斷言（Assertion），指的是程式進行到某個時間點，斷定其必然是某種狀態，具體而言，也就是<strong>斷定該時間點上，某變數必然是某值，或某物件必具擁有何種特性值。</strong></p>
+<ul>
+<li>斷言可以在條件不滿足程序運行的情況下直接返回錯誤，而不必等待程序運行後出現崩潰的情況，</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">deposit</span>(<span class="hljs-params">self, amount</span>):<br>       <span class="hljs-keyword">assert</span> amount &gt; <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;必須是大於 0 的正數&#x27;</span><br>       self.balance += amount<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="event"><a href="#event" class="headerlink" title="event"></a>event</h2><ul>
+<li>合約無法存取events</li>
+<li>比「儲存變數」來的gas efficient</li>
+<li>print of blockchain</li>
+<li>目的: 為了寫測試 <code>test_can_pick_winner_correctly()</code><ul>
+<li><code>emit RequestedRandomness(requestId);</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs solidity">event RequestedRandomness(bytes32 requestId);<br>function endLottery() public &#123;<br>  lottery_state = LOTTERY_STATE.CALCULATING_WINNER;<br>  bytes32 requestId = requestRandomness(keyhash, fee);<br>  emit RequestedRandomness(requestId);<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_can_pick_winner_correctly</span>():<br>    <span class="hljs-comment"># Arrange</span><br>    <span class="hljs-keyword">if</span> network.show_active() <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> LOCAL_BLOCKCHAIN_ENVIRONMENTS:<br>        pytest.skip()<br>    lottery = deploy_lottery()<br>    account = get_account()<br>    <span class="hljs-comment">#得到幾個測試用帳號</span><br>    lottery.startLottery(&#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;)<br>    lottery.enter(&#123;<span class="hljs-string">&quot;from&quot;</span>: account, <span class="hljs-string">&quot;value&quot;</span>: lottery.getEntranceFee()&#125;)<br>    lottery.enter(&#123;<span class="hljs-string">&quot;from&quot;</span>: get_account(index=<span class="hljs-number">1</span>), <span class="hljs-string">&quot;value&quot;</span>: lottery.getEntranceFee()&#125;)<br>    lottery.enter(&#123;<span class="hljs-string">&quot;from&quot;</span>: get_account(index=<span class="hljs-number">2</span>), <span class="hljs-string">&quot;value&quot;</span>: lottery.getEntranceFee()&#125;)<br>    <br>    fund_with_link(lottery)<br>    starting_balance_of_account = account.balance()<br>    balance_of_lottery = lottery.balance()<br>    transaction = lottery.endLottery(&#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;)<br>    <br>    request_id = transaction.events[<span class="hljs-string">&quot;RequestedRandomness&quot;</span>][<span class="hljs-string">&quot;requestId&quot;</span>]<br>    STATIC_RNG = <span class="hljs-number">777</span><br>    <br>    <span class="hljs-comment">#假裝是chainlink node在呼叫函數!</span><br> get_contract(<span class="hljs-string">&quot;vrf_coordinator&quot;</span>).callBackWithRandomness(<br>        request_id, STATIC_RNG, lottery.address, &#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;<br>    )<br>    <span class="hljs-comment"># 777 % 3 = 0</span><br>    <span class="hljs-keyword">assert</span> lottery.recentWinner() == account<br>    <span class="hljs-keyword">assert</span> lottery.balance() == <span class="hljs-number">0</span><br>    <span class="hljs-keyword">assert</span> account.balance() == starting_balance_of_account + balance_of_lottery<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="integration-test"><a href="#integration-test" class="headerlink" title="integration test"></a>integration test</h3><p><a target="_blank" rel="noopener" href="https://youtu.be/M576WGiDBdQ?t=29501">https://youtu.be/M576WGiDBdQ?t=29501</a></p>
+<h1 id="補充"><a href="#補充" class="headerlink" title="補充"></a>補充</h1><h2 id="1-接口和抽象合约"><a href="#1-接口和抽象合约" class="headerlink" title="1. 接口和抽象合约"></a>1. 接口和抽象合约</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lj900911/article/details/83037691">(6条消息) solidity学习笔记（9）—— 接口和抽象合约_lj900911的专栏-CSDN博客_solidity 接口</a></p>
+<blockquote>
+<p>合約如何讀取「其他合約的數據或調用其他合約的方法」？</p>
+<p>有兩種實現方式：抽象合約 和 接口</p>
+</blockquote>
+<h3 id="一、抽象合約"><a href="#一、抽象合約" class="headerlink" title="一、抽象合約"></a>一、抽象合約</h3><p>抽象函數是<strong>沒有函數體的的函數</strong>。如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs solidity">pragma solidity ^0.4.0;<br>contract Feline &#123;<br>    function utterance() returns (bytes32);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>這樣的合約<strong>不能通過編譯</strong>，即使合約內也包含一些正常的函數。</li>
+<li>但它們可以做為基合約base contract<strong>被繼承</strong>。</li>
+<li>如果一個合約從一個抽象合約裡繼承，但卻沒實現所有函數，那麼它也是一個抽象合約。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs solidity">pragma solidity ^0.4.0;<br><br>contract Feline &#123;<br>    function utterance()<br>        returns (bytes32);<br>    function getContractName() returns (string)&#123;<br>        return &quot;Feline&quot;;<br>    &#125;<br>&#125;<br><br>contract Cat is Feline &#123;<br>    function utterance() returns (bytes32) &#123;<br>        return &quot;miaow&quot;;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="如何通過抽象合約實現接口功能？"><a href="#如何通過抽象合約實現接口功能？" class="headerlink" title="如何通過抽象合約實現接口功能？"></a>如何通過抽象合約實現接口功能？</h4><p>如果contract B要使用contract A的方法或數據，本質上：</p>
+<ol>
+<li>先定義一個抽象合約，讓contract A繼承於這個抽象合約；</li>
+<li>把contract A中已經實現了的方法放入抽象合約中，==solidity會自動把這個抽象合約視作接口==；</li>
+<li>contract B通過contract A的地址來<strong>創建連接到contract A的接口實例</strong>；</li>
+<li>調用contract A中的方法或讀取數據；<br><img src="/assets/01303.png" srcset="/img/loading.gif" lazyload alt="image-20220129123322210"></li>
+</ol>
+<h3 id="二、接口"><a href="#二、接口" class="headerlink" title="二、接口"></a>二、接口</h3><p>接口與抽象合約類似，與之不同的是，<strong>接口內沒有任何函數是已實現的</strong>，同時還有如下限制：</p>
+<ul>
+<li>不能繼承其它合約，或接口。</li>
+<li>不能定義構造器</li>
+<li>不能定義變量</li>
+<li>不能定義結構體</li>
+<li>不能定義枚舉類</li>
+<li>接口基本上限制為「合約ABI定義可以表示的內容」<ul>
+<li>ABI和接口定義之間的轉換應該是可能的，不會有任何信息丟失。</li>
+</ul>
+</li>
+</ul>
+<p>注意：</p>
+<ol>
+<li>在兩個.sol文件中都聲明接口，或者兩個合約寫到一個.sol文件裡，那就只要聲明一次；</li>
+<li>在一個合約中實現METHOD_A，該合同必須繼承自接口interfaceContract；</li>
+<li>在另一個合約中創建一個interfaceContract實例，該實例接受實現接口的合約的地址；</li>
+<li>通過這個實例調用目標合約的方法，獲取目標合約的數據；</li>
+</ol>
+<p><img src="/assets/01304.png" srcset="/img/loading.gif" lazyload alt="image-20220129123528076"></p>
+<h1 id="主要資料來源"><a href="#主要資料來源" class="headerlink" title="主要資料來源:"></a>主要資料來源:</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=M576WGiDBdQ&t=27537s">Solidity, Blockchain, and Smart Contract Course – Beginner to Expert Python Tutorial - YouTube</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Side-Project/" class="category-chain-item">Side Project</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Code/" class="category-chain-item">Code</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Crypto/" class="category-chain-item">Crypto</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Solidity/">#Solidity</a>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+        <a href="/tags/Brownie/">#Brownie</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/02/07/%E5%85%A8%E7%AB%AFdefi%E5%B9%B3%E5%8F%B0/" title="全端Defi平台">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">全端Defi平台</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/28/%E7%94%A8%20Python%20%E9%96%8B%E7%99%BC%20DeFi%20%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E5%80%9F%E8%B2%B8%E6%87%89%E7%94%A8/" title="用 Python 開發 DeFi 去中心化借貸應用">
+                        <span class="hidden-mobile">用 Python 開發 DeFi 去中心化借貸應用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目錄</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允許 JavaScript 運行的環境下瀏覽效果更佳</div>
+  </noscript>
+</body>
+</html>

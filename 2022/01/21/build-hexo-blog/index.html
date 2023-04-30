@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/run.png">
+  <link rel="icon" href="/assets/run.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#494e6b">
+  <meta name="author" content="lzydaphne">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="緣起剛放寒假心血來潮，一鼓作氣把拖了4個月的部落格弄得有模有樣了 因為這學期最深刻的體會之一就是我的大腦真的不好使，學沒多久就會變得模糊許多 所以趁現在還有一些記憶趕緊完整記錄一下建置過程 期待是，就算一年後的自己什麼都不會，只要重新照著這一篇教程來做也能成功! 主題:如何使用github pages + Hexo建立自己的部落格  目錄如果你是從零開始，基本上就三大步驟:  建立Github帳號">
+<meta property="og:type" content="article">
+<meta property="og:title" content="build_hexo_blog">
+<meta property="og:url" content="https://lzydaphne.github.io/2022/01/21/build-hexo-blog/index.html">
+<meta property="og:site_name" content="On the Road">
+<meta property="og:description" content="緣起剛放寒假心血來潮，一鼓作氣把拖了4個月的部落格弄得有模有樣了 因為這學期最深刻的體會之一就是我的大腦真的不好使，學沒多久就會變得模糊許多 所以趁現在還有一些記憶趕緊完整記錄一下建置過程 期待是，就算一年後的自己什麼都不會，只要重新照著這一篇教程來做也能成功! 主題:如何使用github pages + Hexo建立自己的部落格  目錄如果你是從零開始，基本上就三大步驟:  建立Github帳號">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://lzydaphne.github.io/assets/post1.PNG">
+<meta property="article:published_time" content="2022-01-21T09:02:35.000Z">
+<meta property="article:modified_time" content="2022-01-21T15:24:48.000Z">
+<meta property="article:author" content="lzydaphne">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="Github">
+<meta property="article:tag" content="Blog">
+<meta property="article:tag" content="tutorial">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lzydaphne.github.io/assets/post1.PNG">
+  
+  
+  
+  <title>build_hexo_blog | On the Road</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lzydaphne.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="On the Road" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>On the Road</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Articles</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/page.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="build_hexo_blog"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-01-21 17:02" pubdate>
+          2022年1月21日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          18 分鐘
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">build_hexo_blog</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最後更新於：2022年1月21日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="緣起"><a href="#緣起" class="headerlink" title="緣起"></a>緣起</h1><p>剛放寒假心血來潮，一鼓作氣把拖了4個月的部落格弄得有模有樣了</p>
+<p>因為這學期最深刻的體會之一就是我的大腦真的不好使，學沒多久就會變得模糊許多</p>
+<p>所以趁現在還有一些記憶趕緊完整記錄一下建置過程</p>
+<p>期待是，就算一年後的自己什麼都不會，只要重新照著這一篇教程來做也能成功!</p>
+<h1 id="主題"><a href="#主題" class="headerlink" title="主題:"></a>主題:</h1><p>如何使用github pages + Hexo建立自己的部落格</p>
+<p><img src="/assets/post1.PNG" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h1 id="目錄"><a href="#目錄" class="headerlink" title="目錄"></a>目錄</h1><p>如果你是從零開始，基本上就三大步驟:</p>
+<ol>
+<li>建立Github帳號</li>
+<li>建立Hexo blog</li>
+<li>選擇Hexo 主題並自訂設置</li>
+</ol>
+<p>強烈建議搭配這篇文章服用，他已經把前兩項都說的很清楚XD</p>
+<p>[<a target="_blank" rel="noopener" href="https://ed521.github.io/2019/07/hexo-install/">教學] 使用 GitHub Pages + Hexo 來架設個人部落格 | 瑪利歐的部落格 (ed521.github.io)</a></p>
+<p>因為實作不難，也就不重新造輪子了，下面會直接切入到主題設置</p>
+<h1 id="選擇Hexo-主題並自訂設置"><a href="#選擇Hexo-主題並自訂設置" class="headerlink" title="選擇Hexo 主題並自訂設置"></a>選擇Hexo 主題並自訂設置</h1><p>過程用Hexo的主題Fluid作為範例</p>
+<p>提醒一下，盡量挑選文檔完整的主題來建置，不然會弄到頭昏眼花的</p>
+<p>Fluid的官方文檔:</p>
+<p><a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/posts/hello-fluid/">Hello Fluid - Hexo Theme Fluid (fluid-dev.com)</a></p>
+<p>開發文檔:</p>
+<p><a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">配置指南 | Hexo Fluid (fluid-dev.com)</a></p>
+<p>基本上照著上面的資料做就可以了，不過還是會盡量拆解成可以理解的步驟來執行</p>
+<p>如果看到這邊，我假設你已經成功建立一個最基礎的github page了，且套上Hexo的主題並成功修改部分內容</p>
+<ul>
+<li>網址列輸入 <a target="_blank" rel="noopener" href="https://username.github.io/">https://username.github.io/</a> (username 是自己的 GitHub 帳號)，能夠看到剛架好的 Github Pages </li>
+<li>了解如何在_config.yml中改動設定</li>
+</ul>
+<h2 id="如何安裝Fluid-主題"><a href="#如何安裝Fluid-主題" class="headerlink" title="如何安裝Fluid 主題?"></a>如何安裝Fluid 主題?</h2><p>開始前，我們有幾個重要前提，多節錄自官方的配置指南:</p>
+<ol>
+<li>務必在_config.yml所在的資料夾開啟git bash或cmd執行以下操作</li>
+<li>“<strong>部落格配置</strong>“ 指的 Hexo 部落格目錄下的 <code>_config.yml</code>，”<strong>主題配置</strong>“ 指的是 <code>theme/fluid/_config.yml</code> 或者 <code>_config.fluid.yml</code> ，必須小心區分；</li>
+<li>提到的 <code>source</code> 目錄都指的是部落格目錄下的 <code>source</code> 文件夹，不建議修改主题内 <code>source</code> 目錄</li>
+<li>每次無論 <code>hexo g</code> 或 <code>hexo s</code>，都最好先使用 <code>hexo clean</code>；</li>
+<li>頁面结果以本地 <code>hexo s</code> 為準，部署後的異常大部分是缓存原因，在確認没有報錯的情况下，等待若干時間後即會顯示正常</li>
+</ol>
+<p>方式一:</p>
+<p><code>npm install --save hexo-theme-fluid</code></p>
+<p>方式二:</p>
+<ul>
+<li>下載 <a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/releases">最新 release 版本 (opens new window)</a>並解壓縮到到 themes 目錄，并將解壓出的文件夾重命名為 <code>fluid</code></li>
+</ul>
+<p>用方式一或方式二後，要修改Hexo部落格目錄中的_config.yml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">theme:</span> <span class="hljs-string">fluid</span>  <span class="hljs-comment"># 指定主題</span><br><span class="hljs-attr">language:</span> <span class="hljs-string">zh-TW</span>  <span class="hljs-comment"># 指定語言</span><br></code></pre></td></tr></table></figure>
+
+<p>這邊比較複雜</p>
+<p>如果前面使用方式一(跟我一樣)，若想要把語言修改成繁體中文(zh_TW)，</p>
+<p>因為沒有壓縮下來的文件夾，會缺失一些內容，所以必須手動加上語言設定的文件</p>
+<p>但也只有這邊不同，其他地方都不會影響到</p>
+<p>步驟:</p>
+<ol>
+<li>按照上面修改語言</li>
+<li>在部落格目錄中，建立一個languages文件夾</li>
+<li>裡面新增一個文件，命名為 <code>zh-TW.yml</code></li>
+<li>往裡面複製貼上以下內容，即可成功把頁面轉成繁體中文版:</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">search:</span><br>  <span class="hljs-attr">title:</span> <span class="hljs-string">搜尋</span><br>  <span class="hljs-attr">keyword:</span> <span class="hljs-string">關鍵字</span><br>  <span class="hljs-attr">status:</span><br>    <span class="hljs-attr">success:</span> <span class="hljs-string">v</span><br>    <span class="hljs-attr">error:</span> <span class="hljs-string">x</span><br><br><span class="hljs-attr">postTotal:</span> <span class="hljs-string">總共</span> <span class="hljs-string">%d</span> <span class="hljs-string">篇文章</span><br><br><span class="hljs-attr">paginator:</span><br>  <span class="hljs-attr">pre:</span> <span class="hljs-string">上一頁</span><br>  <span class="hljs-attr">next:</span> <span class="hljs-string">下一頁</span><br><br><span class="hljs-attr">post:</span><br>  <span class="hljs-attr">toc:</span> <span class="hljs-string">目錄</span><br>  <span class="hljs-attr">pre:</span> <span class="hljs-string">上一篇</span><br>  <span class="hljs-attr">next:</span> <span class="hljs-string">下一篇</span><br><br><span class="hljs-attr">home:</span><br>  <span class="hljs-attr">title:</span> <span class="hljs-string">首頁</span><br><br><span class="hljs-attr">archive:</span><br>  <span class="hljs-attr">title:</span> <span class="hljs-string">封存</span><br>  <span class="hljs-attr">subtitle:</span> <span class="hljs-string">封存</span><br><br><span class="hljs-attr">tag:</span><br>  <span class="hljs-attr">title:</span> <span class="hljs-string">標籤</span><br>  <span class="hljs-attr">subtitle:</span> <span class="hljs-string">標籤</span><br><br><span class="hljs-attr">category:</span><br>  <span class="hljs-attr">title:</span> <span class="hljs-string">分類</span><br>  <span class="hljs-attr">subtitle:</span> <span class="hljs-string">分類</span><br><br><span class="hljs-attr">about:</span><br>  <span class="hljs-attr">title:</span> <span class="hljs-string">關於</span><br>  <span class="hljs-attr">subtitle:</span> <span class="hljs-string">關於</span><br><br><span class="hljs-attr">page404:</span><br>  <span class="hljs-attr">title:</span> <span class="hljs-string">頁面走丟啦!</span><br>  <span class="hljs-attr">subtitle:</span> <span class="hljs-string">頁面走丟啦!</span><br><br><span class="hljs-attr">links:</span><br>  <span class="hljs-attr">title:</span> <span class="hljs-string">交換連結</span><br>  <span class="hljs-attr">subtitle:</span> <span class="hljs-string">交換連結</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>剩下的就是靜態設置都是在 <code>_config.fluid.yml</code>檔案裡調整</p>
+<p>官方文檔說明的超~級清楚，以下節錄常用的功能</p>
+<p><a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/#%E5%85%A8%E5%B1%80%E5%AD%97%E4%BD%93">配置指南 | Hexo Fluid (fluid-dev.com)</a></p>
+<ul>
+<li><p>部落格名字，瀏覽器圖標</p>
+</li>
+<li><p>頁面banner</p>
+</li>
+<li><p>Navbar設定</p>
+</li>
+<li><p>創建頁面(pages)</p>
+<ul>
+<li>about page</li>
+<li>tag page</li>
+<li>category page</li>
+<li>自定義頁面</li>
+</ul>
+</li>
+<li><p>發表新文章(posts)</p>
+<ul>
+<li>文章的tags</li>
+<li>文章的categories</li>
+<li>文章配圖</li>
+</ul>
+</li>
+<li><p>自定義css/html</p>
+<ul>
+<li>我有運用自定義的css設定反白的顏色，配合整體的色調!</li>
+</ul>
+</li>
+</ul>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結:"></a>小結:</h2><p>雖然好像都把工作丟給別人，但是真的只要照著指南做，幾乎碰不到什麼問題</p>
+<p>反而花比較多時間在美化上面</p>
+<p>如果有問題…我再想想辦法xd</p>
+<p>總之很開心2022寒假一兩天就能生出這個部落格，以後應該會固定放上學到的技術結晶</p>
+<p>要去玩玩其他東西了，今年應該會是個非常有趣的一年d(`･∀･)b</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Side-Project/" class="category-chain-item">Side Project</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/HTML/">#HTML</a>
+      
+        <a href="/tags/CSS/">#CSS</a>
+      
+        <a href="/tags/Github/">#Github</a>
+      
+        <a href="/tags/Blog/">#Blog</a>
+      
+        <a href="/tags/tutorial/">#tutorial</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/25/%E9%82%A3%E4%BA%9B%E5%9C%A8Solidity%E4%B8%AD%E7%A2%B0%E4%B8%8A%E7%9A%84%E6%84%8F%E5%A4%96/" title="那些在Solidity中碰上的意外">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">那些在Solidity中碰上的意外</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目錄</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允許 JavaScript 運行的環境下瀏覽效果更佳</div>
+  </noscript>
+</body>
+</html>

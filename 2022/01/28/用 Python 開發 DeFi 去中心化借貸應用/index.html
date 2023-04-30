@@ -1,0 +1,1227 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/run.png">
+  <link rel="icon" href="/assets/run.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#494e6b">
+  <meta name="author" content="lzydaphne">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="利用Solidity和Python在Aave測試鏈上進行交易的Defi應用最近投入大部分的寒假時間來學習，第一次把專案用比較詳細的文字敘述記錄下來，收穫頗多! 也剛好是因為已經有好心人整理要點，自己在思考過程中順暢很多(也省掉碼字的力氣)! 一直在反思要怎麼更好的吸收學習的東西，目前是這樣子的想法: 「先寫筆記，再回頭code」。兩件事情混在一起，對大腦認知負擔會太大 總之拉回正題，今天的專案是「">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Python 開發 DeFi 去中心化借貸應用">
+<meta property="og:url" content="https://lzydaphne.github.io/2022/01/28/%E7%94%A8%20Python%20%E9%96%8B%E7%99%BC%20DeFi%20%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E5%80%9F%E8%B2%B8%E6%87%89%E7%94%A8/index.html">
+<meta property="og:site_name" content="On the Road">
+<meta property="og:description" content="利用Solidity和Python在Aave測試鏈上進行交易的Defi應用最近投入大部分的寒假時間來學習，第一次把專案用比較詳細的文字敘述記錄下來，收穫頗多! 也剛好是因為已經有好心人整理要點，自己在思考過程中順暢很多(也省掉碼字的力氣)! 一直在反思要怎麼更好的吸收學習的東西，目前是這樣子的想法: 「先寫筆記，再回頭code」。兩件事情混在一起，對大腦認知負擔會太大 總之拉回正題，今天的專案是「">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://lzydaphne.github.io/assets/DeFi.jpg">
+<meta property="article:published_time" content="2022-01-28T15:35:59.000Z">
+<meta property="article:modified_time" content="2022-01-28T16:10:50.000Z">
+<meta property="article:author" content="lzydaphne">
+<meta property="article:tag" content="Solidity">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Brownie">
+<meta property="article:tag" content="Defi">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lzydaphne.github.io/assets/DeFi.jpg">
+  
+  
+  
+  <title>用 Python 開發 DeFi 去中心化借貸應用 | On the Road</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lzydaphne.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="On the Road" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>On the Road</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Articles</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/page.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="用 Python 開發 DeFi 去中心化借貸應用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-01-28 23:35" pubdate>
+          2022年1月28日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          17k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          139 分鐘
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">用 Python 開發 DeFi 去中心化借貸應用</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最後更新於：2022年1月29日 凌晨
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="利用Solidity和Python在Aave測試鏈上進行交易的Defi應用"><a href="#利用Solidity和Python在Aave測試鏈上進行交易的Defi應用" class="headerlink" title="利用Solidity和Python在Aave測試鏈上進行交易的Defi應用"></a>利用Solidity和Python在Aave測試鏈上進行交易的Defi應用</h1><p>最近投入大部分的寒假時間來學習，第一次把專案用比較詳細的文字敘述記錄下來，收穫頗多!</p>
+<p>也剛好是因為已經有好心人整理要點，自己在思考過程中順暢很多(<del>也省掉碼字的力氣</del>)!</p>
+<p>一直在反思要怎麼更好的吸收學習的東西，目前是這樣子的想法:</p>
+<p>「先寫筆記，再回頭code」。兩件事情混在一起，對大腦認知負擔會太大</p>
+<p>總之拉回正題，今天的專案是「利用Solidity和Python在Aave測試鏈上進行交易的Defi應用」</p>
+<h2 id="總目標"><a href="#總目標" class="headerlink" title="總目標:"></a>總目標:</h2><ol>
+<li>抵押<ol>
+<li>將ETH換成 WETH</li>
+<li>把一些ETH存入aave</li>
+<li>使用存入的ETH(抵押品Collateral)來借入一些資產assets</li>
+<li>做空Short Selling(把借來的資產賣出)</li>
+<li>歸還Repay所有債務</li>
+</ol>
+</li>
+<li>拿出貸款</li>
+<li>償還貸款</li>
+</ol>
+<p>工具:</p>
+<ol>
+<li>brownie </li>
+<li>Aave</li>
+<li>Python</li>
+</ol>
+<h2 id="0-前置工作"><a href="#0-前置工作" class="headerlink" title="0. 前置工作"></a>0. 前置工作</h2><ol>
+<li><p><code>brownie  init</code></p>
+</li>
+<li><p>這個專案我們不會自己創建合約，因為都是要使用外部鏈上已經發布的˙合約</p>
+<ol>
+<li>把ETH存進WETH 合約會讓你拿到WETH Token</li>
+<li>所以我們需要先呼叫WETH 合約的deposit()<ol>
+<li>如何呼叫合約呢? 透過合約地址和合約abi</li>
+<li>怎麼取得合約地址和合約abi?   abi = interface(address)<ol>
+<li>透過「本地自定或config」(地址)以及「 WETH 的 Interface (<code>IWeth.sol</code>)」(abi)!</li>
+<li>先取得address，再利用address取得abi</li>
+<li><code>IWeth.sol</code> 裡面包含了 <code>ERC20</code> 合約的所有方法</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>先使用 <code>Koven</code>上的weth_token address(==WETH 在Koven上的合約地址)</p>
+</li>
+<li><p>測試</p>
+<ol>
+<li><p>線上+integration test : koven</p>
+</li>
+<li><p>本地+ unit test : mainnet-fork</p>
+<ol>
+<li>因為不使用oracle，所以也不需要 部屬mocking contract，不過還是可以用</li>
+<li>直接把mainnet上的資料都抓下來<ol>
+<li>要先把 <code>mainnet-fork</code> 加入「development」的鏈上(用 <code>brownie list true</code> 查看)<ol>
+<li>先移除在原本的 「ETHEREUM」鏈上的</li>
+<li>再加入「development」的鏈上</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>預設的測試網路其實是「development + mocking」</p>
+<p>不過如果你不會用到oracle，你可以直接使用mainnet-fork</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">networks:</span><br>	<span class="hljs-attr">kovan:</span> <span class="hljs-string">//這是kovan鏈上</span> <span class="hljs-string">WETH合約的地址</span><br>		<span class="hljs-attr">weth_token:</span> <span class="hljs-string">&quot;0xd0a1e359811322d97991e03f863a0c30c2cf029c&quot;</span><br>	<span class="hljs-attr">mainnet-fork:</span> <span class="hljs-string">//</span> <span class="hljs-string">這是主鏈上，WETH合約的地址</span><br>		<span class="hljs-attr">weth_token:</span> <span class="hljs-string">&quot;0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="超級常用的get-account"><a href="#超級常用的get-account" class="headerlink" title="超級常用的get_account()"></a>超級常用的<code>get_account()</code></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> brownie <span class="hljs-keyword">import</span> accounts, network, config<br>LOCAL_BLOCKCHAIN_ENVIRONMENTS = [<span class="hljs-string">&quot;development&quot;</span>, <span class="hljs-string">&quot;ganache&quot;</span>, <span class="hljs-string">&quot;hardhat&quot;</span>, <span class="hljs-string">&quot;local-ganache&quot;</span>, <span class="hljs-string">&quot;mainnet-fork&quot;</span>,]<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_account</span>(<span class="hljs-params">index=<span class="hljs-literal">None</span>, <span class="hljs-built_in">id</span>=<span class="hljs-literal">None</span></span>):<br>    <span class="hljs-keyword">if</span> index:<br>        <span class="hljs-keyword">return</span> accounts[index]<span class="hljs-comment">#本地帳號</span><br>    <span class="hljs-keyword">if</span> network.show_active() <span class="hljs-keyword">in</span> LOCAL_BLOCKCHAIN_ENVIRONMENTS:<br>        <span class="hljs-built_in">print</span>(accounts[<span class="hljs-number">0</span>].balance())<br>        <span class="hljs-keyword">return</span> accounts[<span class="hljs-number">0</span>] <span class="hljs-comment">#本地帳號</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">id</span>:<br>        <span class="hljs-keyword">return</span> accounts.load(<span class="hljs-built_in">id</span>)<br>    <span class="hljs-keyword">return</span> accounts.add(config[<span class="hljs-string">&quot;wallets&quot;</span>][<span class="hljs-string">&quot;from_key&quot;</span>])<span class="hljs-comment">#鏈上帳號</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="accounts-load"><a href="#accounts-load" class="headerlink" title="accounts.load"></a><code>accounts.load</code></h4><ul>
+<li><a target="_blank" rel="noopener" href="https://eth-brownie.readthedocs.io/en/stable/api-network.html#Accounts.load">Network API — Brownie 1.17.2 documentation (eth-brownie.readthedocs.io)</a></li>
+</ul>
+<p>目標: 為了從script或console存取local account，首先必須要「解鎖」</p>
+<p>鑰匙本人: <code>accounts.load</code> ，解完鎖就可以在<a target="_blank" rel="noopener" href="https://eth-brownie.readthedocs.io/en/stable/api-network.html#brownie.network.account.Accounts"><code>Accounts</code></a> container.中使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//回傳一個帳號總列表</span><br>&gt;&gt;&gt; accounts.<span class="hljs-title function_">load</span>()<br>[<span class="hljs-string">&#x27;my_account&#x27;</span>]<br><br><span class="hljs-comment">//回傳一個本地帳號</span><br>&gt;&gt;&gt; accounts.<span class="hljs-title function_">load</span>(<span class="hljs-string">&#x27;my_account&#x27;</span>)<br><span class="hljs-title class_">Enter</span> the password <span class="hljs-keyword">for</span> <span class="hljs-variable language_">this</span> <span class="hljs-attr">account</span>:<br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">LocalAccount</span> <span class="hljs-attr">object</span> &#x27;<span class="hljs-attr">0xa9c2DD830DfFE8934fEb0A93BAbcb6e823e1FF05</span>&#x27;&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<h4 id="accounts-local-account"><a href="#accounts-local-account" class="headerlink" title="accounts / local account"></a>accounts / local account</h4><ul>
+<li>唯一差別:    <code>local account</code> 的私鑰是直接被放置的<ul>
+<li>so is not found in <a target="_blank" rel="noopener" href="https://web3py.readthedocs.io/en/stable/web3.eth.html#web3.eth.Eth.accounts"><code>web3.eth.accounts</code></a>.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Resetting the RPC client will delete all <code>LocalAccount</code> objects from the <a target="_blank" rel="noopener" href="https://eth-brownie.readthedocs.io/en/stable/api-network.html#brownie.network.account.Accounts"><code>Account</code></a> container.</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js">&gt;&gt;&gt; accounts.<span class="hljs-title function_">add</span>()<br>&lt;<span class="hljs-title class_">LocalAccount</span> object <span class="hljs-string">&#x27;0x716E8419F2926d6AcE07442675F476ace972C580&#x27;</span>&gt;<br>&gt;&gt;&gt; accounts[-<span class="hljs-number">1</span>]<br>&lt;<span class="hljs-title class_">LocalAccount</span> object <span class="hljs-string">&#x27;0x716E8419F2926d6AcE07442675F476ace972C580&#x27;</span>&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="dotenv-env"><a href="#dotenv-env" class="headerlink" title="dotenv= .env"></a><code>dotenv= .env</code></h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> PRIVATE_KEY = 0x&lt;自己的私鑰&gt;<br><span class="hljs-built_in">export</span> WEB3_INFURA_PROJECT_ID =530c9d1b97ad4e9c8c4939eefcab5c6f<br><span class="hljs-built_in">export</span> <span class="hljs-attribute">ETHERSCAN_TOKEN</span>=FIC7FIYDT16AXNBN3SY1CFQ82PS9R22DZ2<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-將ETH換成-WETH-By-AAVE"><a href="#1-將ETH換成-WETH-By-AAVE" class="headerlink" title="1. 將ETH換成 WETH(By AAVE)"></a>1. 將ETH換成 WETH(By AAVE)</h2><blockquote>
+<p>我們使用 <code>./scripts/get_weth.py</code> 腳本中的 <code>get_weth</code> 函數完成了此操作。</p>
+</blockquote>
+<h3 id="測試網上的第一筆交易！"><a href="#測試網上的第一筆交易！" class="headerlink" title="測試網上的第一筆交易！"></a>測試網上的第一筆交易！</h3><ol>
+<li>為了與 Aave 協議交互，把我們的 ETH 換成 ERC20 版本的 ETH，稱為 WETH（也稱為wrapped ETH）。它使我們更容易與 AAVE 協議交互。 <ol>
+<li>ERC20 是以太坊上的通用代幣標準。</li>
+</ol>
+</li>
+<li>您應該會看到您的 MetaMask 餘額減少。這是因為我們正在<strong>將 ETH 換成 WETH。</strong></li>
+<li>為了查看我們的新餘額，進入 MetaMask，然後點擊添加令牌。然後，在自定義令牌下輸入地址 0xd0a1e359811322d97991e03f863a0c30c2cf029c。<ol>
+<li>這是 Kovan 測試網上 Wrapped Ether 代幣的合約地址。</li>
+<li>你會注意到現在總共不到 2 個 ETH (1 + 0.99 != 2)。這是因為每次在區塊鏈上進行交易時，都需要支付一點 gas。<ol>
+<li>gas 是一種向礦工和驗證者支付少量交易費用的方式。有兩種 gas：<ol>
+<li>TransactionGas2、</li>
+<li>OracleGas</li>
+<li>在這個專案中，我們只需要關注 transaction gas。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>就是你在測試網上的第一筆交易！</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> scripts.helpful_scripts <span class="hljs-keyword">import</span> get_account<br><span class="hljs-keyword">from</span> brownie <span class="hljs-keyword">import</span> interface, config, network<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    get_weth()<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_weth</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    Mints WETH by depositing ETH</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    account = get_account()<br>    <br>    <span class="hljs-comment">#利用weth合約的address，取得weth合約的abi</span><br>    weth = interface.IWeth(config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;weth_token&quot;</span>]) <br>    <br>    <span class="hljs-comment">#調用合約函式 </span><br>    <span class="hljs-comment">#brownie 預設的eth貨幣單位是wei，1ETH = 10^18 WEI</span><br>    tx = weth.deposit(&#123;<span class="hljs-string">&quot;from&quot;</span>: account, <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">0.1</span> * <span class="hljs-number">10</span> ** <span class="hljs-number">18</span>&#125;) <br>    <br>    tx.wait(<span class="hljs-number">1</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Received 0.1 WETH&quot;</span>)<br>    <span class="hljs-keyword">return</span> tx<br></code></pre></td></tr></table></figure>
+
+<h3 id="我們本身有一個儲存ETH的帳戶，要和WETH的合約進行交互"><a href="#我們本身有一個儲存ETH的帳戶，要和WETH的合約進行交互" class="headerlink" title="我們本身有一個儲存ETH的帳戶，要和WETH的合約進行交互"></a>我們本身有一個儲存ETH的帳戶，要和WETH的合約進行交互</h3><ol start="5">
+<li>我們需要獲取 WETH 合約對象，以便與該合約對象進行交互。<ul>
+<li>我們想將 ETH 存入合約，所以它會為我們鑄造相同數量的 WETH。<ul>
+<li>我們可以隨時使用此合約將 WETH 轉換回 ETH。(使用  <code>withdraw()</code> )</li>
+</ul>
+</li>
+<li>所有 ERC20 代幣（如 LINK、WETH、AAVE 等）本身都是鏈上合約。</li>
+</ul>
+</li>
+<li>要與合約交互，我們需要兩個東西。<ul>
+<li>合約ABI/接口</li>
+<li>合約地址</li>
+</ul>
+</li>
+<li>我們可以<strong>使用該interfaces 接口，因為它可以編譯為 ABI</strong>。<ol>
+<li>編譯後的項目將合約放入 build 文件夾中。</li>
+<li>如果我們查看 build 下的 interfaces 文件夾，我們可以看到一個名為 WethInterface.json 的文件。在該文件夾中，有一個名為 abi 的密鑰。<ul>
+<li>ABI 代表 APP 二進制接口，是<strong>程序了解如何與合約交互的標準方式</strong>，簡單來說，就是每個合約的「使用手冊」</li>
+</ul>
+</li>
+<li>我們可以通過創建一個這樣的 <strong>weth 變數</strong>來<strong>將地址和 ABI 添加到一個對像</strong>中以供我們交互</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">weth = interface.WethInterface(       <br>config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;weth_token&quot;</span>])<br></code></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>我們再一次從配置文件中獲取了 weth_token 地址。你會注意到<strong>不同的代幣有不同的地址</strong>，這取決於<strong>你正在處理的鏈</strong>。<ol>
+<li>如果我們要 <code>print(type(weth))</code>，我們會得到：</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">&lt;<span class="hljs-keyword">class</span><span class="hljs-string">&#x27;brownie.network.contract.Contract&#x27;</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<ol start="9">
+<li><code>Contract</code> 對象就像一個類，它代錶鍊上的合約。然後我們<strong>可以在鏈上調用該合約的函數</strong>。<ul>
+<li>因此，我們調用 <code>weth</code>合約上的存款函數 <code>deposit</code>，並回傳該次transaction<code>tx</code> :</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">tx = weth.deposit(&#123;<span class="hljs-string">&quot;from&quot;</span>: account, <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">1000000000000000000</span>&#125;)<br><span class="hljs-comment">#我打算使用account帳戶裡面的錢，存value進去weth合約裡面</span><br></code></pre></td></tr></table></figure>
+
+<p>​    </p>
+<h3 id="補充原理"><a href="#補充原理" class="headerlink" title="補充原理"></a>補充原理</h3><h4 id="1-我要如何在以太坊上進行交易或調用"><a href="#1-我要如何在以太坊上進行交易或調用" class="headerlink" title="1. 我要如何在以太坊上進行交易或調用?"></a><strong>1. 我要如何在以太坊上進行交易或調用?</strong></h4><ol>
+<li><p>以太坊上交易(transact)==修改區塊鍊的狀態，調用(call)只是查看狀態</p>
+</li>
+<li><p>如果您<strong>想修改區塊鏈的狀態</strong>，您必須始終 <strong>from一個帳戶</strong>。</p>
+</li>
+<li><p>應用:</p>
+<ol>
+<li>我們正在修改區塊鏈的狀態，因為我們將修改我們的 ETH 和 WETH 餘額。</li>
+</ol>
+</li>
+<li><p>每當我們進行函數調用並修改區塊鏈的狀態時，我們就會進行交易。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">Transaction sent: <br><span class="hljs-number">0x888bb9d6657b1de2e5eec465bf9641b401647a61a2bd428b51d8a95d5a3e329a</span><br></code></pre></td></tr></table></figure>
+
+<p>然後，您可以將此交易哈希複製到區塊瀏覽器中以查看該交易的詳細信息。</p>
+</li>
+</ol>
+<h4 id="2-何謂interface接口"><a href="#2-何謂interface接口" class="headerlink" title="2.何謂interface接口?"></a><strong>2.何謂interface接口?</strong></h4><ol>
+<li>接口就是一組「可以面向外部的共同的調用方法」</li>
+<li>對於外部程序來說，如果繼承了這個接口，那麼這個合約一定包含接口中的方法和實現</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">pragma solidity ^<span class="hljs-number">0.4</span><span class="hljs-number">.19</span>;<br>interface Cash &#123;<br>    function receive(address recipient, uint amount) external;<br>    function getRemain(address cashAccount) external;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-函式的modifier宣告的順序"><a href="#3-函式的modifier宣告的順序" class="headerlink" title="3.函式的modifier宣告的順序"></a>3.函式的modifier宣告的順序</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.soliditylang.org/en/v0.8.11/style-guide.html?highlight=constructor#function-declaration">Style Guide — Solidity 0.8.11 documentation (soliditylang.org)</a></li>
+</ul>
+<ol>
+<li>Visibility</li>
+<li>Mutability</li>
+<li>Virtual</li>
+<li>Override</li>
+<li>Custom modifiers</li>
+</ol>
+<h4 id="4-Constructor-怎麼用"><a href="#4-Constructor-怎麼用" class="headerlink" title="4.Constructor 怎麼用?"></a>4.<code>Constructor</code> 怎麼用?</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www-tutorialspoint-com.translate.goog/solidity/solidity_constructors.htm?_x_tr_sl=en&_x_tr_tl=zh-TW&_x_tr_hl=zh-TW&_x_tr_pto=op,sc">Solidity - Constructors (www-tutorialspoint-com.translate.goog)</a></li>
+</ul>
+<ol>
+<li>用來初始化該合約的state variable</li>
+<li>是選擇性使用的<ol>
+<li>有用<ol>
+<li>每個合約只能有一個</li>
+<li>當該合約被建立，<code>Constructor</code> 就會執行</li>
+</ol>
+</li>
+<li>沒用<ol>
+<li>一個default constructor 會自動出現在合約</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>執行完畢，<code>final code</code>會被部屬到鏈上<ol>
+<li>YES: <code>public</code> function  + <code>code reachable through public functions</code></li>
+<li>NO:  <code>Constructor code</code> + <code>any internal method used only by constructor</code></li>
+</ol>
+</li>
+<li>可見度: <code>public </code> 或 <code>internal</code><ol>
+<li>如果是 <code>internal</code> ，代表這是「抽象合約」</li>
+</ol>
+</li>
+<li>如果繼承來的合約(父合約)的 <code>Constructor</code> 有參數，那「子合約」也要輸入參數<ol>
+<li>有兩種方法可以使用</li>
+<li>注意: (父合約)本人不能用這兩種方法來初始化</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs js">pragma solidity ^<span class="hljs-number">0.5</span><span class="hljs-number">.0</span>;<br><br>contract <span class="hljs-title class_">Base</span> &#123;<br>   uint data;<br>   <span class="hljs-title function_">constructor</span>(<span class="hljs-params">uint _data</span>) public &#123;<br>      data = _data;   <br>   &#125;<br>&#125;<br><span class="hljs-comment">// 第一種直接的方法</span><br>contract <span class="hljs-title class_">Derived</span> is <span class="hljs-title class_">Base</span> (<span class="hljs-number">5</span>) &#123;<br>   <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) public &#123;&#125;<br>&#125;<br><span class="hljs-comment">// 第二種間接的方法</span><br>contract <span class="hljs-title class_">Derived</span> is <span class="hljs-title class_">Base</span> &#123;<br>   <span class="hljs-title function_">constructor</span>(<span class="hljs-params">uint _info</span>) <span class="hljs-title class_">Base</span>(_info * _info) public &#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>若「子合約」沒有輸入參數，會被視為「抽象合約」</li>
+<li>如何建立可以在腳本中使用的帳戶? 如何用PYTHON獲得交易所需的帳戶?<ul>
+<li>位於 <code>brownie-config.yaml</code>。使用我們的 <code>PRIVATE_KEY</code> 環境變量。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">wallets:</span> <br>	<span class="hljs-attr">from_key:</span> <span class="hljs-string">$&#123;PRIVATE_KEY&#125;</span> <br>	<span class="hljs-attr">from_mnemonic:</span> <span class="hljs-string">$&#123;MNEMONIC&#125;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>現在不用擔心 MNEMONIC。我们將該帳戶添加到我們的Brownie accounts列表中：</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">accounts.add(config[&quot;wallets&quot;][&quot;from_key&quot;])</span><br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>如何透過「對方合約的地址和ABI」和對方合約進行交互?</li>
+<li>如何使用函式來「調用Call」並傳送交易</li>
+</ol>
+<h3 id="Brownie的功能"><a href="#Brownie的功能" class="headerlink" title="Brownie的功能"></a>Brownie的功能</h3><ol>
+<li>accounts</li>
+<li>network</li>
+<li>config</li>
+<li>interface</li>
+</ol>
+<h2 id="2-把一些ETH存入aave"><a href="#2-把一些ETH存入aave" class="headerlink" title="2. 把一些ETH存入aave"></a>2. 把一些ETH存入aave</h2><p>運行 aave_borrow.py 腳本，它做了 4 件事：</p>
+<ul>
+<li>將抵押品(Collateral，此處是ETH)存入 Aave 貸款池</li>
+<li>獲得了我們的抵押品和另一種資產之間的匯率</li>
+<li>使用該抵押品借入不同的資產（貸款）</li>
+<li>還清了貸款</li>
+</ul>
+<p>我们看一下<code>main</code>函數的開頭：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    account = get_account()<br>    <br>    <span class="hljs-comment">#erc20合約的地址</span><br>    erc20_address = config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;weth_token&quot;</span>]<br>    <span class="hljs-keyword">if</span> network.show_active() <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;mainnet-fork&quot;</span>]:<br>        get_weth() <span class="hljs-comment">#如果在我們本地運行，調用 get_weth()讓我們的錢包中有 WETH，也得到deposit交易的地址</span><br><br>    lending_pool = get_lending_pool()<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-從配置文件中獲取我們的地址"><a href="#1-從配置文件中獲取我們的地址" class="headerlink" title="1. 從配置文件中獲取我們的地址"></a>1. 從配置文件中獲取我們的地址</h3><ol>
+<li>這在 get_account 函數中定義<ol>
+<li>如果我們在測試網上，它會再次從我們的配置中提取</li>
+<li>如果您在本地鏈上進行測試，我們只使用它生成的第一個帳戶。</li>
+</ol>
+</li>
+</ol>
+<h3 id="2-我們也從配置文件中獲取-WETH-令牌的地址"><a href="#2-我們也從配置文件中獲取-WETH-令牌的地址" class="headerlink" title="2. 我們也從配置文件中獲取 WETH 令牌的地址"></a>2. 我們也從配置文件中獲取 WETH 令牌的地址</h3><ul>
+<li>如果我們在本地鏈上，我們調用之前調用的相同 get_weth 函數。<ul>
+<li>這是為了確保如果我們使用本地鏈，我們的錢包中有 WETH。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-我們得到了lending-pool的地址"><a href="#3-我們得到了lending-pool的地址" class="headerlink" title="3. 我們得到了lending_pool的地址"></a>3. 我們得到了lending_pool的地址</h3><ul>
+<li>lending_pool是管理借貸功能的鏈上智能合約。<ul>
+<li>您可以在 Aave 文檔中查看功能，或者您可以直接在鏈上查看合約。</li>
+</ul>
+</li>
+</ul>
+<h4 id="lending-pool"><a href="#lending-pool" class="headerlink" title="lending_pool"></a><code>lending_pool</code></h4><p>我們在這個合約中看到了許多有用的功能：</p>
+<ul>
+<li>借貸</li>
+<li>抵押</li>
+<li>獲取用戶帳戶數據</li>
+<li>償還</li>
+</ul>
+<blockquote>
+<p>請記住，鏈上智能合約與傳統軟件工程中的對像object或類class相同，每個都有與之相關的功能。</p>
+</blockquote>
+<p>如果您要print(type(lending_pool))，我們會得到這種類型</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">&lt;<span class="hljs-keyword">class</span> &#x27;brownie.network.<span class="hljs-keyword">contract</span>.<span class="hljs-keyword">Contract</span>&#x27;&gt;<br></code></pre></td></tr></table></figure>
+
+<p>這意味著借貸池是一個合約，就像 WETH 一樣！</p>
+<h4 id="get-lending-pool-函數"><a href="#get-lending-pool-函數" class="headerlink" title="get_lending_pool() 函數"></a><code>get_lending_pool()</code> 函數</h4><ul>
+<li>我們的 <code>get_lending_pool()</code> 函數實際上做了一些額外的步驟來<strong>獲取貸款池合約</strong><code>lending_pool</code> :</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_lending_pool</span>():<br>    <span class="hljs-comment"># address</span><br>    lending_pool_addresses_provider = interface.ILendingPoolAddressesProvider(<br>        config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;lending_pool_addresses_provider&quot;</span>])<br>    lending_pool_address = lending_pool_addresses_provider.getLendingPool()<br><br>    <span class="hljs-comment"># abi = interface(address)</span><br>    lending_pool = interface.ILendingPool(lending_pool_address)<br>    <span class="hljs-keyword">return</span> lending_pool<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>我們需要兩個東西才能與智能合約進行交互：ABI/接口+ 地址</li>
+</ul>
+<ol>
+<li>我們有位於interfaces文件夾中的借貸池的接口。<ul>
+<li>補充: 你會注意到一個流行的接口約定是讓它們以字母“I”開頭。我們在這個例子中有一個mix，表示它不必以“I”開頭。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>為了讓我們獲得借貸池的地址，我們必須透過 <strong>LendingPoolAddressesProvider 的地址</strong>。<ul>
+<li>這是一個鏈上合約，其中<strong>包含 Aave 借貸池的所有地址</strong>。<ul>
+<li>有時，出借池地址發生變化，但出借池提供者地址永遠不會改變，因此我們始終可以使用該合約的地址來獲取出借池地址。</li>
+<li>你會看到我們在<code>lenting_pool_addresses_provider</code> 變量上調用了 <code>getLendingPool</code> 函數</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="存入抵押品"><a href="#存入抵押品" class="headerlink" title="存入抵押品"></a>存入抵押品</h3><p>讓我們回到主函數。在我們<strong>得到了貸款池合約的地址</strong>後，我們要<strong>先存入抵押品，才能獲得貸款</strong>。</p>
+<ul>
+<li><p>存入抵押品將使我們獲得：</p>
+<ol>
+<li><p>收益: 該協議向將抵押品存入平台的用戶支付報酬。</p>
+</li>
+<li><p>取出貸款: 我們只有在有足夠的抵押品的情況下才能貸款/借入。 </p>
+<ul>
+<li>超額抵押貸款<ul>
+<li>Aave 有一個名為 <code>Liquidationcall</code> 的函數，如果您沒有足夠的抵押品，任何人都可以調用該函數並獲得獎勵。抵押品的價值必須保持大於貸款的價值，</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>流動性挖礦 = 用戶存入抵押品增加流動性，該合約會提供獎勵</p>
+<ul>
+<li>也稱為收益耕作，讓用戶能夠<strong>以治理govermance或其他類型代幣的形式獲得獎勵</strong>，<strong>以向協議提供流動性</strong>。</li>
+<li>但是，為了讓我們存入一些代幣，我們必須<strong>批准智能合約</strong>才能將代幣從我們的錢包中取出。</li>
+<li>我們將把我們的 WETH 作為抵押品。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="approve-erc20"><a href="#approve-erc20" class="headerlink" title="approve_erc20"></a><code>approve_erc20</code></h4><p>讓我們看看我們的approve_erc20函數。</p>
+<blockquote>
+<p>我的account允許lending_pool_address這個合約(借貸池地址)從erc20_address這個地址領取amount這麼多的ERC20 代幣</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">approve_erc20</span>(<span class="hljs-params">amount, lending_pool_address, erc20_address, account</span>):<br>   <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Approving ERC20...&quot;</span>)<br>   erc20 = interface.IERC20(erc20_address)<br>   tx_hash = erc20.approve(lending_pool_address, amount, &#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;)<br>   tx_hash.wait(<span class="hljs-number">1</span>)<br>   <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Approved!&quot;</span>)<br>   <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>amount：允許協議使用多少 ERC20，以 wei 為單位。<ul>
+<li> wei 是區塊鏈世界中最小的計量單位。 1 ETH == 1000000000000000000wei (10^18)</li>
+</ul>
+</li>
+<li>lending_pool_address：借貸池地址。</li>
+<li>erc20_address：ERC20 代幣的地址。(哪一個幣種?)</li>
+<li>account：我們想要交易的賬戶。</li>
+</ul>
+<p>原理:</p>
+<ul>
+<li><p>在使用 ERC20 代幣時，如果我們希望從我們的錢包中“調用”另一個合約，我們必須首先批准該合約</p>
+</li>
+<li><p>我們調用 ERC20 合約（我們的 WETH）上的批准函數(<code>approve_erc20</code>)，然後我們“等待”<code>tx_hash.wait(1)</code>該交易繼續進行。</p>
+</li>
+<li><p>現在我們已經批准了合同，我們可以<strong>將我們的抵押品存入我們的主函數中的 <code>lending_pool</code> 合同中(來自 <code>get_lending_pool()</code> )</strong></p>
+</li>
+</ul>
+<h4 id="lending-pool-借貸池合約，完成deposit"><a href="#lending-pool-借貸池合約，完成deposit" class="headerlink" title="lending_pool  借貸池合約，完成deposit!"></a><code>lending_pool</code>  借貸池合約，完成deposit!</h4><blockquote>
+<p>我讓account.address存amount這麼多的erc20_address該種類代幣到借貸池</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Depositing...&quot;</span>)<br>lending_pool.deposit(erc20_address, amount, account.address, <span class="hljs-number">0</span>, &#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Deposited!&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>我們可以在這裡看到，我們在合約上調用了deposit函數，我們給了它：</p>
+<ul>
+<li>erc20_address：要存入的代幣（在我們的例子中是 WETH）</li>
+<li>amount：要存入的 wei 金額。</li>
+<li>account.address：我們想為誰貸款，在這種情況下是我們自己。</li>
+<li>0：這是推薦代碼（已折舊，始終使用 0）</li>
+</ul>
+<p>我們可以從 Aave 文檔中了解更多關於智能合約中的存款功能。</p>
+<h3 id="Etherscan-上-Kovan-測試網的例子"><a href="#Etherscan-上-Kovan-測試網的例子" class="headerlink" title="Etherscan 上 Kovan 測試網的例子"></a>Etherscan 上 Kovan 測試網的例子</h3><p>如果你正確地完成了這部分，你會得到一個交易哈希，它會告訴你發生了什麼。</p>
+<p>讓我們看一個關於 Etherscan 上 Kovan 測試網的例子。</p>
+<p><img src="/assets/t3.png" srcset="/img/loading.gif" lazyload alt="image-20220129000032424"></p>
+<p>如果我們查看 Tokens Transferred 部分，我們可以看到 <strong>1 筆存款交易發生了 3 筆交易</strong>。</p>
+<p>按順序，這些是：</p>
+<ul>
+<li>一些 aToken 被鑄造出來供我們存入 (aWETH)</li>
+<li>我們發送了 1 個 WETH 到 lending_pool 合約（這是我們的存款）</li>
+<li>我們收到了一些 aToken</li>
+</ul>
+<p>所以中間代幣轉移是有道理的——我們正在向借貸池發送一些 WETH。但是其他token是什麼？</p>
+<h4 id="屬於支付利息Interest-Bearing-的代幣aToken"><a href="#屬於支付利息Interest-Bearing-的代幣aToken" class="headerlink" title="屬於支付利息Interest Bearing 的代幣aToken"></a>屬於支付利息Interest Bearing 的代幣aToken</h4><ul>
+<li><p>aToken 是一種計息代幣，<strong>在存款時鑄造並在贖回時銷毀</strong>。</p>
+<ul>
+<li>所以當你取回你的存款時，你<strong>燒掉你的 aToken 以獲得等量的基礎資產</strong>。 </li>
+<li>aTokens 最酷的部分是它們的價值每時每刻都在上漲！</li>
+<li>餘額增加是因為人們使用 Aave 協議並藉用您的資產，因此您因此獲得報酬！</li>
+</ul>
+</li>
+<li><p>您可以查看某人的餘額並每隔幾秒鐘刷新一次，以實時查看餘額的增加情況。</p>
+</li>
+<li><p>每當我們想要贖回或提取我們的 WETH 時，無論我們擁有多少 aWETH，我們都會提取，而這些 aWETH 將被燒毀。</p>
+</li>
+<li><p>與 WETH token相同，您現在可以在您的 MetaMask 錢包中看到 aWETH。只需進入您的 MetaMask，並執行我們上面所做的添加的token部分，Kovan WETH 地址為 <code>0x87b1f4cf9bd63f7bbd3ee1ad04e8f52540349347</code></p>
+</li>
+</ul>
+<h2 id="3-貸款–使用存入的ETH-抵押品Collateral-來借入一些資產assets"><a href="#3-貸款–使用存入的ETH-抵押品Collateral-來借入一些資產assets" class="headerlink" title="3. 貸款–使用存入的ETH(抵押品Collateral)來借入一些資產assets"></a>3. 貸款–使用存入的ETH(抵押品Collateral)來借入一些資產assets</h2><p>現在我們已經存入了一些抵押品，我們可以貸款了。現在我們為什麼要貸款？</p>
+<ul>
+<li>無摩擦賣空</li>
+<li>無需平倉即可獲得流動性</li>
+</ul>
+<h3 id="健康系數"><a href="#健康系數" class="headerlink" title="健康系數"></a>健康系數</h3><p>您可以<strong>借入資產以保持對標的抵押品的敞口</strong>，同時還可以用另一種資產進行交易或支付。只要確保將您的健康係數保持在 1 以上。</p>
+<ul>
+<li>您的健康因素是您貸款的抵押品數量。</li>
+<li>假設我存入了 1 ETH，借了 0.5 ETH。如果清算閾值為 1，那麼我的健康係數將為 2。</li>
+</ul>
+<p><img src="/assets/t2.png" srcset="/img/loading.gif" lazyload alt="image-20220129000045954"></p>
+<p><strong>清算門檻( liquidation threshold  )<strong>是貸款</strong>被定義為抵押不足的百分比</strong>。</p>
+<ul>
+<li><p>例如，清算門檻為 80% 意味著如果<strong>價值超過抵押品的 80%，則貸款抵押不足，可以清算</strong>。</p>
+</li>
+<li><p>但是假設我有 2 ETH 借入和 1 ETH 作為抵押品，1 作為清算門檻。我的健康係數是 0.5，我會被要求清算。這是清算人代表借款人償還部分或全部未償還借入金額的情況，同時獲得折扣金額的抵押品作為回報（也稱為清算“獎金”）。</p>
+</li>
+<li><p>清算人可以決定他們是否想要獲得等值的金額 抵押aToken，或者直接標的資產，</p>
+</li>
+<li><p>當清算成功完成後，增加倉位的健康係數，使健康係數在1以上。通過這種方式，來保持貸款健康</p>
+</li>
+</ul>
+<h3 id="getUserAccountData-函數"><a href="#getUserAccountData-函數" class="headerlink" title="getUserAccountData 函數"></a><code>getUserAccountData</code> 函數</h3><p>目的: 了解帳戶情況( 抵押品/借貸(債務)/可借貸數量/清算門檻/貸款價值比 (Loan-to-value ratio)/健康系數)</p>
+<p>以我們的抵押品借款，我們首先要<strong>衡量我們作為抵押品的抵押品數據</strong>。我們可以調用貸款池上的 getUserAccountData 函數來找出這一點。</p>
+<ul>
+<li>我們將它封裝到一個名為 get_borrowable_data 的函數中</li>
+<li>我們只關注 available_borrow_eth 和 total_debt_eth，這樣我們就會知道：<ul>
+<li>我們可以借多少錢</li>
+<li>我們目前有多少債務</li>
+</ul>
+</li>
+</ul>
+<h4 id="Web3-fromWei"><a href="#Web3-fromWei" class="headerlink" title="Web3.fromWei( )"></a><code>Web3.fromWei( )</code></h4><p><code>web3.utils.fromWei(number [, unit]) </code>  <strong>從 <code>wei</code> 轉為指定單位</strong></p>
+<ol>
+<li><code>number</code>：接受格式字串、數字、BN，單位是 <code>wei</code>。</li>
+<li><code>uint</code>：接受格式字串 (非必填)，預設是 <code>ether</code>。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_borrowable_data</span>(<span class="hljs-params">lending_pool, account</span>):<br>    (<br>        total_collateral_eth,<span class="hljs-comment">#抵押品</span><br>        total_debt_eth,<span class="hljs-comment">#借貸(債務)</span><br>        available_borrow_eth,<span class="hljs-comment">#可借貸數量</span><br>        current_liquidation_threshold,<span class="hljs-comment">#清算門檻</span><br>        ltv,<span class="hljs-comment">#貸款價值比 (Loan-to-value ratio)</span><br>        health_factor,<span class="hljs-comment">#健康系數</span><br>    ) = lending_pool.getUserAccountData(account.address)<span class="hljs-comment">#getUserAccountData</span><br>    <br>    available_borrow_eth = Web3.fromWei(available_borrow_eth, <span class="hljs-string">&quot;ether&quot;</span>)<span class="hljs-comment">#從wei轉為ether</span><br>    total_collateral_eth = Web3.fromWei(total_collateral_eth, <span class="hljs-string">&quot;ether&quot;</span>)<span class="hljs-comment">#從wei轉為ether</span><br>    total_debt_eth = Web3.fromWei(total_debt_eth, <span class="hljs-string">&quot;ether&quot;</span>)<span class="hljs-comment">#從wei轉為ether</span><br>    <br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;You have <span class="hljs-subst">&#123;total_collateral_eth&#125;</span> worth of ETH deposited.&quot;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;You have <span class="hljs-subst">&#123;total_debt_eth&#125;</span> worth of ETH borrowed.&quot;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;You can borrow <span class="hljs-subst">&#123;available_borrow_eth&#125;</span> worth of ETH.&quot;</span>)<br>    <span class="hljs-keyword">return</span> (<span class="hljs-built_in">float</span>(available_borrow_eth), <span class="hljs-built_in">float</span>(total_debt_eth))<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="為什麼我還沒有進行交易？"><a href="#為什麼我還沒有進行交易？" class="headerlink" title="為什麼我還沒有進行交易？"></a>為什麼我還沒有進行交易？</h3><p>其實有兩種類型的智能合約功能，您無需進行交易即可調用。</p>
+<ul>
+<li>視圖函數 view</li>
+<li>純函數</li>
+</ul>
+<p>這些函數<strong>不會修改區塊鏈的狀態，因此我們可以調用它們</strong>，因為我們只是在讀取智能合約的狀態。</p>
+<blockquote>
+<p>請記住，如果您修改區塊鏈的狀態，它只會花費 gas。</p>
+</blockquote>
+<h3 id="獲取可借資產價值"><a href="#獲取可借資產價值" class="headerlink" title="獲取可借資產價值"></a>獲取可借資產價值</h3><p>目的: 借不同種類的代幣，需要得到「資產VS目標代幣的匯率」</p>
+<ul>
+<li>現在，當我們借款時，我們會被告知我們<strong>擁有的以 ETH 表示的資產數量</strong>。然而，也許我們想借用一個不同的代幣，比如 DAI。如果我們要以 ETH 為抵押借入 DAI，我們首先要得到 ETH -&gt; DAI 的兌換率。</li>
+</ul>
+<h4 id="Chainlink-介紹"><a href="#Chainlink-介紹" class="headerlink" title="Chainlink 介紹"></a>Chainlink 介紹</h4><p>Chainlink 是 DeFi 和智能合約生態系統中獲取數據和執行外部計算的標準，也是 Aave 用來獲取費率的標準！他們有一個價格 Oracle 部分，描述如何通過他們的智能合約 API 獲取 Chainlink 數據。如果你學會了一般地使用 Chainlink 數據，你可以跨協議使用它，即使他們沒有使用 Chainlink，或者沒有價格預言機機制！</p>
+<p>Chainlink 通過去中心化的預言機網絡獲取數據，其中多個節點將跨多個 API 和服務的數據聚合到一個去中心化的來源，該來源經過驗證並記錄在鏈上供我們使用。我們可以在 data.chain.link 頁面或文檔上看到當前可用數據提要的列表。如您所知，數據是大多數量化系統、算法交易者和整個 DeFi 生態系統的支柱，因此您要始終確保自己是從去中心化系統中提取的，這樣您就可以獲得最準確、最可靠和最安全的數據。</p>
+<p>此外，如果您不想要某些數據，您可以從任何 API 調用您的智能合約，獲得可證明的隨機數以及許多其他不同的服務。這些使得智能合約數據安全、可靠和去中心化。</p>
+<p>但是讓我們回到 Python！</p>
+<h4 id="法1-get-asset-price"><a href="#法1-get-asset-price" class="headerlink" title="法1: get_asset_price"></a>法1: <code>get_asset_price</code></h4><p>目的: 它從 dai_eth_price_feed 中<strong>讀取數據</strong>，如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_asset_price</span>():<br>   <span class="hljs-comment"># For mainnet we can just do:</span><br>   <span class="hljs-comment"># return Contract(f&quot;&#123;pair&#125;.data.eth&quot;).latestAnswer() / 1e8</span><br>   dai_eth_price_feed = interface.AggregatorV3Interface(<br>       config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;dai_eth_price_feed&quot;</span>]<br>   )<br>   latest_price = Web3.fromWei(dai_eth_price_feed.latestRoundData()[<span class="hljs-number">1</span>], <span class="hljs-string">&quot;ether&quot;</span>)<br>   <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;The DAI/ETH price is <span class="hljs-subst">&#123;latest_price&#125;</span>&quot;</span>)<br>   <span class="hljs-keyword">return</span> <span class="hljs-built_in">float</span>(latest_price)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>我們從Interface接口中提取的 Chainlink 合約 AggregatorV3Interface 已存儲在我們的配置文件中。</p>
+<ul>
+<li>自行複製AggregatorV3Interface.sol檔案並設置在config中</li>
+</ul>
+</li>
+<li><p>在該合約中，我們調用 <code>latestRoundData</code> 函數</p>
+<ul>
+<li>你會注意到我們也不需要為這個做一個交易，這也是一個視圖函數！</li>
+</ul>
+</li>
+</ul>
+<h4 id="法2-使用ENS-來獲取價格對的地址"><a href="#法2-使用ENS-來獲取價格對的地址" class="headerlink" title="法2: 使用ENS 來獲取價格對的地址"></a>法2: 使用ENS 來獲取價格對的地址</h4><ul>
+<li>請注意，ENS 僅適用於主網網絡，<ul>
+<li>因此您在運行 brownie 時必須使用 –network mainnet 或 –network mainnet-fork。</li>
+</ul>
+</li>
+</ul>
+<p>你會看到通過brownie獲得 Chainlink 數據價格的另一種方式是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> brownie <span class="hljs-keyword">import</span> Contract<br><span class="hljs-built_in">print</span>(Contract(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;pair&#125;</span>.data.eth&quot;</span>).latestAnswer() / <span class="hljs-number">1e8</span>)<br></code></pre></td></tr></table></figure>
+
+<p>這是使用 ENS 來獲取價格對的地址。 </p>
+<ul>
+<li>ENS 是一種<strong>獲取智能合約地址並使其可讀</strong>的方法。例如，您可以執行以下操作：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(Contract(<span class="hljs-string">f&quot;eth-usd.data.eth&quot;</span>).latestAnswer() / <span class="hljs-number">1e8</span>)<br></code></pre></td></tr></table></figure>
+
+<p>以美元為單位獲取以太坊的最新價格。</p>
+<p>回到貸款。</p>
+<p>每項資產都有不同的貸款借入比率，它告訴您的清算門檻，以便您借入資產。</p>
+<p>一旦我們得出了可藉貸款量，我們就可以借了！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 得到整體帳戶資料</span><br>borrowable_eth, total_debt = get_borrowable_data(lending_pool, account)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot; let&#x27;s borrow!&quot;</span>)<br><span class="hljs-comment"># DAI im terms of ETH (DAI以ETH計價 )</span><br>dai_eth_price = get_asset_price(<br>    config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;dai_eth_price_feed&quot;</span>]<br>)<br><br><span class="hljs-comment">#我們的DAI可以換多少ETH</span><br>amount_dai_to_borrow = (<span class="hljs-number">1</span> / dai_eth_price) * (borrowable_eth * <span class="hljs-number">0.95</span>)<br><span class="hljs-comment"># borrowable_eth - &gt;  borrowable_dai *95%</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;we are going to borrow <span class="hljs-subst">&#123;amount_dai_to_borrow&#125;</span> DAI &quot;</span>)<br><span class="hljs-comment"># 開借! NOW we will borrow</span><br>dai_address = config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;dai_token&quot;</span>]<br>borrow_tx = lending_pool.borrow(<br>    dai_address,<br>    Web3.toWei(amount_dai_to_borrow, <span class="hljs-string">&quot;ether&quot;</span>),<br>    <span class="hljs-number">1</span>,<br>    <span class="hljs-number">0</span>,<br>    account.address,<br>    &#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;,<br>)<br>borrow_tx.wait(<span class="hljs-number">1</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;WE Borrowed some dai!&quot;</span>)<br>get_borrowable_data(lending_pool, account)<span class="hljs-comment">#帳戶詳情</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="做空Short-Selling-把借來的資產賣出"><a href="#做空Short-Selling-把借來的資產賣出" class="headerlink" title="做空Short Selling(把借來的資產賣出)"></a>做空Short Selling(把借來的資產賣出)</h3><blockquote>
+<p>將價值轉換為借用</p>
+</blockquote>
+<ul>
+<li>現在我們有了<strong>抵押品</strong>和我們<strong>想要借入的資產</strong>之間的<strong>轉換率</strong>，<ul>
+<li>我們可以設置一個變量來確定我們想要借入多少。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">amount_dai_to_borrow = (<span class="hljs-number">1</span> / erc20_eth_price) * (borrowable_eth * <span class="hljs-number">0.95</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;we are going to borrow <span class="hljs-subst">&#123;amount_dai_to_borrow&#125;</span> DAI &quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>我們得到 ==ETH/DAI 價格的倒數==，並將其乘以我們==可以借入的金額（以 ETH 為單位）==。<ul>
+<li>為了安全起見，我們還將其乘以 0.95。然後，我們調用借用函數  <code>lending_pool.borrow</code> ！</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># NOW we will borrow</span><br>dai_address = config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;dai_token&quot;</span>]<br>borrow_tx = lending_pool.borrow(<br>    dai_address,<span class="hljs-comment">#資產的地址（在我們的例子中是 DAI 代幣）</span><br>    Web3.toWei(amount_dai_to_borrow, <span class="hljs-string">&quot;ether&quot;</span>),<span class="hljs-comment">#我們要借的金額，單位為 wei</span><br>    <span class="hljs-number">1</span>,<span class="hljs-comment">#nterestRateMode，（0, 1, 2: 1 是穩定的，2 是可變的……現在不用擔心 0）</span><br>    <span class="hljs-number">0</span>,<span class="hljs-comment">#推薦碼（忽略）</span><br>    account.address,<span class="hljs-comment">#onBehalfOf 值，即誰將承擔債務</span><br>    &#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;,<br>)<br>borrow_tx.wait(<span class="hljs-number">1</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;WE Borrowed some dai!&quot;</span>)<br>get_borrowable_data(lending_pool, account)<span class="hljs-comment">#帳戶詳情</span><br></code></pre></td></tr></table></figure>
+
+<p>借用函數需要幾個參數：</p>
+<ul>
+<li>資產的地址（在我們的例子中是 DAI 代幣）</li>
+<li>我們要借的金額，單位為 wei</li>
+<li>interestRateMode，（0, 1, 2: 1 是穩定的，2 是可變的……現在不用擔心 0）</li>
+<li>推薦碼（忽略）</li>
+<li>onBehalfOf 值，即誰將承擔債務</li>
+</ul>
+<p>讓我們看一下 Etherscan 上這筆交易的樣本，以了解剛剛發生的事情。</p>
+<p><img src="/assets/t1.png" srcset="/img/loading.gif" lazyload alt="image-20220129000101990"></p>
+<p>按順序，代幣轉移的方向是：</p>
+<ul>
+<li>Aave 協議正在鑄造一些 aDAI</li>
+<li>我們的錢包正在鑄造一些 Aave Stable Debt Bearing DAI</li>
+<li>我們的錢包獲得了一些 DAI</li>
+</ul>
+<blockquote>
+<p>重要說明：Aave 有時會更改其測試網token。通過檢查已部署的合約地址，確保您擁有正確的 testnet DAI 地址。並檢查官方 json 列表。</p>
+</blockquote>
+<h4 id="債務代幣"><a href="#債務代幣" class="headerlink" title="債務代幣"></a>債務代幣</h4><p>這一次，我們得到了一種不同類型的計息代幣，一種債務代幣。</p>
+<ul>
+<li>這是我們必須償還的金額，並且與 aToken 一樣，它的<strong>價值也會增長</strong>。</li>
+<li>如果你欠更多的債務（用這個債務代幣表示），有人可以清算你並拿走你所有的抵押品！所以要警惕你有多少債務。</li>
+</ul>
+<p>查看狀況:</p>
+<ul>
+<li>通過添加新的代幣地址，我們可以再次在我們的 MetaNask 中<strong>看到借入的資產</strong>。</li>
+<li>我們還可以通過添加債務token地址來<strong>查看我們的債務</strong>。</li>
+<li>現在最簡單的賣空方法之一就是出售我們的資產。如果資產價格下跌，我們將不得不償還比借入的更少的錢。</li>
+</ul>
+<p>然而，我越來越擔心我會被清算。讓我們償還我們的債務。</p>
+<h2 id="4-歸還Repay所有債務"><a href="#4-歸還Repay所有債務" class="headerlink" title="4. 歸還Repay所有債務"></a>4. 歸還Repay所有債務</h2><p>償還我們的債務</p>
+<p>我們想弄清楚我們欠了多少，然後償還！我們可以用這些函數做到這一點：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python">borrowable_eth, total_debt_eth = get_borrowable_data(lending_pool, account)<br>amount_erc20_to_repay = (<span class="hljs-number">1</span> / erc20_eth_price) * (total_debt_eth * <span class="hljs-number">0.95</span>)<br><span class="hljs-comment"># repay</span><br>repay_all(Web3.toWei(amount_erc20_to_repay, <span class="hljs-string">&quot;ether&quot;</span>), lending_pool, account)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;You just deposited, borrowed, and repayed with Aave, Brownie and Chainlink&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">repay_all</span>(<span class="hljs-params">amount, lending_pool, account</span>):<br>    approve_erc20(<br>        amount,<br>        lending_pool,<br>        config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;aave_dai_token&quot;</span>],<br>        account,<br>    )<br>    repay_tx = lending_pool.repay(<br>        config[<span class="hljs-string">&quot;networks&quot;</span>][network.show_active()][<span class="hljs-string">&quot;aave_dai_token&quot;</span>],<br>        amount,<br>        <span class="hljs-number">1</span>,<br>        account.address,<br>        &#123;<span class="hljs-string">&quot;from&quot;</span>: account&#125;,<br>    )<br>    repay_tx.wait(<span class="hljs-number">1</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Repay!&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>總結</p>
+<p>我們已經完成了與 Aave 合作的所有步驟。</p>
+<ul>
+<li>抵押</li>
+<li>拿出貸款</li>
+<li>償還貸款</li>
+</ul>
+<h1 id="小結"><a href="#小結" class="headerlink" title="小結:"></a>小結:</h1><p>筆記很花時間(約4~5小時)，不過省下更多之後回頭重看影片的麻煩</p>
+<p>寫完也把很多模糊的概念理清楚了，繼續精進!</p>
+<h1 id="資料來源"><a href="#資料來源" class="headerlink" title="資料來源:"></a>資料來源:</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=M576WGiDBdQ&t=27414s">Solidity, Blockchain, and Smart Contract Course – Beginner to Expert Python Tutorial - YouTube</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAxMjUyNDQ5OA==&mid=2653576511&idx=1&sn=f801e6fd57da1609a8a4f361d8fbc6cb&chksm=806e7382b719fa94b728a56f3034317036624771ca2ce60db4715b808cfcf3c1af5b21e7aa35&scene=21#wechat_redirect">用 Python 开发 DeFi 去中心化借贷应用 (qq.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAxMjUyNDQ5OA==&mid=2653576600&idx=1&sn=773dff58760c033db1426a9db08af622&chksm=806e7325b719fa337d5e3a56fe324d6bcb24281d8e06871f6643ad3611d3a869aa332fce352b&scene=21#wechat_redirect">用 Python 开发 DeFi 去中心化借贷应用（中） (qq.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://jishuin.proginn.com/p/763bfbd5ecf1">用 Python 开发 DeFi 去中心化借贷应用（下）-技术圈 (proginn.com)</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Side-Project/" class="category-chain-item">Side Project</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Code/" class="category-chain-item">Code</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Crypto/" class="category-chain-item">Crypto</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Solidity/">#Solidity</a>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+        <a href="/tags/Brownie/">#Brownie</a>
+      
+        <a href="/tags/Defi/">#Defi</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/30/Decentralized-Lottery-App/" title="去中心化樂透solidity應用">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">去中心化樂透solidity應用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/25/%E9%82%A3%E4%BA%9B%E5%9C%A8Solidity%E4%B8%AD%E7%A2%B0%E4%B8%8A%E7%9A%84%E6%84%8F%E5%A4%96/" title="那些在Solidity中碰上的意外">
+                        <span class="hidden-mobile">那些在Solidity中碰上的意外</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目錄</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允許 JavaScript 運行的環境下瀏覽效果更佳</div>
+  </noscript>
+</body>
+</html>
