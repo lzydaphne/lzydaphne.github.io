@@ -48,8 +48,8 @@ https://lzydaphne.github.io/tags/Books/
 https://lzydaphne.github.io/tags/Motivation/
 https://lzydaphne.github.io/tags/Social/
 https://lzydaphne.github.io/tags/Psycology/
-https://lzydaphne.github.io/tags/Ganache/
 https://lzydaphne.github.io/tags/Mind/
+https://lzydaphne.github.io/tags/Ganache/
 https://lzydaphne.github.io/categories/Side-Project/
 https://lzydaphne.github.io/categories/Code/
 https://lzydaphne.github.io/categories/PersonalGrowth/
@@ -60,4 +60,3 @@ https://lzydaphne.github.io/categories/Reading/
 https://lzydaphne.github.io/categories/Productivity/
 https://lzydaphne.github.io/categories/Health/
 https://lzydaphne.github.io/categories/Web-Dev/
-https://lzydaphne.github.io/categories/PersonnalGrowth/
