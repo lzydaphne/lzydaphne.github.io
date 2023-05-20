@@ -270,6 +270,13 @@
   </url>
   
   <url>
+    <loc>https://lzydaphne.github.io/tags/Thoughts/</loc>
+    <lastmod>2023-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://lzydaphne.github.io/tags/Solidity/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -285,13 +292,6 @@
   
   <url>
     <loc>https://lzydaphne.github.io/tags/Brownie/</loc>
-    <lastmod>2023-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lzydaphne.github.io/tags/Thoughts/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -433,14 +433,14 @@
   </url>
   
   <url>
-    <loc>https://lzydaphne.github.io/categories/Code/</loc>
+    <loc>https://lzydaphne.github.io/categories/PersonalGrowth/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://lzydaphne.github.io/categories/PersonalGrowth/</loc>
+    <loc>https://lzydaphne.github.io/categories/Code/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -461,14 +461,14 @@
   </url>
   
   <url>
-    <loc>https://lzydaphne.github.io/categories/Crypto/</loc>
+    <loc>https://lzydaphne.github.io/categories/Reading/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://lzydaphne.github.io/categories/Reading/</loc>
+    <loc>https://lzydaphne.github.io/categories/Crypto/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
