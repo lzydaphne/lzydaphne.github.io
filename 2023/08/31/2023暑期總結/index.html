@@ -1,0 +1,659 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/run.png">
+  <link rel="icon" href="/assets/run.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#494e6b">
+  <meta name="author" content="lzydaphne">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="很久沒有寫文章來梳理生活中的一些想法和思考 剛好今天是暑假實習的最後一天，象徵性地來產出一些總結和進展 用倒敘的形式來記錄好了 最近我在： 中研院資訊所暑期實習，主要參與加密通訊軟體的算法優化(密碼學真的…交給數學家來研發，我們實作就好) 弄專題，這算是一個蠻有趣的產學合作，主要是幫一間半導體檢測場進行排程優化。但實際情況過於複雜，幸好有大神學長帶著我們一步一步做，不然好像越級打怪一樣，一下被推到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2023暑期總結（二下）">
+<meta property="og:url" content="https://lzydaphne.github.io/2023/08/31/2023%E6%9A%91%E6%9C%9F%E7%B8%BD%E7%B5%90/index.html">
+<meta property="og:site_name" content="On the Road">
+<meta property="og:description" content="很久沒有寫文章來梳理生活中的一些想法和思考 剛好今天是暑假實習的最後一天，象徵性地來產出一些總結和進展 用倒敘的形式來記錄好了 最近我在： 中研院資訊所暑期實習，主要參與加密通訊軟體的算法優化(密碼學真的…交給數學家來研發，我們實作就好) 弄專題，這算是一個蠻有趣的產學合作，主要是幫一間半導體檢測場進行排程優化。但實際情況過於複雜，幸好有大神學長帶著我們一步一步做，不然好像越級打怪一樣，一下被推到">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://lzydaphne.github.io/assets/230831.jpg">
+<meta property="article:published_time" content="2023-08-31T06:06:23.000Z">
+<meta property="article:modified_time" content="2023-08-31T23:35:15.540Z">
+<meta property="article:author" content="lzydaphne">
+<meta property="article:tag" content="Thoughts">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lzydaphne.github.io/assets/230831.jpg">
+  
+  
+  
+  <title>2023暑期總結（二下） | On the Road</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lzydaphne.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="On the Road" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>On the Road</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Articles</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/page.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="2023暑期總結（二下）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-31 14:06" pubdate>
+          2023年8月31日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          39 分鐘
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">2023暑期總結（二下）</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最後更新於：2023年9月1日 早上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>很久沒有寫文章來梳理生活中的一些想法和思考</p>
+<p>剛好今天是暑假實習的最後一天，象徵性地來產出一些總結和進展</p>
+<p>用倒敘的形式來記錄好了</p>
+<h2 id="最近我在："><a href="#最近我在：" class="headerlink" title="最近我在："></a>最近我在：</h2><ol>
+<li>中研院資訊所暑期實習，主要參與加密通訊軟體的算法優化(密碼學真的…交給數學家來研發，我們實作就好)</li>
+<li>弄專題，這算是一個蠻有趣的產學合作，主要是幫一間半導體檢測場進行排程優化。但實際情況過於複雜，幸好有大神學長帶著我們一步一步做，不然好像越級打怪一樣，一下被推到恐慌區</li>
+<li>念托福，一開始頗有幹勁，每天有空都在念，但後來發現交換只要90就好，從那之後我就開始擺爛，把精力放到其他有幫助一點的事情</li>
+<li>鬼轉到資工系，當初有點買彩票的心態，但沒想到真的上了，之後再展開討論一下</li>
+</ol>
+<h2 id="生活中，我在："><a href="#生活中，我在：" class="headerlink" title="生活中，我在："></a>生活中，我在：</h2><ol>
+<li>積極減脂、重訓、瑜珈、有氧。不誇張，雖然強度沒有外面健身房那麼高，但我真的幾乎每天都會做這些事。之前覺得還要用 app 紀錄數字卡路里真的是瘋子（或許這就是之前都減肥失敗的原因），但現在打開心胸先不要 judge，open-minded 的去嘗試一下很多人都說有用的東西，真的沒有任何損失（好啦這需要一點點時間），而且預期的收益也高，這算是一個 Life lesson。總之，我覺得把生活中一些習以為常但模糊的東西，具體用數字記錄下來，會獲得一些很有趣的洞察。例如：我一天碳水吃的並不多，但很容易脂肪超過一天的量。尤其是，八月中買了一隻 Garmin 的一支智慧手表給自己當禮物，真的是發現新大陸，自從開始配戴它，我開始很注意自己的睡眠品質、每日走路步數、喝水量、卡路里攝取，原因就是，一切都有數字給妳進行立即反饋！我太愛這種感覺了，每一組重訓雖然短期看不出成果，但透過它幫我記錄後，就覺得做什麼訓練都很踏實，every set counts 的感覺。雖然還沒明顯調秤，但肚肚那邊肉眼可見的小的一點！這種完成正回餽的感覺非常幸福，希望開學後可以繼續維持這種慣性，讓自己在學習上的效率再高一點，不要壓縮到健身時間；其實健身反過來可以幫助提高學習效率，具體而言就是大腦會更願意去直接挑戰那些困難的問題，例如：OK，所以你這節課聽完之後了解了什麼；他們之間的邏輯是什麼；為什麼這些東西的性質是這樣，舉個人的例子而言，我最近在閒暇時間先開聽之後要修的 OS（題外話，越來越覺得學校的學習模式有夠低效，高強度集中學習讓內容邏輯更連貫，明顯效果更好），雖然整體內容稍嫌繁雜，但解釋起來其實都有可以理解的邏輯，不死記硬背那些特質，因為特質是運作模式的延伸，理解運作模式，特質就是理所當然的結果；就像人的個性就是思維的具現，理解對方的思維邏輯，就可以比較好理解他的個性。同時，這件事（困難的任務們），最好在不同的環境中練習，譬如我都在自己房間的電腦桌前進行吸收學習，如果我要開始做自我問答，最好站起來，想一想，講給旁邊擺的黃小鴨聽，遇到卡詞或邏輯缺陷，就趕快回去翻答案找補丁，更新到腦內的 OS plugin。</li>
+<li>多熟悉股票投資的操作。穩定的工作只代表穩定的現金流，我和同溫層在升學賽道上拚死拚活的卷，不過是希望未來能夠順利勾到更高額穩定的現金流。但實際上那也只是高級打工人，真正的財富是成為投資人或企業家之後才可能累積的。突然想到，通常會提到願景的人都是家裡通常給他一種富足富裕的心態；而我的心態偏向稀缺，所以會往務實的方向思考，是個有趣的觀察。還有人問，賺那麼多錢要幹嘛？第一個是因為我的物慾不低，所以足夠的財富能夠給予我一些空間去當有能力升級裝備的玩家（就是爽），第二點是足夠的安全感和獨立感帶來的底氣，進而實現選擇自由，我想幹嘛就幹嘛，所有的 effort 都是我自願提供的，Flow 說來就來，幸福感爆棚，人生滿意度飆增。但目前問題是本金太小，沒辦法學生就是窮逼巴，只能先熟悉盤勢和操作，馬步先站好，蹲低才跳的高，不用急。反過來說，太早就選擇自由感覺也會挺無趣的，有點壓力也是增添經驗的推力。</li>
+<li>感冒咳嗽。身體健康還是最重要，近年來最大的心態轉變就是 健康&gt;念書，因為發現過去對自己太苛刻，身體內外都顧不好，當然做什麼都做不好。放寬心，顧好身體，並用相對短的時間高強度精進本職學能，是我目前採取的模式（缺點就是晚上會很累必須早睡）</li>
+</ol>
+<h2 id="思考："><a href="#思考：" class="headerlink" title="思考："></a>思考：</h2><ol>
+<li><p>Inspired by GPT 和 Neural Link，把不同領域的知識看成一種 Plugin，每次學習都是在 build 那個 Plugin。我們實際在開發的時候都會有心理準備，不可能一次就可以運行，通常都要 Debug 好多次才能真正 build 出一個好的 Plugin。類比到人腦學習，把吸收專業領域的知識看成 Plugin 的不斷完善，花幾天心力把一部分 module 完整寫好，更要記得把這些 module 連接起來，打造一個完整的專屬於自己的 OS Plugin。也就是：把書讀厚再讀薄(不是讀博)。讀薄的意思是，把厚重的細節、解釋性訊息「壓縮」起來、「濃縮」起來。假設換你要上去教課，你會怎麼去說明? 我覺得 Smart Brevity 的概念很棒，我們會告訴學生某個主題（What），並快速解釋為什麼這個概念很重要（Why），當然這只是過程的一部分，想要考試表現出色，更重要的是找實際題目練習（How），因為沒有經過客觀因素檢驗的知識都是泡沫，有好工具不等於擅長運用工具，理論和實踐中間永遠隔著一條鴻溝，這是我過去踩過最大的坑，我稱之為「熟悉感的陷阱」。再往上跳一層，其實大腦本身就是一套 OS，只是沒有人是完美的，Windows 一年更新一次，Mac OS、Ubuntu半年進行一次升級，一大群最頂尖的工程師都無法做出完美的 OS，何況個人？我覺得有個地道的用語很有趣：「打補丁」，代表某個地方的邏輯有問題，就去小修一下，每天進行調整，一個月、一年後，就足夠進行一次大升級。前面提到我買手錶，有個它附贈的 slogan 我很喜歡：＂Beat yourself yesterday＂，每天都要比昨天更好，就是這個意思。</p>
+</li>
+<li><p>更新我對於生產力的定義：一天的生產力取決於你有多少時間真正投入在你想做的事情中，而不是清單上完成任務的比例。這是來自 Practice of Groundedness 的啟發，這給了我們不要這麼緊迫盯自己的緩衝，反而讓表現更好。搭配 Sam Altman 的建議：</p>
+<blockquote>
+<p>Also, don’t fall into the trap of productivity porn—chasing productivity for its own sake isn’t helpful.  Many people spend too much time thinking about how to perfectly optimize their system, and not nearly enough asking if they’re working on the right problems.  It doesn’t matter what system you use or if you squeeze out every second if you’re working on the wrong thing.</p>
+<p>The right goal is to allocate your year optimally, not your day.</p>
+</blockquote>
+<p>我理解成，制定你一年的（正確）目標方向，而不是卡在一日復一日的局部最佳解。</p>
+</li>
+</ol>
+<h2 id="覺得需要在未來不斷練習的："><a href="#覺得需要在未來不斷練習的：" class="headerlink" title="覺得需要在未來不斷練習的："></a>覺得需要在未來不斷練習的：</h2><ol>
+<li>安排更多時間去社交，大概一周至少要 1~2 個小時。原因：大學有很多寶藏朋友，但好東西通常不會自己到處宣揚，所以需要投資一些時間去挖掘。不過要接受的是，雖然90%時間很可能都感覺是浪費時間（這也是我過去最主要避免社交的主因），但請撐到黃金的10%出現，他們的存在讓90%的時間都顯得值回票價。一點盲目的相信總是可以帶來一些驚喜。</li>
+<li>不要 judge 別人，你就不怕會被別人 judge。找到他人身上的閃光點，因為沒有人可以了解所有知識，但所有人都會了解一些事。拜所有人為師。請求幫助不丟臉，因為我有自信可以在其他方面提供價值（但通常對方先知道似乎比較有利，根據過去經驗的小發現）。</li>
+<li>確保自己 work on the right problem，不要浪費時間在原地空轉。嚴格執行 time block 是很好的練習。卡點就問：我現在進度如何？順利的話，問「我過去一個半小時學到什麼？」不順利的話，問「我現在卡在哪邊，有誰可以請教？是否需要轉換環境？是否需要休息一下？」</li>
+<li>保持 Abundance mindset，給別人不會讓自己變少，而是讓雙方都能互利共生。只是互利通常不會馬上回饋，隱藏的不確定性是建立 Abundance mindset 的最大阻礙，因為你不知道對方是否會知恩圖報。但根據過去的觀察，至少學生們絕大多數還是有一顆善良的心，你 offer value 給他們，有些人會急著想要還你，有些人過一段時間會給你一個大的，都很棒。總之，舉手之勞一定要幫，朋友是投資得來的，從整個人生階段來看，時間、情感、智識，這些資源是相對划算的投資，低成本高回報，是你的緊急儲備金，是你透過日積月累的付出和有意識的積累獲得的。卡內基的思想永遠不過時，因為他刻劃的是百年來穩定不變的人性教戰手冊。</li>
+<li>Much more ……</li>
+</ol>
+<h2 id="最近在讀的書："><a href="#最近在讀的書：" class="headerlink" title="最近在讀的書："></a>最近在讀的書：</h2><p>最近讀的東西太雜了，大概列一下心得</p>
+<ol>
+<li>Born a crime。我最喜歡的就是 Treavor 總是用喜劇演員的眼光看待他荒謬又無奈的生活。過程中我曾經嘗試帶入一下他的角色，如果我是他，肯定會對這個家庭、這個國家充滿抱怨和憤慨，所以說，相同的客觀事實，總是會在不同人的思維中生成截然不同的解釋，適時戴上喜劇演員的眼鏡來看看我生活中的問題，是未來的必修課題！</li>
+<li>上行。Self-help看太多，標準有提高，但這本確實更好一點，他從更細膩的角度來提供一個人在成長（或稱上行）的闖關遊戲中，可能會需要的破關攻略。他說，反覆橫跳是升等的好招式、幫自己打造唯一的標籤，多了反而中了所謂好學生陷阱、靠譜的人＝低預期高交付</li>
+<li> The Practice of Groundedness 。最需要練習的部分，是他說的 Embrace your vulnerability，接受自己的脆弱並適時主動展現，是承認自己不完美的一份勇氣，脆弱讓彼此可以更真誠的交流，並和他人建立更深層的連結。</li>
+<li>天才的責任（維根斯坦的傳記）。語言的邊界就是思想的邊界。語言溝通本質上是一種「語言遊戲」，譬如說，提到放鬆這件事，你想到的可能是打遊戲，我想到的是去吃大餐，但這種隱晦的動態想像，溝通雙方並不會明說，因此容易產生誤解。</li>
+<li>勝者思維。一位中國的高層將領寫的，是少數打破我現有思維的好書，他帶領讀者從一個好將軍的視角來談戰略思維，並分析過去的戰爭情勢。一次只能讀一點，需要慢品。</li>
+<li>一個投機者的告白。科斯托蘭尼的作品，算是打開眼界的投資書籍，看看那些資本家在金融市場中都在用哪些工具來參與遊戲。</li>
+</ol>
+<p>其他只看一點點就有點看不下去，現在閱讀的耐心值有點低落，可能是閾值隨著閱讀量的提升而提升，加上嘗試多看一些社科的書籍，我發現有點困難，很常棄書。因為歷史牽涉到的脈絡太多太雜，單方面地從讀者的角度看線性的文字紀錄，很難還原當時立體的情境，就像渤海小吏說的，看似笨蛋的操作，背後都是三個字：不得已！，加上我也沒那麼多時間去鑽研這些細節，可能還是從別人提煉過的內容切入會更有實際收穫。</p>
+<h2 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h2><p><a target="_blank" rel="noopener" href="https://blog.samaltman.com/productivity">Productivity - Sam Altman</a></p>
+<p><a target="_blank" rel="noopener" href="https://vocus.cc/article/639bf5b8fd89780001da57ed">如何用最少的文字，讓讀者瞬間抓到你想傳達的重點? 好書《Smart Brevity》 讀書心得分享｜方格子 vocus</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/PersonalGrowth/" class="category-chain-item">PersonalGrowth</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Thoughts/">#Thoughts</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/20/%E9%97%9C%E6%96%BC%E7%9D%A1%E7%9C%A0%E7%9A%84%E9%82%A3%E4%BA%9B%E5%95%8F%E9%A1%8C/" title="關於睡眠的那些問題">
+                        <span class="hidden-mobile">關於睡眠的那些問題</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目錄</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允許 JavaScript 運行的環境下瀏覽效果更佳</div>
+  </noscript>
+</body>
+</html>
