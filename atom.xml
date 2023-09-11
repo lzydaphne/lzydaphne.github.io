@@ -6,7 +6,7 @@
   <link href="https://lzydaphne.github.io/atom.xml" rel="self"/>
   
   <link href="https://lzydaphne.github.io/"/>
-  <updated>2023-08-31T23:58:36.089Z</updated>
+  <updated>2023-09-11T07:04:54.697Z</updated>
   <id>https://lzydaphne.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker小試身手</title>
+    <link href="https://lzydaphne.github.io/2023/09/11/Docker%E5%B0%8F%E8%A9%A6%E8%BA%AB%E6%89%8B/"/>
+    <id>https://lzydaphne.github.io/2023/09/11/Docker%E5%B0%8F%E8%A9%A6%E8%BA%AB%E6%89%8B/</id>
+    <published>2023-09-11T06:56:21.000Z</published>
+    <updated>2023-09-11T07:04:54.697Z</updated>
+    
+    <content type="html"><![CDATA[<p>趁著課餘零碎時間，小玩一下 Docker，主要參考以下 tutorial</p><p><a href="https://docker-curriculum.com/#what-are-containers-">A Docker Tutorial for Beginners (docker-curriculum.com)</a></p><p>學到了</p><ol><li>如何部屬靜態網站</li><li>如何建立自己的 image <a href="https://hub.docker.com/r/daphne61221/catnip">daphne61221/catnip - Docker Image | Docker Hub</a></li><li>如何部屬到 AWS 上</li><li>如何處理多個 container 的環境</li></ol><p>當然還有更進階複雜的用法，但現在沒有使用場景，以後再學 d(`･∀･)b</p><p>Docker 採用了主從式架構（client-server model）。在Docker的世界裡，分別稱為 Docker Client 與 Docker Daemon （server）·Docker Client 負責發布命令，Docker Daemon 則是依照命令執行任務，就是操作下面三個元件：<br>■映像檔（image） ■容器（container） ■倉庫（registry） </p><p><img src="https://s2.loli.net/2023/09/11/TFCY7XZSJEPpVrB.png" alt="image.png"></p><h3 id="images-映像檔，唯讀"><a href="#images-映像檔，唯讀" class="headerlink" title="images: 映像檔，唯讀"></a>images: 映像檔，唯讀</h3><h3 id="container-容器"><a href="#container-容器" class="headerlink" title="container 容器"></a>container 容器</h3><p>基於 image 可以建立出 Container。<br>它的概念像是建立一個可讀寫內容的外層，蓋在image 上。<br>實際存取container 會經過可讀寫層與image，因此運行container時，看到 的檔案系統會是兩者合併後的結果。<br>以圖2—1的示意圖為例，image層已有／bin、／etc與／var 等目錄。執行container的過程中，新增了 兩個目錄或檔案為／usr／local／app與／var／log／app，實際在觀察檔案 時，會看到兩者合併的結果，也就是右半邊的目錄示意列表。<br><img src="https://s2.loli.net/2023/09/11/4NUEkQdT9pe5KjR.png" alt="image.png"></p><h3 id="registry-倉庫"><a href="#registry-倉庫" class="headerlink" title="registry 倉庫"></a>registry 倉庫</h3><p>Registry是存放image的空間。<br>Docker 存放image的設計方法，很像分散式版本控制。而分散式架構就會有類似git的pull／push 指令與行為，Docker也有對應的pull／push指令，實際做的事也跟 git類似：跟遠端的 registry同步。 目前Docker 預設下載的 registry為 Docker Hub，大多數程式環境或 服務都能在上面找得到image。</p><p><img src="https://s2.loli.net/2023/09/11/BXjtOEKQ8ewnLJ1.png" alt="image.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;趁著課餘零碎時間，小玩一下 Docker，主要參考以下 tutorial&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://docker-curriculum.com/#what-are-containers-&quot;&gt;A Docker Tutorial for Beginners</summary>
+      
+    
+    
+    
+    <category term="Side Project" scheme="https://lzydaphne.github.io/categories/Side-Project/"/>
+    
+    
+    <category term="Docker" scheme="https://lzydaphne.github.io/tags/Docker/"/>
+    
+  </entry>
   
   <entry>
     <title>2023暑期總結（二下）</title>
@@ -533,31 +558,6 @@
     <category term="Motivation" scheme="https://lzydaphne.github.io/tags/Motivation/"/>
     
     <category term="Mind" scheme="https://lzydaphne.github.io/tags/Mind/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Weekly-Review-#1</title>
-    <link href="https://lzydaphne.github.io/2022/02/21/Weekly-Review-1/"/>
-    <id>https://lzydaphne.github.io/2022/02/21/Weekly-Review-1/</id>
-    <published>2022-02-20T16:04:46.000Z</published>
-    <updated>2022-02-20T16:25:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Weekly-Review-1"><a href="#Weekly-Review-1" class="headerlink" title="Weekly-Review #1"></a>Weekly-Review #1</h1><blockquote><p>2022/02/14~02/20</p></blockquote><h2 id="Courses"><a href="#Courses" class="headerlink" title="Courses"></a>Courses</h2><p>這學期修的課程普遍都比較硬</p><ul><li>程設二/邏設/機率/區塊鍊/會計</li></ul><p>連通識的loading也蠻重的，每周都有作業要繳交</p><ul><li>群眾的心理分析/遇見科學</li></ul><p>然後又因緣際會下加了正在做區塊鍊募資平台的團隊，前後端都要幫忙一下</p><p>前幾天開會就噴了三小時(兩組的會我都要參加)</p><p>然後，沒錯又有然後，我又看到交大開了一門很厲害的MBA課程，</p><p>詢問之下發現旁聽其實也規定需要每週繳交一份類似心得文章的東西</p><p>老實說其實蠻害怕之後期末會炸裂</p><p>會不會從期初就一直待在圖書館阿我???</p><h2 id="Books-Blog"><a href="#Books-Blog" class="headerlink" title="Books / Blog"></a>Books / Blog</h2><h3 id="替罪羊"><a href="#替罪羊" class="headerlink" title="替罪羊"></a>替罪羊</h3><p>這本書其實是通識課&lt;群眾的心理分析&gt;的指定閱讀，目前只讀了前面幾章，卻覺得毛骨悚然﹑細思極恐</p><ul><li><p>「替罪羊」和「集體性暴力迫害」一詞相比，多了幾層意義: 「神聖與暴力」–把暴力包裝成神聖﹑「秩序與混亂」–在混亂中尋求明確秩序</p></li><li><p>「擁有這個神聖性幻覺，使得暴力加害者不再是凶手、惡徒、創子手這些少數的喪心病狂之人，而是讓他們摇身成爲祭司、英雄、解救者：更可怕的是，迫害者就是一般的正常人，既消除罪惡感，又一舉解決了迫害者供應數量的問題。人命，以及環繞人命的所有權利、意義、價値和最基本的公平正義問題，都在單一性的強烈不可逼視神聖光芒之下黯然失色」</p></li><li><p>勞倫茲的魚群實驗「他以均一行動的魚群為實驗對象，把魚群中某一條魚取出割去腦前葉再置放回去，而失去前額葉的魚會失去理性控制只剩自我意志，這條已經是瘋子的魚會暴烈的自行亂竄亂游，魚群因此陷入暫時的混亂，但很快的，他們會開始跟隨這條瘋子魚身後行動，整個魚群又回復均一性的行動；唯一不同的是，魚群領袖換成了那條只剩自我意志的瘋子魚」</p></li></ul><p>看完嚴肅的，來點Naval 爺爺的溫暖雞湯</p><h3 id="The-Almanack-of-Naval"><a href="#The-Almanack-of-Naval" class="headerlink" title="The Almanack of Naval"></a>The Almanack of Naval</h3><p>關於幸福，他說: </p><ul><li>「幸福不在於積極或消極的想法。而是沒有慾望」</li><li>幸福是一種選擇，事實都是中立的，世界只是把你得感受返回給你</li><li>然而，<strong>如果你把自己看成細菌或阿米巴變形蟲——或者說，你把你所有的作品看作是在水上寫的字或在沙地上建的城堡，那麼你就不會再期待生活“實際上”應該是怎麼樣的。生活就是如此</strong>。當你接受這個的時候，你就沒有快樂或不快樂的理由。那些東西幾乎不適用。</li><li>你有兩次人生，第二次來臨的時候是當你意識到你只有一個的時候</li></ul><p>關於Ego，他說:</p><ul><li>「不要把自己看得太重。你只是一隻有計畫的猴子而已。」</li></ul><p>關於這點，Tim Ferris在本書為他寫序時，</p><p>特別提到在他重視Naval的所有原因中，這是更加重要的一項特質</p><blockquote><p>我重視納瓦爾，是因為他：</p><p>幾乎質疑一切 / 能從第一性原理出發進行思考 /能很好地測試事物 /  善於不欺騙自己 / 定期改變他的想法 / 經常笑 / 思考全面 / 思考長遠 / 而且……不把自己當回事</p><p>最後一個很重要。</p></blockquote><p>關於商業，他說: </p><blockquote><p>Productize  Yourself</p></blockquote><p>如果那你追尋致富的長期目標，你應該問自己：</p><ul><li><p>這是否是自己內心真正想要的？</p><ul><li><p>尊重每樣財富，這個世界上並沒有快速賺錢致富的方法，如果你想要找尋這種方法，那它只會讓別人從你身上賺錢致富。</p></li><li><p>忽略名詞，專注動詞；別去理會那些熱衷於玩身份遊戲的人。學會影響人們和建立事物</p></li><li><p>不要追逐熱點</p><ul><li><p>選擇一個你可以長期從事的產業，尋找一批可以一起長期共事的人。</p></li><li><p>用獨到知識，責任感和槓桿武裝自己，==對情勢有好的判斷力==</p><ul><li>獨到知識更偏向是經過實踐之後才能得到的智慧</li><li>除了靠自己摸索，找到一個好導師比任何培訓都更重要!</li></ul></li><li><p>**去學習微觀經濟學、博弈論、心理學、說服術、倫理學、數學和計算機科學。 **</p><ul><li><p>讀比聽快，做比看快。</p></li><li><p>不斷重新定義你在做甚麼—因為真正的學習應當會超越你本來的認知</p></li></ul></li></ul></li></ul></li><li><p>你自己是否在利用槓桿作用和特定知識來實現目標？</p><ul><li>財富增長需要使用槓桿。商業槓桿有三個來源：1、資本；2、人力；3、複製起來邊際成本為零的產品（如：代碼和媒體）。<ul><li>懂得利用非等價交換時間的方式來獲取資產。你不會通過出租自己的時間而變得富有。你必須擁有產權，也就是生意的一部分，以此才能得個人財務自由。</li><li>槓桿能夠成倍地放大你的判斷力（所產生的效能）</li></ul></li><li>主動發展弱關係<ul><li>長期心態，保持合作</li><li>誠實是最重要的特質</li></ul></li></ul></li></ul><h3 id="過早最佳化是萬惡的根源"><a href="#過早最佳化是萬惡的根源" class="headerlink" title="過早最佳化是萬惡的根源"></a>過早最佳化是萬惡的根源</h3><p>源自<a href="https://blog.vgod.tw/2012/10/27/premature-optimization/">vgod’s的部落格</a>，原文很精采，剛好拿讀大學舉例子很符合我現在的心境</p><p>「資訊界的大師<a href="https://en.wikipedia.org/wiki/Donald_Knuth">Knuth</a>有一句名言：「premature optimization is the root of all evil」（過早最佳化是萬惡的根源）」</p><p>以前自己一直很喜歡講求效率，對各種看似浪費時間的事情避而遠之</p><p>殊不知，很多風景﹑體驗﹑感受等等，</p><p>都不會出現在你最佳化的路徑之上，非必要就捨去是進行最佳化的核心精神</p><p>沒有了那些體驗，時間過去也不會留下記憶點，</p><p>回頭一望，才驚覺自己好像在過去那段時間也沒有做什麼?</p><p>其實並不是沒有努力生活，而是那些經歷無法利用情緒特徵依附在自己的記憶之中</p><p>這樣要回想，當然困難</p><p>此外，我也覺得微積分的「局部最佳解」和「全局最優解」是這句話最好的自然體現</p><p>當你以為自己已經占據了最高的山頭，</p><p>其實更有可能的是你的侷限視角讓你沒法看見更高的另一座山頭</p><p>如果說要給自己一個針對這句化的行動指南，</p><p>我會期許自己多給一點行動上的「冗餘」</p><p>冗餘不是罪惡，而是一種彈性，能夠允許創造力和想像力奔馳的空間</p><p>不論是時間的冗餘，社交的冗餘，計畫的冗餘，</p><p>我想應該是讓個體能夠保持長期穩定成長很重要的彈性。</p><h2 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h2><p>這週算是蠻認真在研究smart contract，順便讀了大部分的Mastering Ethereum</p><p>把之前不太清楚的細節差不多都理解完畢了，舒暢!</p><p>也很開心在周末拚出一個project(冷到不行就不出門了)，可以</p><ol><li>前端連結metamask</li><li>把交易放到鏈上</li><li>把鏈上交易都抓下來並顯示在網站中</li></ol><p>最後，下周有兩個任務，</p><p>第一是要把oracle連到團隊學長做好的swap contract中，</p><p>第二是要趕快學Vue因為團隊前端採用這個(React學一半都還不太會的說…)</p><p>其實網頁技術越學越多，還是覺得遲早要來好好研究資料結構和演算法，</p><p>最近其實寫道有些感觸，對我來說網頁是繁雜但不困難，但解題是代碼不多但要想很久</p><p>各自有各自的樂趣。</p><p>不過如果就競爭力以及市場供給的情況，</p><p>挑難一點的問題才能保持在上風處(Stay Upwind，by Paul Graham)</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Weekly-Review-1&quot;&gt;&lt;a href=&quot;#Weekly-Review-1&quot; class=&quot;headerlink&quot; title=&quot;Weekly-Review #1&quot;&gt;&lt;/a&gt;Weekly-Review #1&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;202</summary>
-      
-    
-    
-    
-    <category term="Review" scheme="https://lzydaphne.github.io/categories/Review/"/>
-    
-    
-    <category term="Weekly" scheme="https://lzydaphne.github.io/tags/Weekly/"/>
     
   </entry>
   
