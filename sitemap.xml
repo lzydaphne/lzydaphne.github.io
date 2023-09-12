@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lzydaphne.github.io/2023/09/12/%E7%94%A8%20.bat%20%E6%89%93%E9%80%A0%E5%AE%9A%E6%99%82%E7%B6%AD%E8%AD%B7%E7%9A%84%20Github%20Repo/</loc>
+    
+    <lastmod>2023-09-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://lzydaphne.github.io/2023/09/11/Docker%E5%B0%8F%E8%A9%A6%E8%BA%AB%E6%89%8B/</loc>
     
     <lastmod>2023-09-11</lastmod>
@@ -443,6 +452,13 @@
   
   <url>
     <loc>https://lzydaphne.github.io/tags/Docker/</loc>
+    <lastmod>2023-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lzydaphne.github.io/tags/%E8%87%AA%E5%8B%95%E5%8C%96/</loc>
     <lastmod>2023-09-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>用 .bat 打造定時維護的 Github Repo</title>
+    <link href="/2023/09/12/%E7%94%A8%20.bat%20%E6%89%93%E9%80%A0%E5%AE%9A%E6%99%82%E7%B6%AD%E8%AD%B7%E7%9A%84%20Github%20Repo/"/>
+    <url>/2023/09/12/%E7%94%A8%20.bat%20%E6%89%93%E9%80%A0%E5%AE%9A%E6%99%82%E7%B6%AD%E8%AD%B7%E7%9A%84%20Github%20Repo/</url>
+    
+    <content type="html"><![CDATA[<h1 id="用-bat-打造定時維護的-Github-Repo"><a href="#用-bat-打造定時維護的-Github-Repo" class="headerlink" title="用 .bat 打造定時維護的 Github Repo"></a>用 .bat 打造定時維護的 Github Repo</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation:"></a>Motivation:</h2><p>之前一直沒有注意到可以用自動化的工具來幫我定期維護本地的repo<br>每次都要靠人腦記憶，還常常遇到 conflict 要解，太麻煩了<br>今天下定決心要自動化整個流程<br>幫我把本地上的 notes 定時 push 到 Github 上!</p><h2 id="Process"><a href="#Process" class="headerlink" title="Process:"></a>Process:</h2><p>所需工具:<br>一份簡單的 <code>commit_push.bat</code> 和 Windows 內建的任務排程器</p><h3 id="建立-bat-檔案"><a href="#建立-bat-檔案" class="headerlink" title="建立 .bat 檔案"></a>建立 <code>.bat</code> 檔案</h3><p>先在目標 repo 的路徑下，建立一份 <code>commit_push.bat</code> :</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs BASH"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-built_in">cd</span> /path/to/your/repo<br><br>git add .<br>git commit -m <span class="hljs-string">&quot;Commit Automatically&quot;</span><br>git push origin master<br><br></code></pre></td></tr></table></figure><h3 id="建立基本工作排程"><a href="#建立基本工作排程" class="headerlink" title="建立基本工作排程"></a>建立基本工作排程</h3><p>用Win+R，輸入<code>taskschd.msc</code> 來開啟工作排程器，主要從右側的動作欄操作<br><img src="https://s2.loli.net/2023/09/12/QHfqEk1AKh6R87W.png" alt="Imgur"></p><p>點選右側的<code>建立基本工作...</code>會開啟一個設定精靈，先輸入名稱跟描述。<br><img src="https://s2.loli.net/2023/09/12/1EV6haIOjWlFUXC.png" alt="Imgur"></p><p>觸發程序主要是選擇觸發的間隔，可以自行選擇希望的時段<br><img src="https://s2.loli.net/2023/09/12/xuO1oPJUpGShKLa.png" alt="Imgur"></p><p>設定開始這項計畫工作的時間，間隔天數這裡也可以更改。<br><img src="https://s2.loli.net/2023/09/12/FGNpsA9b2TMe5S6.png" alt="Imgur"></p><p>選擇啟動程式，瀏覽並選擇你之前創建的 <code>commit_push.bat</code> 檔案。<br><img src="https://s2.loli.net/2023/09/12/tZ5qPJp83WOw1ue.png" alt="Imgur"></p><p>完成設定!<br>它會在你設定的時間間隔內運行你的批處理腳本，從而自動 commit 和 push 更改到 GitHub</p><h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://ithelp.ithome.com.tw/articles/10276390">工作排程器–Windows的忠實程序秘書 - iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Productivity</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Github</tag>
+      
+      <tag>自動化</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Docker小試身手</title>
     <link href="/2023/09/11/Docker%E5%B0%8F%E8%A9%A6%E8%BA%AB%E6%89%8B/"/>
     <url>/2023/09/11/Docker%E5%B0%8F%E8%A9%A6%E8%BA%AB%E6%89%8B/</url>

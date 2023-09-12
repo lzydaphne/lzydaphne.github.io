@@ -16,24 +16,25 @@
   <meta name="author" content="lzydaphne">
   <meta name="keywords" content="">
   
-    <meta name="description" content="趁著課餘零碎時間，小玩一下 Docker，主要參考以下 tutorial A Docker Tutorial for Beginners (docker-curriculum.com) 學到了  如何部屬靜態網站 如何建立自己的 image daphne61221&#x2F;catnip - Docker Image | Docker Hub 如何部屬到 AWS 上 如何處理多個 container 的環境">
+    <meta name="description" content="用 .bat 打造定時維護的 Github RepoMotivation:之前一直沒有注意到可以用自動化的工具來幫我定期維護本地的repo每次都要靠人腦記憶，還常常遇到 conflict 要解，太麻煩了今天下定決心要自動化整個流程幫我把本地上的 notes 定時 push 到 Github 上! Process:所需工具:一份簡單的 commit_push.bat 和 Windows 內建的任務排">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker小試身手">
-<meta property="og:url" content="https://lzydaphne.github.io/2023/09/11/Docker%E5%B0%8F%E8%A9%A6%E8%BA%AB%E6%89%8B/index.html">
+<meta property="og:title" content="用 .bat 打造定時維護的 Github Repo">
+<meta property="og:url" content="https://lzydaphne.github.io/2023/09/12/%E7%94%A8%20.bat%20%E6%89%93%E9%80%A0%E5%AE%9A%E6%99%82%E7%B6%AD%E8%AD%B7%E7%9A%84%20Github%20Repo/index.html">
 <meta property="og:site_name" content="On the Road">
-<meta property="og:description" content="趁著課餘零碎時間，小玩一下 Docker，主要參考以下 tutorial A Docker Tutorial for Beginners (docker-curriculum.com) 學到了  如何部屬靜態網站 如何建立自己的 image daphne61221&#x2F;catnip - Docker Image | Docker Hub 如何部屬到 AWS 上 如何處理多個 container 的環境">
+<meta property="og:description" content="用 .bat 打造定時維護的 Github RepoMotivation:之前一直沒有注意到可以用自動化的工具來幫我定期維護本地的repo每次都要靠人腦記憶，還常常遇到 conflict 要解，太麻煩了今天下定決心要自動化整個流程幫我把本地上的 notes 定時 push 到 Github 上! Process:所需工具:一份簡單的 commit_push.bat 和 Windows 內建的任務排">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://lzydaphne.github.io/assets/230911.png">
-<meta property="article:published_time" content="2023-09-11T06:56:21.000Z">
-<meta property="article:modified_time" content="2023-09-11T07:04:54.697Z">
+<meta property="og:image" content="https://lzydaphne.github.io/assets/230912.png">
+<meta property="article:published_time" content="2023-09-12T01:25:06.000Z">
+<meta property="article:modified_time" content="2023-09-12T01:30:34.486Z">
 <meta property="article:author" content="lzydaphne">
-<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Github">
+<meta property="article:tag" content="自動化">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://lzydaphne.github.io/assets/230911.png">
+<meta name="twitter:image" content="https://lzydaphne.github.io/assets/230912.png">
   
   
   
-  <title>Docker小試身手 | On the Road</title>
+  <title>用 .bat 打造定時維護的 Github Repo | On the Road</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -204,7 +205,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Docker小試身手"></span>
+            <span id="subtitle" data-typed-text="用 .bat 打造定時維護的 Github Repo"></span>
           
         </div>
 
@@ -215,8 +216,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-11 14:56" pubdate>
-          2023年9月11日 下午
+        <time datetime="2023-09-12 09:25" pubdate>
+          2023年9月12日 上午
         </time>
       </span>
     
@@ -228,7 +229,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          842 字
+          603 字
         
       </span>
     
@@ -240,7 +241,7 @@
         
         
           <!-- compatible with older versions-->
-          8 分鐘
+          6 分鐘
         
       </span>
     
@@ -278,13 +279,13 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Docker小試身手</h1>
+            <h1 style="display: none">用 .bat 打造定時維護的 Github Repo</h1>
             
               <p class="note note-info">
                 
                   
                     <!-- compatible with older versions-->
-                    本文最後更新於：2023年9月11日 下午
+                    本文最後更新於：2023年9月12日 上午
                   
                 
               </p>
@@ -292,21 +293,19 @@
             
               <div class="markdown-body">
                 
-                <p>趁著課餘零碎時間，小玩一下 Docker，主要參考以下 tutorial</p>
-<p><a target="_blank" rel="noopener" href="https://docker-curriculum.com/#what-are-containers-">A Docker Tutorial for Beginners (docker-curriculum.com)</a></p>
-<p>學到了</p>
-<ol>
-<li>如何部屬靜態網站</li>
-<li>如何建立自己的 image <a target="_blank" rel="noopener" href="https://hub.docker.com/r/daphne61221/catnip">daphne61221/catnip - Docker Image | Docker Hub</a></li>
-<li>如何部屬到 AWS 上</li>
-<li>如何處理多個 container 的環境</li>
-</ol>
-<p>當然還有更進階複雜的用法，但現在沒有使用場景，以後再學 d(`･∀･)b</p>
-<p>Docker 採用了主從式架構（client-server model）。在Docker的世界裡，分別稱為 Docker Client 與 Docker Daemon （server）·Docker Client 負責發布命令，Docker Daemon 則是依照命令執行任務，就是操作下面三個元件：<br>■映像檔（image） ■容器（container） ■倉庫（registry） </p>
-<p><img src="https://s2.loli.net/2023/09/11/TFCY7XZSJEPpVrB.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h3 id="images-映像檔，唯讀"><a href="#images-映像檔，唯讀" class="headerlink" title="images: 映像檔，唯讀"></a>images: 映像檔，唯讀</h3><h3 id="container-容器"><a href="#container-容器" class="headerlink" title="container 容器"></a>container 容器</h3><p>基於 image 可以建立出 Container。<br>它的概念像是建立一個可讀寫內容的外層，蓋在image 上。<br>實際存取container 會經過可讀寫層與image，因此運行container時，看到 的檔案系統會是兩者合併後的結果。<br>以圖2—1的示意圖為例，image層已有／bin、／etc與／var 等目錄。執行container的過程中，新增了 兩個目錄或檔案為／usr／local／app與／var／log／app，實際在觀察檔案 時，會看到兩者合併的結果，也就是右半邊的目錄示意列表。<br><img src="https://s2.loli.net/2023/09/11/4NUEkQdT9pe5KjR.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h3 id="registry-倉庫"><a href="#registry-倉庫" class="headerlink" title="registry 倉庫"></a>registry 倉庫</h3><p>Registry是存放image的空間。<br>Docker 存放image的設計方法，很像分散式版本控制。而分散式架構就會有類似git的pull／push 指令與行為，Docker也有對應的pull／push指令，實際做的事也跟 git類似：跟遠端的 registry同步。 目前Docker 預設下載的 registry為 Docker Hub，大多數程式環境或 服務都能在上面找得到image。</p>
-<p><img src="https://s2.loli.net/2023/09/11/BXjtOEKQ8ewnLJ1.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+                <h1 id="用-bat-打造定時維護的-Github-Repo"><a href="#用-bat-打造定時維護的-Github-Repo" class="headerlink" title="用 .bat 打造定時維護的 Github Repo"></a>用 .bat 打造定時維護的 Github Repo</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation:"></a>Motivation:</h2><p>之前一直沒有注意到可以用自動化的工具來幫我定期維護本地的repo<br>每次都要靠人腦記憶，還常常遇到 conflict 要解，太麻煩了<br>今天下定決心要自動化整個流程<br>幫我把本地上的 notes 定時 push 到 Github 上!</p>
+<h2 id="Process"><a href="#Process" class="headerlink" title="Process:"></a>Process:</h2><p>所需工具:<br>一份簡單的 <code>commit_push.bat</code> 和 Windows 內建的任務排程器</p>
+<h3 id="建立-bat-檔案"><a href="#建立-bat-檔案" class="headerlink" title="建立 .bat 檔案"></a>建立 <code>.bat</code> 檔案</h3><p>先在目標 repo 的路徑下，建立一份 <code>commit_push.bat</code> :</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs BASH"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-built_in">cd</span> /path/to/your/repo<br><br>git add .<br>git commit -m <span class="hljs-string">&quot;Commit Automatically&quot;</span><br>git push origin master<br><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="建立基本工作排程"><a href="#建立基本工作排程" class="headerlink" title="建立基本工作排程"></a>建立基本工作排程</h3><p>用Win+R，輸入<code>taskschd.msc</code> 來開啟工作排程器，主要從右側的動作欄操作<br><img src="https://s2.loli.net/2023/09/12/QHfqEk1AKh6R87W.png" srcset="/img/loading.gif" lazyload alt="Imgur"></p>
+<p>點選右側的<code>建立基本工作...</code>會開啟一個設定精靈，先輸入名稱跟描述。<br><img src="https://s2.loli.net/2023/09/12/1EV6haIOjWlFUXC.png" srcset="/img/loading.gif" lazyload alt="Imgur"></p>
+<p>觸發程序主要是選擇觸發的間隔，可以自行選擇希望的時段<br><img src="https://s2.loli.net/2023/09/12/xuO1oPJUpGShKLa.png" srcset="/img/loading.gif" lazyload alt="Imgur"></p>
+<p>設定開始這項計畫工作的時間，間隔天數這裡也可以更改。<br><img src="https://s2.loli.net/2023/09/12/FGNpsA9b2TMe5S6.png" srcset="/img/loading.gif" lazyload alt="Imgur"></p>
+<p>選擇啟動程式，瀏覽並選擇你之前創建的 <code>commit_push.bat</code> 檔案。<br><img src="https://s2.loli.net/2023/09/12/tZ5qPJp83WOw1ue.png" srcset="/img/loading.gif" lazyload alt="Imgur"></p>
+<p>完成設定!<br>它會在你設定的時間間隔內運行你的批處理腳本，從而自動 commit 和 push 更改到 GitHub</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10276390">工作排程器–Windows的忠實程序秘書 - iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天</a></p>
 
                 
               </div>
@@ -325,7 +324,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Side-Project/" class="category-chain-item">Side Project</a>
+  <a href="/categories/Productivity/" class="category-chain-item">Productivity</a>
   
   
 
@@ -340,7 +339,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Docker/">#Docker</a>
+        <a href="/tags/Github/">#Github</a>
+      
+        <a href="/tags/%E8%87%AA%E5%8B%95%E5%8C%96/">#自動化</a>
       
     </div>
   
@@ -354,18 +355,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/12/%E7%94%A8%20.bat%20%E6%89%93%E9%80%A0%E5%AE%9A%E6%99%82%E7%B6%AD%E8%AD%B7%E7%9A%84%20Github%20Repo/" title="用 .bat 打造定時維護的 Github Repo">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">用 .bat 打造定時維護的 Github Repo</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/31/2023%E6%9A%91%E6%9C%9F%E7%B8%BD%E7%B5%90/" title="2023暑期總結（二下）">
-                        <span class="hidden-mobile">2023暑期總結（二下）</span>
+                      <a href="/2023/09/11/Docker%E5%B0%8F%E8%A9%A6%E8%BA%AB%E6%89%8B/" title="Docker小試身手">
+                        <span class="hidden-mobile">Docker小試身手</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

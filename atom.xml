@@ -6,7 +6,7 @@
   <link href="https://lzydaphne.github.io/atom.xml" rel="self"/>
   
   <link href="https://lzydaphne.github.io/"/>
-  <updated>2023-09-11T07:04:54.697Z</updated>
+  <updated>2023-09-12T01:30:34.486Z</updated>
   <id>https://lzydaphne.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>用 .bat 打造定時維護的 Github Repo</title>
+    <link href="https://lzydaphne.github.io/2023/09/12/%E7%94%A8%20.bat%20%E6%89%93%E9%80%A0%E5%AE%9A%E6%99%82%E7%B6%AD%E8%AD%B7%E7%9A%84%20Github%20Repo/"/>
+    <id>https://lzydaphne.github.io/2023/09/12/%E7%94%A8%20.bat%20%E6%89%93%E9%80%A0%E5%AE%9A%E6%99%82%E7%B6%AD%E8%AD%B7%E7%9A%84%20Github%20Repo/</id>
+    <published>2023-09-12T01:25:06.000Z</published>
+    <updated>2023-09-12T01:30:34.486Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="用-bat-打造定時維護的-Github-Repo"><a href="#用-bat-打造定時維護的-Github-Repo" class="headerlink" title="用 .bat 打造定時維護的 Github Repo"></a>用 .bat 打造定時維護的 Github Repo</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation:"></a>Motivation:</h2><p>之前一直沒有注意到可以用自動化的工具來幫我定期維護本地的repo<br>每次都要靠人腦記憶，還常常遇到 conflict 要解，太麻煩了<br>今天下定決心要自動化整個流程<br>幫我把本地上的 notes 定時 push 到 Github 上!</p><h2 id="Process"><a href="#Process" class="headerlink" title="Process:"></a>Process:</h2><p>所需工具:<br>一份簡單的 <code>commit_push.bat</code> 和 Windows 內建的任務排程器</p><h3 id="建立-bat-檔案"><a href="#建立-bat-檔案" class="headerlink" title="建立 .bat 檔案"></a>建立 <code>.bat</code> 檔案</h3><p>先在目標 repo 的路徑下，建立一份 <code>commit_push.bat</code> :</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs BASH"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-built_in">cd</span> /path/to/your/repo<br><br>git add .<br>git commit -m <span class="hljs-string">&quot;Commit Automatically&quot;</span><br>git push origin master<br><br></code></pre></td></tr></table></figure><h3 id="建立基本工作排程"><a href="#建立基本工作排程" class="headerlink" title="建立基本工作排程"></a>建立基本工作排程</h3><p>用Win+R，輸入<code>taskschd.msc</code> 來開啟工作排程器，主要從右側的動作欄操作<br><img src="https://s2.loli.net/2023/09/12/QHfqEk1AKh6R87W.png" alt="Imgur"></p><p>點選右側的<code>建立基本工作...</code>會開啟一個設定精靈，先輸入名稱跟描述。<br><img src="https://s2.loli.net/2023/09/12/1EV6haIOjWlFUXC.png" alt="Imgur"></p><p>觸發程序主要是選擇觸發的間隔，可以自行選擇希望的時段<br><img src="https://s2.loli.net/2023/09/12/xuO1oPJUpGShKLa.png" alt="Imgur"></p><p>設定開始這項計畫工作的時間，間隔天數這裡也可以更改。<br><img src="https://s2.loli.net/2023/09/12/FGNpsA9b2TMe5S6.png" alt="Imgur"></p><p>選擇啟動程式，瀏覽並選擇你之前創建的 <code>commit_push.bat</code> 檔案。<br><img src="https://s2.loli.net/2023/09/12/tZ5qPJp83WOw1ue.png" alt="Imgur"></p><p>完成設定!<br>它會在你設定的時間間隔內運行你的批處理腳本，從而自動 commit 和 push 更改到 GitHub</p><h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://ithelp.ithome.com.tw/articles/10276390">工作排程器–Windows的忠實程序秘書 - iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;用-bat-打造定時維護的-Github-Repo&quot;&gt;&lt;a href=&quot;#用-bat-打造定時維護的-Github-Repo&quot; class=&quot;headerlink&quot; title=&quot;用 .bat 打造定時維護的 Github Repo&quot;&gt;&lt;/a&gt;用 .bat 打造定</summary>
+      
+    
+    
+    
+    <category term="Productivity" scheme="https://lzydaphne.github.io/categories/Productivity/"/>
+    
+    
+    <category term="Github" scheme="https://lzydaphne.github.io/tags/Github/"/>
+    
+    <category term="自動化" scheme="https://lzydaphne.github.io/tags/%E8%87%AA%E5%8B%95%E5%8C%96/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker小試身手</title>
@@ -530,34 +556,6 @@
     
     
     <category term="Weekly" scheme="https://lzydaphne.github.io/tags/Weekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>聊聊多巴胺</title>
-    <link href="https://lzydaphne.github.io/2022/02/26/%E8%81%8A%E8%81%8A%E5%A4%9A%E5%B7%B4%E8%83%BA/"/>
-    <id>https://lzydaphne.github.io/2022/02/26/%E8%81%8A%E8%81%8A%E5%A4%9A%E5%B7%B4%E8%83%BA/</id>
-    <published>2022-02-26T15:27:31.000Z</published>
-    <updated>2022-02-26T15:34:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="多巴胺省思"><a href="#多巴胺省思" class="headerlink" title="多巴胺省思"></a>多巴胺省思</h1><p>我一直很喜歡嘗試hack自己的思想</p><p>而多巴胺是人類行為和動機的核心機制</p><p>把他搞懂，應該很多地方都有合理的解釋了</p><p>Enjoy!</p><p><img src="/assets/220226-1.png" alt="Cute Dopamine"></p><h2 id="生物機制"><a href="#生物機制" class="headerlink" title="生物機制"></a>生物機制</h2><ol><li>Dopamine is a neuromodulator (different than a neurotransmitter) – influences the communication of many neurons at once</li><li><strong>Two main pathways: (1) mesocortical limbic pathway</strong> – responsible for reward, motivation, craving; <strong>(2) nigrostriatal pathway</strong> – responsible for movement<ol><li><strong>Dopamine release can be local or broad</strong></li></ol></li><li>Dopamine communicates via g-protein-coupled receptors (GPCR) so its effects take longer to kick in and actually impact gene expression</li><li>Neurons that release dopamine also release glutamate</li><li>When you experience or crave something desirable, ==your baseline level of dopamine drops==</li></ol><h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ol><li>多巴胺是所有上癮機制/動機/渴望/時間感知的核心</li><li>對生活的體驗和執行動機，是「相對」於你在當下獲取多少多巴胺<ol><li>所以，你在當下感受到的多巴胺，取決於你前一刻的感受多寡</li></ol></li><li>當你正在體驗或渴望一些事物，你的「多巴胺基線」(baseline level of dopamine)會下降，<ol><li><strong>Tonic:</strong> low level of dopamine that is always circulating</li><li><strong>Phasic:</strong> peaks of dopamine that release.</li></ol></li><li>你感受到多巴胺多寡，是根據你的多巴胺基線相對於多巴胺高峰的值。</li><li>「Pleasure-Pain Balance」<ol><li>獲得愉悅有兩種途徑:<ol><li>尋找正向快感</li><li>避免痛苦無聊</li></ol></li><li>兩者像是翹翹板不斷進行體內平衡</li><li>當你不斷從事一些讓你愉悅的事情，多巴胺基線會上升，讓以更難獲得相同程度的愉悅</li><li>減少從事那些會讓你獲得太高劑量的多巴胺的活動，否則你很難再趕到相同程度的愉悅。有意識的控制<ol><li>簡單來說「為了調節你的多巴胺，不要過太爽」</li></ol></li></ol></li><li>多巴胺會影響你對時間的感知，當我們只為了獎勵本身從事活動，會覺得時間被拉得更長，因為我們並沒有在努力過程中釋放足夠多的多巴胺<ol><li>把多巴胺黏附在努力過程或是那些阻力，</li></ol></li></ol><h2 id="行動"><a href="#行動" class="headerlink" title="行動"></a>行動</h2><ol><li>學會從「effort」本身spike dopamine<ol><li>如果你專注在最後的獎勵結果，會讓你在過程中更容易感到挫折和痛苦</li><li>Cold Plunge可以在一段長時間中增加2.5倍的多巴胺，最多可以維持3小時</li></ol></li><li>為了調節你的多巴胺，不要過太爽，沉浸在愉悅事物太長或太久</li><li>接受那些你在放縱後的焦慮不適過程，那是你的身體在進行多巴胺平衡</li></ol><hr><h2 id="資料來源"><a href="#資料來源" class="headerlink" title="資料來源:"></a>資料來源:</h2><p>Huberman Lab EP39</p><p>Dopamine Nation</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;多巴胺省思&quot;&gt;&lt;a href=&quot;#多巴胺省思&quot; class=&quot;headerlink&quot; title=&quot;多巴胺省思&quot;&gt;&lt;/a&gt;多巴胺省思&lt;/h1&gt;&lt;p&gt;我一直很喜歡嘗試hack自己的思想&lt;/p&gt;
-&lt;p&gt;而多巴胺是人類行為和動機的核心機制&lt;/p&gt;
-&lt;p&gt;把他搞懂，應該很</summary>
-      
-    
-    
-    
-    <category term="PersonalGrowth" scheme="https://lzydaphne.github.io/categories/PersonalGrowth/"/>
-    
-    
-    <category term="Motivation" scheme="https://lzydaphne.github.io/tags/Motivation/"/>
-    
-    <category term="Mind" scheme="https://lzydaphne.github.io/tags/Mind/"/>
     
   </entry>
   
