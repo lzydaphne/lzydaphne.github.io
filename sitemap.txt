@@ -33,10 +33,10 @@ https://lzydaphne.github.io/
 https://lzydaphne.github.io/tags/Thoughts/
 https://lzydaphne.github.io/tags/Database/
 https://lzydaphne.github.io/tags/Docker/
+https://lzydaphne.github.io/tags/Weekly/
 https://lzydaphne.github.io/tags/Solidity/
 https://lzydaphne.github.io/tags/Python/
 https://lzydaphne.github.io/tags/Brownie/
-https://lzydaphne.github.io/tags/Weekly/
 https://lzydaphne.github.io/tags/HTML/
 https://lzydaphne.github.io/tags/CSS/
 https://lzydaphne.github.io/tags/Github/
@@ -57,11 +57,11 @@ https://lzydaphne.github.io/tags/Mind/
 https://lzydaphne.github.io/tags/Ganache/
 https://lzydaphne.github.io/categories/PersonalGrowth/
 https://lzydaphne.github.io/categories/Side-Project/
-https://lzydaphne.github.io/categories/Code/
-https://lzydaphne.github.io/categories/Course/
 https://lzydaphne.github.io/categories/Review/
+https://lzydaphne.github.io/categories/Course/
+https://lzydaphne.github.io/categories/Code/
 https://lzydaphne.github.io/categories/Reading/
-https://lzydaphne.github.io/categories/Crypto/
 https://lzydaphne.github.io/categories/Productivity/
 https://lzydaphne.github.io/categories/Health/
+https://lzydaphne.github.io/categories/Crypto/
 https://lzydaphne.github.io/categories/Web-Dev/
