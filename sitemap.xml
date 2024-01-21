@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lzydaphne.github.io/2024/01/21/BinarySearch%E6%A8%A1%E6%9D%BF/</loc>
+    
+    <lastmod>2024-01-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://lzydaphne.github.io/2024/01/20/GPGPU-CH1/</loc>
     
     <lastmod>2024-01-20</lastmod>
@@ -292,7 +301,7 @@
 
   <url>
     <loc>https://lzydaphne.github.io/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -300,182 +309,189 @@
   
   <url>
     <loc>https://lzydaphne.github.io/tags/Thoughts/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lzydaphne.github.io/tags/leetcode/</loc>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/Database/</loc>
-    <lastmod>2024-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lzydaphne.github.io/tags/Solidity/</loc>
-    <lastmod>2024-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lzydaphne.github.io/tags/Python/</loc>
-    <lastmod>2024-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lzydaphne.github.io/tags/Brownie/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/Docker/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lzydaphne.github.io/tags/Solidity/</loc>
+    <lastmod>2024-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lzydaphne.github.io/tags/Python/</loc>
+    <lastmod>2024-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lzydaphne.github.io/tags/Brownie/</loc>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/GPU/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/Weekly/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/HTML/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/CSS/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/Github/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/Blog/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/tutorial/</loc>
-    <lastmod>2024-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lzydaphne.github.io/tags/Defi/</loc>
-    <lastmod>2024-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lzydaphne.github.io/tags/React/</loc>
-    <lastmod>2024-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lzydaphne.github.io/tags/Material-UI/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/startup/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/business/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/autobiography/</loc>
-    <lastmod>2024-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lzydaphne.github.io/tags/Books/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/Motivation/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://lzydaphne.github.io/tags/Social/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <loc>https://lzydaphne.github.io/tags/Books/</loc>
+    <lastmod>2024-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lzydaphne.github.io/tags/Defi/</loc>
+    <lastmod>2024-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lzydaphne.github.io/tags/React/</loc>
+    <lastmod>2024-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lzydaphne.github.io/tags/Material-UI/</loc>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/%E8%87%AA%E5%8B%95%E5%8C%96/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://lzydaphne.github.io/tags/Mind/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <loc>https://lzydaphne.github.io/tags/Social/</loc>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/Psycology/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lzydaphne.github.io/tags/Mind/</loc>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/tags/Ganache/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -484,77 +500,77 @@
   
   <url>
     <loc>https://lzydaphne.github.io/categories/PersonalGrowth/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/categories/Side-Project/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/categories/Code/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/categories/Research/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/categories/Course/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/categories/Review/</loc>
-    <lastmod>2024-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lzydaphne.github.io/categories/Crypto/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/categories/Reading/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lzydaphne.github.io/categories/Crypto/</loc>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/categories/Productivity/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/categories/Health/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lzydaphne.github.io/categories/Web-Dev/</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2024-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

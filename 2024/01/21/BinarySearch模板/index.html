@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/run.png">
+  <link rel="icon" href="/assets/run.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#494e6b">
+  <meta name="author" content="lzydaphne">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="快速整理一下困擾許久的 binary search template 這個演算法的提出早至 1946 年，雖然原理並不難，但是真的很難 bug free 一次寫好 主要問題來自很容易犯下 Off-by-one error 以至於圖靈獎得主高德納在他 The Art of Computer Programming 3 中如此描述二分搜尋：  Although the basic idea of bi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BinarySearch模板">
+<meta property="og:url" content="https://lzydaphne.github.io/2024/01/21/BinarySearch%E6%A8%A1%E6%9D%BF/index.html">
+<meta property="og:site_name" content="On the Road">
+<meta property="og:description" content="快速整理一下困擾許久的 binary search template 這個演算法的提出早至 1946 年，雖然原理並不難，但是真的很難 bug free 一次寫好 主要問題來自很容易犯下 Off-by-one error 以至於圖靈獎得主高德納在他 The Art of Computer Programming 3 中如此描述二分搜尋：  Although the basic idea of bi">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://lzydaphne.github.io/assets/240121.png">
+<meta property="article:published_time" content="2024-01-21T07:51:38.000Z">
+<meta property="article:modified_time" content="2024-01-21T08:10:02.964Z">
+<meta property="article:author" content="lzydaphne">
+<meta property="article:tag" content="leetcode">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lzydaphne.github.io/assets/240121.png">
+  
+  
+  
+  <title>BinarySearch模板 | On the Road</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"lzydaphne.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="On the Road" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>On the Road</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Articles</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/page.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="BinarySearch模板"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-21 15:51" pubdate>
+          2024年1月21日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          18 分鐘
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">BinarySearch模板</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最後更新於：2024年1月21日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>快速整理一下困擾許久的 binary search template</p>
+<p>這個演算法的提出早至 1946 年，雖然原理並不難，但是真的很難 bug free 一次寫好</p>
+<p>主要問題來自很容易犯下 Off-by-one error</p>
+<p>以至於圖靈獎得主高德納在他 The Art of Computer Programming 3 中如此描述二分搜尋：</p>
+<blockquote>
+<p>Although the basic idea of binary search is comparatively straightforward, the details can be surprisingly tricky…</p>
+</blockquote>
+<p>以下統一使用「左閉右閉」區間</p>
+<p>之前本來慣用「左閉右開」，但發現在某些情況下，會需要特別向上取整，或是給出不同返回值，太瑣碎了，乾脆換一套新的，更容易理解。</p>
+<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>第一組:</p>
+<p>返回值 &lt;= target</p>
+<p>返回值 &gt; target</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs CPP"><span class="hljs-keyword">if</span>( nums[mid] &lt;= target ) l = c + <span class="hljs-number">1</span>;<br><span class="hljs-keyword">else</span> r = c - <span class="hljs-number">1</span>;<br><br><span class="hljs-comment">//...</span><br>    <br><span class="hljs-comment">//返回值 &lt;= target</span><br><span class="hljs-keyword">return</span> r;<br><span class="hljs-comment">//返回值 &gt; target</span><br><span class="hljs-keyword">return</span> l;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>第二組:</p>
+<p>返回值 &lt; target</p>
+<p>返回值 &gt;= target</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">if</span>( nums[mid] &lt;= target ) l = c + <span class="hljs-number">1</span>;<br><span class="hljs-keyword">else</span> r = c - <span class="hljs-number">1</span>;<br><br><span class="hljs-comment">//...</span><br>    <br><span class="hljs-comment">//返回值 &lt; target</span><br><span class="hljs-keyword">return</span> r;<br><span class="hljs-comment">//返回值 &gt;= target</span><br><span class="hljs-keyword">return</span> l;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>這些都是不是通靈，是一步一步推論後整理出來，方便記憶的結論！</p>
+<h2 id="細節討論"><a href="#細節討論" class="headerlink" title="細節討論"></a>細節討論</h2><p>通常有【相等返回】，和四個【一般情況】</p>
+<ul>
+<li>相等返回: 若找到 <code>nums[mid] == target</code> 就返回 <code>mid</code></li>
+<li>一般情況<ol>
+<li>返回值 &gt;= target</li>
+<li>返回值 &gt; target</li>
+<li>返回值 &lt;= target</li>
+<li>返回值 &lt; target</li>
+</ol>
+</li>
+</ul>
+<h2 id="相等返回"><a href="#相等返回" class="headerlink" title="相等返回"></a>相等返回</h2><p>通常是一開始練習二分搜就會寫到的題目</p>
+<p>蠻簡單的，檢查到  <code>nums[mid] == target</code> 就返回 <code>mid</code></p>
+<h2 id="情況一-返回值-gt-target"><a href="#情況一-返回值-gt-target" class="headerlink" title="情況一: 返回值 &gt;= target"></a>情況一: 返回值 &gt;= target</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 模版一「一般」情形1: 大於等於</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> </span>&#123;<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = nums.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(l &lt;= r)&#123;<br>            <span class="hljs-type">int</span> c = l + (r - l) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(nums[c] &lt; target) l = c + <span class="hljs-number">1</span>; <span class="hljs-comment">// #1 更新後l左側元素「必」小於target</span><br>            <span class="hljs-keyword">else</span> r = c - <span class="hljs-number">1</span>; <span class="hljs-comment">// #2 更新後r右側「必」大於等於target</span><br>        &#125;<br>        <span class="hljs-comment">// return (l == nums.length || nums[l] != target) ? -1 : l; // 704題的返回，處理:相等/不等</span><br>        <span class="hljs-keyword">return</span> l == nums.length ? <span class="hljs-number">-1</span> : l; <span class="hljs-comment">// 處理: 相等/剛好大於/不存在</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="情況二-返回值-gt-target"><a href="#情況二-返回值-gt-target" class="headerlink" title="情況二: 返回值 &gt; target"></a>情況二: 返回值 &gt; target</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 模版一「一般」情形2: 大於</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> </span>&#123;<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = nums.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(l &lt;= r)&#123;<br>            <span class="hljs-type">int</span> c = l + (r - l) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(nums[c] &lt;= target) l = c + <span class="hljs-number">1</span>; <span class="hljs-comment">// #1 更新後l左側元素「必」小於等於target</span><br>            <span class="hljs-keyword">else</span> r = c - <span class="hljs-number">1</span>; <span class="hljs-comment">// #2 更新後r右側「必」大於target</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> l == nums.length ? <span class="hljs-number">-1</span> : l; <span class="hljs-comment">// 處理: 剛好大於/不存在</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="情況三-返回值-lt-target"><a href="#情況三-返回值-lt-target" class="headerlink" title="情況三: 返回值 &lt;= target"></a>情況三: 返回值 &lt;= target</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 模版一「一般」情形3: 小於等於</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> </span>&#123;<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = nums.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(l &lt;= r)&#123;<br>            <span class="hljs-type">int</span> c = l + (r - l) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(nums[c] &lt;= target) l = c + <span class="hljs-number">1</span>; <span class="hljs-comment">// #1 更新後l左側「必」小於等於target</span><br>            <span class="hljs-keyword">else</span> r = c - <span class="hljs-number">1</span>; <span class="hljs-comment">// #2 更新後r右側「必」大於target</span><br>        &#125;<br>        <span class="hljs-comment">// return (r == -1 || nums[r] != target) ? -1 : r; // 704題的返回，處理:相等/不等</span><br>        <span class="hljs-keyword">return</span> r; <span class="hljs-comment">// 處理: 相等/剛好小於/不存在</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="情況四-返回值-lt-target"><a href="#情況四-返回值-lt-target" class="headerlink" title="情況四: 返回值 &lt; target"></a>情況四: 返回值 &lt; target</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 模版一「一般」情形4: 小於</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> </span>&#123;<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = nums.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(l &lt;= r)&#123;<br>            <span class="hljs-type">int</span> c = l + (r - l) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(nums[c] &lt; target) l = c + <span class="hljs-number">1</span>; <span class="hljs-comment">// #1 更新後l左側元素「必」小於target</span><br>            <span class="hljs-keyword">else</span> r = c - <span class="hljs-number">1</span>; <span class="hljs-comment">// #2 更新後r右側「必」大於等於target</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> r; <span class="hljs-comment">// 處理: 相等/剛好小於/不存在</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/circle/discuss/ooxfo8/#%E6%A8%A1%E7%89%88%E4%B8%89-%E7%9B%B8%E9%82%BB%E7%BB%88%E6%AD%A2/%E5%B7%A6%E5%BC%80%E5%8F%B3%E5%BC%80">二分查找从入门到入睡 - 力扣（LeetCode）</a></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/leetcode/">#leetcode</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/01/20/GPGPU-CH1/" title="GPGPU-CH1">
+                        <span class="hidden-mobile">GPGPU-CH1</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目錄</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允許 JavaScript 運行的環境下瀏覽效果更佳</div>
+  </noscript>
+</body>
+</html>
