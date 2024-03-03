@@ -6,7 +6,7 @@
   <link href="https://lzydaphne.github.io/atom.xml" rel="self"/>
   
   <link href="https://lzydaphne.github.io/"/>
-  <updated>2024-01-21T08:11:15.959Z</updated>
+  <updated>2024-03-03T15:40:14.209Z</updated>
   <id>https://lzydaphne.github.io/</id>
   
   <author>
@@ -15,6 +15,81 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GPGPU-Ch4-Memory-System</title>
+    <link href="https://lzydaphne.github.io/2024/03/02/GPGPU-Ch4-Memory-System/"/>
+    <id>https://lzydaphne.github.io/2024/03/02/GPGPU-Ch4-Memory-System/</id>
+    <published>2024-03-02T07:07:41.000Z</published>
+    <updated>2024-03-03T15:40:14.209Z</updated>
+    
+    <content type="html"><![CDATA[<p>Complete notes can be found here (Mandarin) :</p><p><a href="https://hackmd.io/@YWDEoiCeQdGIyz04HFQMIw/Bkbm7QOYa">Ch4 Memory System Notes</a></p><h2 id="Brief-overview-of-chapter4"><a href="#Brief-overview-of-chapter4" class="headerlink" title="Brief overview of chapter4:"></a>Brief overview of chapter4:</h2><p>The memory system of CUDA-capable GPUs is hierarchically structured to efficiently manage and access data across various levels of memory with varying sizes, speeds, and accessibilities. This hierarchical design is critical for optimizing the performance of GPU-accelerated applications, which often require massive parallel computations and fast data access patterns. Understanding the memory hierarchy and its components is crucial for developers aiming to fully leverage the GPU’s computational resources.</p><h3 id="4-1-First-Level-Memory-Structures"><a href="#4-1-First-Level-Memory-Structures" class="headerlink" title="4.1 First-Level Memory Structures"></a>4.1 First-Level Memory Structures</h3><p><strong>Unified L1 Data Cache and Scratchpad Memory</strong>: The unified L1 data cache and scratchpad memory serve as fast, on-chip memory resources available to the threads of a CUDA block. The unified design allows for flexible partitioning between the L1 cache and scratchpad memory, enabling optimized data sharing and caching strategies for different workloads. Scratchpad memory, in particular, is crucial for shared data among threads in a block, facilitating efficient communication and reducing memory access latency.</p><p><strong>L1 Texture Cache</strong>: The L1 texture cache is optimized for the specific access patterns of texture data, which are common in graphics rendering and certain types of computations. The architecture of the L1 texture cache, with its FIFO buffer, is designed to handle the high frequency of cache misses typical in texture mapping operations, thereby hiding the long off-chip latencies and improving data access efficiency.</p><h3 id="4-2-On-Chip-Interconnection-Network"><a href="#4-2-On-Chip-Interconnection-Network" class="headerlink" title="4.2 On-Chip Interconnection Network"></a>4.2 On-Chip Interconnection Network</h3><p>The on-chip interconnection network connects the SIMT cores to the memory partition units, facilitating data transfers across the GPU’s internal components. The design of the interconnection network, whether it be a crossbar or a ring network, plays a significant role in the overall efficiency of memory access and data communication within the GPU.</p><h3 id="4-3-Memory-Partition-Unit"><a href="#4-3-Memory-Partition-Unit" class="headerlink" title="4.3 Memory Partition Unit"></a>4.3 Memory Partition Unit</h3><p>The memory partition unit is a complex structure that includes a portion of the L2 cache, memory access schedulers, and ROP units. Each of these components contributes to the efficient management of memory accesses, storage, and atomic operations:</p><ul><li><strong>L2 Cache</strong>: The L2 cache serves as a shared memory cache for graphics and compute data, reducing the need for frequent off-chip memory accesses and improving data access efficiency.</li><li><strong>Atomic Operations</strong>: The ROP units support atomic operations, which are essential for synchronization and data consistency across multiple threads and blocks.</li><li><strong>Memory Access Scheduler</strong>: The memory access schedulers optimize the order of memory read and write operations, taking into account the specific characteristics of DRAM to minimize latency and maximize throughput.</li></ul><h3 id="Memory-Access-Efficiency"><a href="#Memory-Access-Efficiency" class="headerlink" title="Memory Access Efficiency"></a>Memory Access Efficiency</h3><p>The compute-to-memory access ratio and the optimization strategies surrounding it are crucial for maximizing GPU performance. By balancing the workload between compute and memory access and optimizing the memory access patterns, developers can significantly enhance the efficiency of their GPU-accelerated applications.</p><h3 id="CPU-vs-GPU-Register-Architecture"><a href="#CPU-vs-GPU-Register-Architecture" class="headerlink" title="CPU vs. GPU Register Architecture"></a>CPU vs. GPU Register Architecture</h3><p>The differences in register architecture between CPUs and GPUs highlight the GPUs’ design for massively parallel processing. The GPU’s approach to register allocation, with its large, dynamically partitioned register file and zero-overhead thread switching, contrasts with the CPU’s fixed register set per thread and context switch overhead. This distinction underlines the GPU’s efficiency in handling a vast number of concurrent threads, which is fundamental to its computational power.</p><p>Understanding these aspects of GPU architecture and memory systems is essential for developers looking to optimize their applications for CUDA-capable GPUs. By leveraging the unique characteristics of each level of the memory hierarchy and utilizing the GPU’s parallel processing capabilities, significant performance gains can be achieved.</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Complete notes can be found here (Mandarin) :&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://hackmd.io/@YWDEoiCeQdGIyz04HFQMIw/Bkbm7QOYa&quot;&gt;Ch4 Memory System Note</summary>
+      
+    
+    
+    
+    <category term="Research" scheme="https://lzydaphne.github.io/categories/Research/"/>
+    
+    
+    <category term="GPU" scheme="https://lzydaphne.github.io/tags/GPU/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GPGPU-Ch2-Programming-Model</title>
+    <link href="https://lzydaphne.github.io/2024/03/02/GPGPU-Ch2-Programming-Model/"/>
+    <id>https://lzydaphne.github.io/2024/03/02/GPGPU-Ch2-Programming-Model/</id>
+    <published>2024-03-02T07:07:24.000Z</published>
+    <updated>2024-03-03T15:40:06.706Z</updated>
+    
+    <content type="html"><![CDATA[<p>Complete notes can be found here (Mandarin) :</p><p><a href="https://hackmd.io/@YWDEoiCeQdGIyz04HFQMIw/SkpTDZdtT">Ch2 Programming Model</a></p><h2 id="Brief-overview-of-chapter2"><a href="#Brief-overview-of-chapter2" class="headerlink" title="Brief overview of chapter2:"></a>Brief overview of chapter2:</h2><p>Chapter 2 dives into the fascinating world of GPU computing, unraveling how GPUs manage to perform complex calculations at breakneck speeds. It kicks off by introducing us to the magic behind GPUs: their ability to handle thousands of tasks simultaneously without breaking a sweat. This capability is powered by clever tricks like creating threads with minimal fuss, scheduling them effortlessly, and synchronizing tasks swiftly, allowing for an incredible level of detail and speed in processing.</p><p>Imagine a bustling city where every inhabitant has a specific task. In this city, there are neighborhoods (thread blocks) where tasks are finely detailed and closely related (fine-grained parallelism), and there are entire districts (independent thread blocks) where tasks are more varied but still connected by a common goal (coarse-grained parallelism). Even broader, the city comprises multiple regions (independent grids) each taking on different large-scale projects (task parallelism).</p><p>The chapter then shines a spotlight on SIMD (Single Instruction, Multiple Data), a smart architecture that lets a single command work on multiple pieces of data at once. This is particularly handy for tasks that need the same operation repeated over and over on lots of data points. Modern GPUs are built on this principle, but they smartly hide the complexity and instead present a more versatile model through programming interfaces like CUDA and OpenCL. This model is like having an army of tiny, efficient workers (scalar threads) each capable of taking their own path and accessing any information they need to get the job done.</p><p>Next, we explore how GPUs fit into the bigger picture alongside CPUs. Whether we’re talking about standalone GPUs or those integrated directly with CPUs, the dance between allocating memory, transferring data, and launching computational kernels (the actual computations running on the GPU) is beautifully orchestrated to ensure everything runs smoothly. The chapter uses the example of a simple mathematical operation (SAXPY) to show how these calculations are split up and run in parallel across thousands of threads, demonstrating the power and efficiency of GPU processing.</p><p>In an exciting turn, the chapter delves into the nuts and bolts of GPU instruction sets, comparing NVIDIA’s approach with AMD’s. It introduces us to PTX and SASS, two levels of instruction within NVIDIA’s ecosystem, showing us how high-level programming commands are translated into the language that the GPU hardware actually understands. This process is a bit like translating a novel into multiple languages, each more detailed and closer to the action.</p><p>Lastly, the comparison with AMD’s Graphics Core Next ISA offers a glimpse into the diverse strategies tech giants use to push the boundaries of what GPUs can achieve. This deep dive into the inner workings of GPUs showcases the constant innovation and the intricate dance between software and hardware that powers the stunning graphics and lightning-fast computations we’ve come to rely on in gaming, scientific research, and so much more.</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Complete notes can be found here (Mandarin) :&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://hackmd.io/@YWDEoiCeQdGIyz04HFQMIw/SkpTDZdtT&quot;&gt;Ch2 Programming Model&lt;</summary>
+      
+    
+    
+    
+    <category term="Research" scheme="https://lzydaphne.github.io/categories/Research/"/>
+    
+    
+    <category term="GPU" scheme="https://lzydaphne.github.io/tags/GPU/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GPGPU-Ch3-SIMT-Core:Instruction-and-Register-Data-flow</title>
+    <link href="https://lzydaphne.github.io/2024/03/02/GPGPU-Ch3-SIMT-Core-Instruction-and-Register-Data-flow/"/>
+    <id>https://lzydaphne.github.io/2024/03/02/GPGPU-Ch3-SIMT-Core-Instruction-and-Register-Data-flow/</id>
+    <published>2024-03-02T07:07:24.000Z</published>
+    <updated>2024-03-03T15:40:10.604Z</updated>
+    
+    <content type="html"><![CDATA[<p>Complete notes can be found here (Mandarin) :</p><p><a href="https://hackmd.io/@YWDEoiCeQdGIyz04HFQMIw/HyMn5IcYT">Ch3 SIMT Core Notes</a></p><h2 id="Brief-overview-of-chapter3"><a href="#Brief-overview-of-chapter3" class="headerlink" title="Brief overview of chapter3:"></a>Brief overview of chapter3:</h2><p>Chapter 3 dives deeper into the architectural marvels of modern GPUs, specifically focusing on the Single Instruction, Multiple Threads (SIMT) core, and subsequently, the memory system. This chapter first unpacks the intricate dance GPUs perform to handle the enormous datasets involved in graphics rendering. Unlike their ancestors, which struggled to cache entire data sets like texture maps on-chip, today’s GPUs cleverly sidestep this issue. They do so by simultaneously running tens of thousands of threads, leveraging on-chip caches to drastically cut down on off-chip memory accesses. This is illustrated through the efficient caching of spatial locality found in adjacent pixel operations in graphical workloads.</p><p>The microarchitecture of the GPU pipeline is then unveiled, showing a sophisticated division between the SIMT frontend and the SIMD backend. This is where the magic happens, involving three crucial scheduling loops that work in harmony within a pipeline: the instruction fetch loop, instruction issue loop, and the register access scheduling loop. This setup ensures that while each thread has minimal on-chip memory, the collective power of thousands of threads can be harnessed efficiently, thanks to the effective use of caches.</p><p>A significant portion of the discussion is dedicated to explaining how modern GPUs achieve their computational prowess by smartly navigating through the challenges posed by data and instruction handling. This includes an exploration of how GPUs utilize SIMD architecture to perform operations across multiple data points simultaneously, despite presenting a more flexible programming model through technologies like CUDA and OpenCL. It elaborates on how GPUs fit alongside CPUs, detailing the orchestration required in allocating memory, transferring data, and launching computational kernels to ensure seamless operation.</p><p>One of the highlights of this chapter is the comparison between NVIDIA’s PTX and AMD’s Graphics Core Next ISA, providing insights into how different approaches to GPU instruction sets can influence programming and performance optimization. This discussion extends into the nuances of GPU instruction sets, shedding light on how high-level programming commands are translated into machine-understandable instructions that GPUs can execute efficiently.</p><p>The chapter doesn’t stop at instruction handling; it ventures into the realm of GPU memory management, detailing how GPUs manage memory through a mix of on-chip caches and off-chip memory accesses. This is crucial for understanding how GPUs handle the vast amounts of data required for tasks ranging from complex scientific computations to rendering the vivid graphics in video games.</p><p>In essence, Chapter 3 is a deep dive into the heart of GPU architecture, revealing the layers of complexity and innovation that enable GPUs to perform at the cutting edge of computational power. It’s a testament to the continuous evolution of GPU technology, highlighting how architectural decisions impact the capabilities and efficiency of GPUs in handling a wide array of computational tasks.</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Complete notes can be found here (Mandarin) :&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://hackmd.io/@YWDEoiCeQdGIyz04HFQMIw/HyMn5IcYT&quot;&gt;Ch3 SIMT Core Notes&lt;/a</summary>
+      
+    
+    
+    
+    <category term="Research" scheme="https://lzydaphne.github.io/categories/Research/"/>
+    
+    
+    <category term="GPU" scheme="https://lzydaphne.github.io/tags/GPU/"/>
+    
+  </entry>
   
   <entry>
     <title>BinarySearch模板</title>
@@ -42,11 +117,11 @@
   </entry>
   
   <entry>
-    <title>GPGPU-CH1</title>
-    <link href="https://lzydaphne.github.io/2024/01/20/GPGPU-CH1/"/>
-    <id>https://lzydaphne.github.io/2024/01/20/GPGPU-CH1/</id>
+    <title>GPGPU-CH1-GPU Hardware</title>
+    <link href="https://lzydaphne.github.io/2024/01/20/GPGPU-CH1-GPU%20Hardware%20/"/>
+    <id>https://lzydaphne.github.io/2024/01/20/GPGPU-CH1-GPU%20Hardware%20/</id>
     <published>2024-01-20T01:06:13.000Z</published>
-    <updated>2024-01-20T01:19:07.676Z</updated>
+    <updated>2024-03-03T15:38:01.666Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Ch1-GPU-硬體基礎"><a href="#Ch1-GPU-硬體基礎" class="headerlink" title="Ch1 GPU 硬體基礎"></a>Ch1 GPU 硬體基礎</h1><p>硬體方面的研究通常是不同設計間的 trade-off<br>本書主要是在提出這些已經被研究過的設計考量，並提高在非圖形計算類的應用程式的 performance 和 energy efficiency</p><p>本書內文是作者根據各種不同文獻、專利來敘述，有些細節可能跟實際產品的架構不同，不能盡信</p><h2 id="1-1-歷史背景"><a href="#1-1-歷史背景" class="headerlink" title="1-1 歷史背景"></a>1-1 歷史背景</h2><p>幾十年來，連續幾代計算系統的每美元效能呈指數級增長。根本原因是電晶體尺寸的減少、硬體架構的改進、編譯器技術和演算法的改進</p><p>然而，大約自 2005 年以來，電晶體的縮放比例未能遵循 <strong>Dennard Scaling</strong> [Dennard et al., 1974] 規則。所以目前，clock rate 增長的速度緩於裝置變小的速度。</p><ul><li>Dennard scaling：隨著電晶體變得越來越小，它們的功率密度保持不變，所以電晶體尺寸越小，能耗就會成比例的減少，在同個晶片上可以容納更多電晶體，使得裝置可以在不會過熱的情況下執行得更快(clock rate 更高)。</li></ul><p>隨著登納德縮放比例定律（Dennard Scaling）的失效，增加能源效率（energy efficiency）是目前計算機架構研究中主要的動力<br>一個重要的觀察結果就是：”存取” 大型儲存結構所消耗的能量，實際上與 “計算” 消耗的能量一樣多，甚至更多。表 1.1 所提供的 45nm 製程中各操作的能量數據 [Han et al., 2016] 就是一個例子。<br><img src="https://s2.loli.net/2024/01/10/b9FdwM8fxqXNgih.png" alt="image.png"></p><p>為了提高性能，需要找到更有效率的硬體架構，下列是一些能夠改善 energy efficiency 的方式：</p><ul><li>hardware specialization<ul><li>使用類似 GPU 的 vector HW，可以減少指令處理的成本</li></ul></li><li>minimize data movement<ul><li>how? 執行複合操作的指令(在避免大型記憶體存取的前提下，可以一次執行多個算術操作)</li></ul></li></ul><p>當前架構面臨的挑戰：效率 vs 彈性：</p><ul><li>專用硬體通常更有效率，但彈性較差</li><li>通用型的可以支援更多 program</li></ul><p>如果沒有靈活的架構，只有那些能在現有專用硬體上有效執行的演算法才能獲得性能提升，高效運算的範圍被限制在某些特定任務。<br>雖然有一個趨勢朝向更專用的硬體(機器學習)，但總會有對通用計算的需求。</p><h2 id="1-2-GPU-硬體架構"><a href="#1-2-GPU-硬體架構" class="headerlink" title="1-2 GPU 硬體架構"></a>1-2 GPU 硬體架構</h2><h3 id="GPU-和-CPU-架構的差異"><a href="#GPU-和-CPU-架構的差異" class="headerlink" title="GPU 和 CPU 架構的差異"></a>GPU 和 CPU 架構的差異</h3><p><img src="https://s2.loli.net/2024/01/12/Gh2E9Tn7AHi8QLV.png" alt="image.png"></p><table><thead><tr><th>特性</th><th>CPU (中央處理單元)</th><th>GPU (圖形處理單元)</th></tr></thead><tbody><tr><td><strong>設計焦點</strong></td><td>針對 sequential code 優化</td><td>針對浮點計算和 memory bandwidth 優化</td></tr><tr><td><strong>主要任務</strong></td><td>通用計算任務，包括複雜的邏輯和分支決策</td><td>圖形處理和高度平行化的計算任務</td></tr><tr><td><strong>硬體架構</strong></td><td>較少的核心，但每個核心擁有高度優化的性能</td><td>大量核心，專注於平行處理</td></tr><tr><td><strong>算術單元</strong></td><td>適合複雜運算，如分支和控制邏輯</td><td>maximize 浮點計算能力</td></tr><tr><td><strong>記憶體</strong></td><td>大型的 cache 和 memory</td><td>簡化的記憶體系統，通常擁有和需要更高的 memory bandwidth</td></tr><tr><td><strong>適用場景</strong></td><td>適用於高性能單執行緒和快速分支預測的任務</td><td>適用於需要大規模數據處理和高度平行化的任務</td></tr><tr><td><strong>記憶體頻寬</strong></td><td>相對較低的 memory bandwidth</td><td>高達 10 倍於 CPU 的 memory bandwidth</td></tr><tr><td><strong>設計理念</strong></td><td>latency-oriented，minimize 算術操作的 latency</td><td>throughput-oriented，提高整體處理能力</td></tr></tbody></table><h3 id="GPU-和-CPU-的溝通"><a href="#GPU-和-CPU-的溝通" class="headerlink" title="GPU 和 CPU 的溝通"></a>GPU 和 CPU 的溝通</h3><p>目前 GPU 並不是可以 stand-alone computing 的設備，所以考慮的形式是 GPU 和 CPU 進行溝通</p><ul><li>GPU 和 CPU 的通訊<ul><li>目前的 GPU 可能和 CPU 整合在一個晶片上，</li><li>或是 GPU 插在主機板上透過 PCIE 和 CPU 進行通訊，CPU 用於初始化計算，並且將資料透過 PCIE 匯流排傳入到 GPU 中<ul><li>PCIE 通訊速率也是 GPU 的瓶頸之一，因為 PCIE 傳輸對於 GPU 來說太慢了</li></ul></li></ul></li><li>GPU 和 CPU 的 I/O<ul><li>目前為止 CPU 中有北橋可以存取 main memory，有中斷器可以對應 input 設備，CPU 還提供了一套 API 去存取 IO，</li><li>但是 GPU 雖然說做到這些不難， 但是還沒有廠商實現。</li><li>操作系統也是一個問題，GPU 一般平行處理數據，但是操作系統要求平行處理資料的場景比較少</li></ul></li></ul><p>下面是 CPU 和 GPU 的兩種架構，<br><img src="https://s2.loli.net/2024/01/08/5HfOxeLQP13q8Ak.png" alt="image.png"></p><table><thead><tr><th>Device</th><th>Memory</th><th>DRAM Technology</th><th>Optimization</th></tr></thead><tbody><tr><td>CPU</td><td>系統記憶體（system memory）</td><td>DDR</td><td>Lower latency</td></tr><tr><td>GPU</td><td>裝置記憶體（device memory）</td><td>GDDR</td><td>Higher throughput</td></tr></tbody></table><ul><li><p>左邊是 GPU 直接插入 PCIE 插槽</p><ul><li>CPU 和 GPU 帶有獨立的 DRAM menory space 和 不同的 DRAM 技術<ul><li>CPU 的記憶體通常被稱為系統記憶體（system memory），GPU 的則通常被稱為裝置記憶體（device memory）</li><li>不同的 DRAM 技術：system memory 使用 DDR ，device memory 使用 GDDR</li><li>CPU 的 DRAM 通常會優先優化 access latency，而 GPU 的 RAM 則優先優化 throughput</li></ul></li></ul></li><li><p>右邊是 GPU 和 CPU 整合成一個晶片(AMD 的 APU)，只擁有單一的 DRAM 記憶體空間，因此必須使用相同的記憶體技術。</p><ul><li>由於整合 CPU 和 GPU 的晶片經常出現在低功耗的行動裝置上，因此這種共享的 DRAM 記憶體往往會針對功耗進行最佳化（如 LPDDR）。</li></ul></li></ul><h3 id="近代不同的架構設計"><a href="#近代不同的架構設計" class="headerlink" title="近代不同的架構設計"></a>近代不同的架構設計</h3><ul><li><p>在 NVIDIA 和 AMD 較舊的獨立 GPU 上，CPU 通常會在 CPU 和 GPU 的 memory space 中，為資料結構分配空間。</p><ul><li>對於這些 GPU，CPU 執行部分必須協調將 data 從 CPU 記憶體移至 GPU 記憶體。</li></ul></li><li><p>最近的獨立 GPU（如 NVIDIA 的 Pascal 架構），則可透過相關的軟硬體支持，自動地將資料從 CPU 記憶體轉移到 GPU 記憶體中。</p><ul><li>How?<ul><li>這可透過利用 CPU 和 GPU 對虛擬記憶體的支援來實現 [Gelado et al., 2010]。</li><li>NVIDIA 將此稱為「統一記憶體（unified memory）」。</li></ul></li></ul></li><li><p>CPU 和 GPU 被整合在同一晶片，並共享相同記憶體的系統</p><ul><li>不需要由人來將 GPU 記憶體複製到 GPU 記憶體。然而，由於 CPU 和 GPU 都是用了 cache，並且其中一些 cache 是 private 的，因此這裡可能會出現緩存一致性（cache coherence）的問題，這點需要由硬體開發商來解決 [Power et al., 2013b]。</li></ul></li></ul><p>::: success<br>怎麼從 CPU 開始呼叫 GPU 進行運算?<br>:::</p><h3 id="GPU-啟動運算的程序"><a href="#GPU-啟動運算的程序" class="headerlink" title="GPU 啟動運算的程序"></a>GPU 啟動運算的程序</h3><ol><li>在 GPU 上啟動運算前，在 CPU 上的 GPU 計算程式，要 <strong>指定哪些程式碼應該在 GPU 上運作</strong>。<ol><li>這些程式碼通常被稱作 <code>kernel</code>，是使用 GPU 程式語言（如 CUDA 或 OpenCL）編寫的函數，專門在 GPU 的平行架構上運行。</li></ol></li><li>同時，在 CPU 上的 GPU 計算程式也 <strong>指定了要執行執行緒的數量</strong>，以及 <strong>這些執行緒應該從哪裡取得輸入資料</strong>。</li><li>要運行的 kernel、執行緒的數量和資料的位置是由 CPU 上執行的驅動程式(driver)傳遞給 GPU 硬體的。</li><li>驅動程式作為中介，將這些資訊轉換為 GPU 可以理解的指令，並將它們放置在 GPU 可存取的記憶體中。</li><li>隨後，驅動程式向 GPU 發送訊號，告訴 GPU 要進行新的運算。</li></ol><p>::: success<br>開始運算後，現代 GPU 常用 SIMT 架構來執行平行化的計算<br>:::</p><h3 id="SIMT-Single-Instruction-Multiple-Threads"><a href="#SIMT-Single-Instruction-Multiple-Threads" class="headerlink" title="SIMT (Single-Instruction, Multiple Threads)"></a>SIMT (Single-Instruction, Multiple Threads)</h3><p>what: 是一種現代 GPU 常用架構</p><ul><li>使 GPU 能夠平行執行許多 thread，使其在可以分解為許多同時進行的小操作</li><li>NVIDIA 將這些 core 稱為串流多處理器（SM, streaming multiprocessor），AMD 則將它們稱為運算單元（compute unit）</li></ul><p><img src="https://s2.loli.net/2024/01/08/wKIgUNpaB14x3AL.png" alt="image.png"></p><p><strong>SIMT Core Cluster</strong></p><ul><li>What?<ul><li>這是多個 SIMT core 的分組。</li><li>可以同時使用相同指令但不同資料，來執行多個 Threads。</li></ul></li><li>Why?<ul><li>這在圖形處理中特別有用，因為同一操作通常應用於許多像素或頂點。</li></ul></li></ul><p><strong>SIMT core</strong></p><ul><li>What?<ul><li>每個 SIMT core 能夠同時執行多個(數千個)執行緒，為高度平行的設計，這對於通常由 GPU 處理的大規模平行工作負載來說是理想的。</li></ul></li></ul><p><strong>Memory Partition(記憶體分區):</strong></p><ul><li>What?<ul><li>GPU 中的記憶體被分成多個分割區(Partition)，允許多個 SIMT core 同時存取。</li></ul></li><li>Why?<ul><li>這種分割對於保持高吞吐量至關重要，因為它最小化了記憶體存取瓶頸</li><li>如果所有 core 都存取單一記憶體池，將會發生記憶體存取瓶頸。</li></ul></li></ul><p><strong>Interconnection Network:</strong></p><ul><li>What?<ul><li>這是連接 SIMT Core Cluster 與 Memory Partition 的 data pathway。它被設計成能夠處理高 bandwidth ，以實現快速數據交換</li></ul></li><li>Why?<ul><li>這對於維持 core 性能和記憶體訪問效率至關重要。</li></ul></li></ul><p>::: success<br>從更上層的視角來看整個 GPU 的內部架構:<br>:::</p><h3 id="GPU-內部架構"><a href="#GPU-內部架構" class="headerlink" title="GPU 內部架構:"></a>GPU 內部架構:</h3><p>Why? 在 thread 之間以不高的成本快速切換(context switch)，是 GPU 維持高使用率和效率的關鍵</p><ul><li>GPU 計算非常快，速度慢的瓶頸是 memory access，所以會不斷 context switch，達到 <strong>隱藏延遲</strong> 的效果（hide memory access latency）<ul><li>一個 core 中可以讓很多 threads 共用，其中一個 thread 如果要進行 memory access，就可以觸發 context switch，讓另一個 thread 來使用，以達到 hide (memory access) latency 的功能</li><li>CUDA 中，每個 thread 都有自己的 <strong>register set</strong>，所以 context switch 時基本上不用動到 register 裡面的值</li></ul></li></ul><p>How? 這些 GPU cores 將負責執行在 GPU 上啟動的 kernel 程序，以單指令多執行緒（SIMT）的方式執行，所以 GPU 上的每個 core 通常可以運行上千個 threads。</p><ul><li>同處在單一 core 上執行的 threads<ul><li>可透過草稿記憶體（scratchpad memory, shared, fast-access memory area）來溝通</li><li>可以透過一些高速屏障操作（barrier operations）進行同步。</li><li>每個 core 內部通常也會包含 L1 instruction cache 和 L1 data cache，可充當 bandwidth filter 以減少到較低階記憶體系統的通訊量。</li></ul></li><li>高水準的計算吞吐量（ high computational throughput ），有必要和 high memory bandwidth 間進行平衡。high memory bandwidth 很重要，因為它能夠讓 GPU 快速 load 和 store 計算所需的大量資料。</li></ul><p>為了達到這種平衡，我們在記憶體系統加入平行性（parallelism），通過以下架構特點實現：</p><p><strong>Multiple Memory Channels</strong>:</p><ul><li>主記憶體會被切成多個記憶體分區（memory partisions），每個 Partision 會連結到一個記憶體通道（memory channel）</li><li>在 GPU 中，這種平行性是由 GPU 所包含的多個 memory channel 提供的</li><li>每個 channel 都是一個獨立的路徑，用於 data 在 memory 和 GPU core 之間的流動。</li><li>所以通過擁有多個 channel，GPU 可以同時處理更多的 data，從而增加了可供 GPU core 使用的總體 memory bandwidth</li></ul><p><strong>Last-Level Cache Association</strong>:</p><blockquote><p>Last level cache (LLC) refers to <strong>the highest-numbered cache that is accessed by the cores prior to fetching from memory</strong>. Usually, LLC is shared by all the cores. In Skylake and Cascade Lake, the LLC is the shared L3 cache.</p></blockquote><ul><li>每個 memory channels 都會和一部分的 LLC 連結</li></ul><p><strong>On-Chip Interconnection Network</strong>:<br>GPU core 透過 on-chip network，如 crossbar，來與 memory partisions 連接。</p><ul><li>其它架構也是可能的，例如在超算市場上與 GPU 直接競爭的 Intel 的 Xeon Phi，就將 LLC 分配給了各個 core</li></ul><p>::: success<br>重點關注 core 和 thread 之間的關係<br>:::</p><h3 id="架構分析-core-thread"><a href="#架構分析-core-thread" class="headerlink" title="架構分析(core, thread)"></a>架構分析(core, thread)</h3><p>與 CPU 相比，GPU 可將其晶片面積中的更大部分用於 ALU（arithmetic logic units），並減少用於控制邏輯的面積，從而獲得更好的單位面積性能（performance per unit area）。<br><img src="https://s2.loli.net/2024/01/10/mYhlV7anq4j2gAF.png" alt="image.png"></p><blockquote><p>圖 1.3，對多核心（MC）CPU 架構和多執行緒（MT）架構（如 GPU）間的效能權衡的模型分析表明，如果執行緒數量不足以覆蓋 off-chip memory 的 memory access latency，就會出現「效能谷（ performance valley）」（基於 Guz et al.[2009] 的 Figure 1）</p></blockquote><p>為幫助對 CPU 和 GPU 架構間的權衡有一個直觀的認識，Guz 等人（Guz et al. [2009]）開發了一個分析模型，以顯示性能是如何隨 thread 數量的變化而變化的。</p><p>模型前提:</p><ul><li>thread 不會共享資料，</li><li>擁有無限的 off-chip memory bandwidth</li></ul><p>圖 1.3 就再現了它們論文中的一個圖表，顯示了他們在模型中發現的一個有趣的 trade-off：</p><ul><li>當一個大 cache 被少量 thread 共享時（如多核 CPU 的情況），效能將隨 thread 數量的增加而增加（MC Region）。</li><li>但是，一旦 thread 數量增加到 cache 無法容納整個工作集（working set，在 windows 中用到的 bytes）時，就會達到 Valley，效能下降。</li><li>然後，隨著 thread 的進一步增加，多執行緒技術也能隱藏較長的 off-chip latency，因此效能隨之提升（MT Region），即透過多執行緒來 tolerate 頻繁的 cache-miss。</li></ul><h3 id="GPU-的歷史要點："><a href="#GPU-的歷史要點：" class="headerlink" title="GPU 的歷史要點："></a>GPU 的歷史要點：</h3><ol><li><strong>Origins in the 1960s</strong>: Computer graphics technology dates back to the 1960s, marked by pioneering projects like Ivan Sutherland’s Sketchpad.起源於 1960 年代：電腦圖形技術可以追溯到 1960 年代，以伊凡·薩瑟蘭的 Sketchpad 等開創性項目為標誌。</li><li><strong>Early Role in Animation and Gaming</strong>: Graphics have played a crucial role in both off-line rendering for film animation and the development of real-time rendering for video games.早期在動畫和遊戲中的角色：圖形在電影動畫的離線渲染和視頻遊戲的實時渲染的發展中都扮演著至關重要的角色。</li><li><strong>Evolution of Video Cards</strong>: The progression started with text-only support in IBM’s MDA in 1981, followed by 2D and then 3D acceleration, which also benefited computer-aided design.顯示卡的演進：這個進程始於 1981 年 IBM 的 MDA 只支援文字，接著發展到 2D 和 3D 加速，同時也對電腦輔助設計有所裨益。</li><li><strong>Advancements in GPU Functionality</strong>: Early 3D graphics processors, like the NVIDIA GeForce 256, were mostly fixed-function. NVIDIA later introduced programmability with vertex and pixel shaders in 2001.GPU 功能的進步：早期的 3D 圖形處理器，如 NVIDIA GeForce 256，大多是固定功能的。NVIDIA 在 2001 年後引入了頂點和像素著色器的可編程功能。</li><li><strong>General-Purpose Computing on GPUs</strong>: Researchers found ways to use early GPUs for linear algebra, which led to more general-purpose computing applications on GPUs. NVIDIA’s GeForce 8 Series was the first commercial product to support this directly.研究人員發現了如何利用早期的 GPU 進行線性代數運算，這導致了更多通用計算應用在 GPU 上的出現。NVIDIA 的 GeForce 8 系列是第一個直接支援這一功能的商業產品。</li><li><strong>Innovations in GPU Architecture</strong>: The GeForce 8 Series added the ability to write to arbitrary memory addresses and introduced scratchpad memory. NVIDIA’s Fermi architecture later enabled caching of read-write data.GPU 架構的創新：GeForce 8 系列增加了對任意記憶體地址的寫入能力，並引入了暫存記憶體。NVIDIA 的 Fermi 架構後來實現了讀寫數據的緩存。</li><li><strong>Integration and Dynamic Parallelism</strong>: AMD’s Fusion architecture integrated the CPU and GPU on the same die. Dynamic parallelism was introduced, allowing for threads to be launched directly from the GPU.整合和動態平行處理：AMD 的 Fusion 架構將 CPU 和 GPU 整合在同一晶片上。引入了動態平行處理，允許直接從 GPU 啟動執行緒。</li><li><strong>Machine Learning Acceleration</strong>: The latest innovations, like NVIDIA’s Volta, include Tensor Cores designed specifically for machine learning acceleration.機器學習加速：最新的創新，如 NVIDIA 的 Volta，包括專為機器學習加速而設計的 Tensor Cores。</li></ol><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h1><ul><li>Aamodt, T. M., Fung, W. W. L., &amp; Rogers, T. G. (2018). General-Purpose Graphics Processor Architectures. Morgan &amp; Claypool Publishers.</li><li>Hwu, W. W., Kirk, D. B., El Hajj, I. (2023). Programming Massively Parallel Processors: A Hands-on Approach. Morgan Kaufmann.</li></ul>]]></content>
     
@@ -478,81 +553,6 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>Weekly-Review-5</title>
-    <link href="https://lzydaphne.github.io/2022/03/20/Weekly-Review-5/"/>
-    <id>https://lzydaphne.github.io/2022/03/20/Weekly-Review-5/</id>
-    <published>2022-03-20T15:20:29.000Z</published>
-    <updated>2022-03-21T00:31:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Weekly-Review-5"><a href="#Weekly-Review-5" class="headerlink" title="Weekly Review #5"></a>Weekly Review #5</h1><blockquote><p>2022/03/14~03/20</p></blockquote><h2 id="Courses-Life"><a href="#Courses-Life" class="headerlink" title="Courses / Life"></a>Courses / Life</h2><p>最近這周在準備期中考</p><p>蠻多事情都先暫停推進了</p><p>有時會頗為羨慕那些課業不重的人</p><p>他們可以比較有足夠的時間去學習感興趣的領域</p><p>當然我也在學習用長期思維的角度去想像</p><p>如果說牛熊一直會循環</p><p>那我怎會怕眼前這一兩年沒有累積呢</p><p>我應該就是人家說的那種很窮但是很努力的類型(笑)</p><hr><p>然後也在這學期擺進一些活動，營隊 *2 ﹑區塊鏈專題 *2﹑資安比賽……</p><p>目前看還是還好</p><p>但我覺得期末鐵定爆炸，不能像在期初一樣悠閒了，</p><p>至少每周都要確保課程和專題都有在規劃的時程中推進</p><p>算是充實又忙碌，不過可能就要等明年暑假再來實習</p><p>先來體驗大學生的生活也不錯</p><p>反正很多事情不需要迫切的急於一時，在當下的階段就好好體驗</p><p>畢竟未來也沒機會讓你重溫</p><p>生活嘛，總是要有些新體驗</p><h2 id="Books-Blog"><a href="#Books-Blog" class="headerlink" title="Books / Blog"></a>Books / Blog</h2><p>最近投入比較多時間閱讀的是<strong>米爾格蘭的&lt;服從權威&gt;</strong></p><p>有了之前佛洛姆的基礎之後</p><p>對服從這件事情有了更完整的理解</p><p>環境﹑對權威的感知﹑甚至自我的「代理人心態」都是促使個體服從權威的因素</p><p>簡單整理成一份mind map來幫助理解:</p><p><img src="/assets/book0321.png" alt="服從權威的因素"></p><p>之後或許再把碎片點整理一下放上來</p><p>不過最後分享一下篇末看到的心靈雞湯:</p><p>Q: 為何無法將信念化為行動?如何才能克服心理障礙?</p><p>A: 「一旦真的做到不服從之後，所有的壓力、焦慮與恐懼全不翼而飛。」</p><p>沒錯，90%的困難都是想像的!</p><h2 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h2><p>這周花很多時間理解prefix和infix/ preorder 和 inorder等等</p><p>還有tree/BST等等</p><p>要時常提醒自己</p><ol><li>覺得困難就是在學習</li><li>Paul Graham: 去解決困難的問題!</li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Weekly-Review-5&quot;&gt;&lt;a href=&quot;#Weekly-Review-5&quot; class=&quot;headerlink&quot; title=&quot;Weekly Review #5&quot;&gt;&lt;/a&gt;Weekly Review #5&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;202</summary>
-      
-    
-    
-    
-    <category term="Review" scheme="https://lzydaphne.github.io/categories/Review/"/>
-    
-    
-    <category term="Weekly" scheme="https://lzydaphne.github.io/tags/Weekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Weekly-review-#4</title>
-    <link href="https://lzydaphne.github.io/2022/03/14/weekly-review-4/"/>
-    <id>https://lzydaphne.github.io/2022/03/14/weekly-review-4/</id>
-    <published>2022-03-13T17:05:14.000Z</published>
-    <updated>2022-03-21T00:10:48.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Weekly-Review-4"><a href="#Weekly-Review-4" class="headerlink" title="Weekly Review #4"></a>Weekly Review #4</h1><blockquote><p>2022/03/07~03/13</p></blockquote><h2 id="Courses-Life"><a href="#Courses-Life" class="headerlink" title="Courses / Life"></a>Courses / Life</h2><p>這禮拜對defi有比較多研究，實際投入才知道人家說以太坊gas free很貴，是真的很貴!</p><p>一來一往造成的摩擦成本就足以讓本金縮水不少(好啦我很窮)</p><p>其實也有一些應用出現，讓消費者不需要主動尋找，年化從10%到20%不等，不過還是有些風險要承擔</p><p>最近其實有些感悟，</p><ol><li>吸收三分，行動七分。實踐才是最好的內化，只默默吸收是最懶惰的低等勤奮</li><li>對資訊敏感，感到有機會就趕緊去研究。運營人生的同時，還要主動建立項目，很可能身旁不會有人理解，但是你一定可以主動reach out到其他興趣團體，只是看你想不想。</li><li>很多事情都是想像比較難，實際做5分鐘後就會發現也還好，是自己能夠cover的</li><li>找尋一個興趣團體比你想像中的還要重要，一群人才能夠走得更遠，</li><li>謙卑來自「意識到自己有很多認知外的陌生區」</li><li>學習會有一種與未知相處的過程，不用擔心或著急，那代表你還在路上。如果妳都懂，那表示你還在舒適圈裏面。</li></ol><h2 id="Books-Blog"><a href="#Books-Blog" class="headerlink" title="Books / Blog"></a>Books / Blog</h2><p>&lt;隨機騙局&gt;</p><p>越到後面越精彩…講述一些心理偏誤和非線性的特徵。例如「沙堆效應」﹑「路徑相依」﹑「前景理論」等等。基本上在Think fast and slow都可以看到這些心理傾向的有趣例子。不過最近比較忙，還沒整理出一些比較具體的心得，待補充!</p><p>&lt;稀缺&gt;</p><p>這周最喜歡的觀念!這本書主要是在介紹「稀缺心態」的特徵和影響，以及如何改善。</p><p>簡單來說，稀缺心態就類似隧道效應，個體的心智帶寬會縮小，越來越局限於眼前的事</p><p>而稀缺的本質是沒有餘閒，所以最簡單的應對方法，就是刻意幫自己留有餘閒空間。</p><p>&lt;逃避自由&gt;</p><p>權威性格﹑施受虐性格﹑機械式順從……</p><p>其實意外收穫的，是我會想去思考如何把一些我很喜歡的概念，用簡單易懂又能二次傳播的方式來傳遞給他人。不然突然很生硬的卡進對話，也是有點怪</p><h2 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h2><p>這周在上機，考linked list有關的。</p><p>不過竟然考了circular LL，其實蠻有趣的但是時間不構解不出來</p><p>下次上機要考parse 那些，又牽扯到遞迴，覺得有點抽象，趕緊找人討論。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Weekly-Review-4&quot;&gt;&lt;a href=&quot;#Weekly-Review-4&quot; class=&quot;headerlink&quot; title=&quot;Weekly Review #4&quot;&gt;&lt;/a&gt;Weekly Review #4&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;202</summary>
-      
-    
-    
-    
-    <category term="Review" scheme="https://lzydaphne.github.io/categories/Review/"/>
-    
-    
-    <category term="Weekly" scheme="https://lzydaphne.github.io/tags/Weekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Weekly-Review-3</title>
-    <link href="https://lzydaphne.github.io/2022/03/07/Weekly-Review-3/"/>
-    <id>https://lzydaphne.github.io/2022/03/07/Weekly-Review-3/</id>
-    <published>2022-03-06T16:36:20.000Z</published>
-    <updated>2022-03-06T16:38:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Weekly-Review-3"><a href="#Weekly-Review-3" class="headerlink" title="Weekly Review #3"></a>Weekly Review #3</h1><blockquote><p>2022/02/28~03/06</p></blockquote><h2 id="Courses-Life"><a href="#Courses-Life" class="headerlink" title="Courses / Life"></a>Courses / Life</h2><p>上週比較有印象的課程是群眾的心理分析和程設</p><p>這周的文本是佛洛姆的&lt;逃避自由&gt;</p><p><a href="https://lzydaphne.github.io/2022/03/05/%E7%BE%A4%E7%9C%BE%E7%9A%84%E5%BF%83%E7%90%86%E5%88%86%E6%9E%90-%E9%80%83%E9%81%BF%E8%87%AA%E7%94%B1/">群眾的心理分析/逃避自由 | On the Road (lzydaphne.github.io)</a></p><p>因為太喜歡了，直接把QA放上去</p><p>裡面的主題包含 施虐受虐/自卑感和權力慾/權威性格/毀滅性格/機械化的順從 等等</p><p>直覺會聯想到最極端的例子，但最常發生的卻是深深隱埋在個體心中</p><p>只是強度和發生頻率的問題</p><p>最值得警醒的是，這些問題的存在會在自己無意識的情況下伴隨自己一輩子</p><p>就像你的大腦被預設成那樣的思考迴路</p><p>除非自己有意識的刻意改變</p><p>而認識，就是改變的第一步</p><hr><p>程設最近在教時間複雜度和編譯</p><p>我卡很久，卡大概10小時以上。</p><p>自己悶著頭寫效率很差，所以直接果斷組了一個討論小組，算是圓了上學期的夢</p><p>萬事起頭難，要趁最有熱情的時候去推動第一步</p><p>不然妳就真的不會去做了。真的。</p><p>而且大部分的困難都是自己想像的，實際執行上相對來說不困難</p><p>想做就趕快當下馬上做!</p><hr><p>這三天牙齒碰到冷物就會神經刺痛，痛到快哭出來那種</p><p>我發現這可能是之前拔牙後沒有乖乖把藥吃完，讓拔牙的地方出現感染，長出膿包</p><p>然後這邊的牙醫都要提前預約，所以沒辦法馬上處理，真的很無奈</p><p>週日其實有刻意找一間周日營業的牙醫，但是沒預約到害我白跑一趟</p><p>但也發現腳踏車原來可以想辦法抬過火車那邊的橋，不用走路穿過去</p><p>而且，有一點感悟是，出事情要馬上解決，不要有苟且的心態覺得拖一下就好</p><p>事情只會越拖越麻煩，當下不想處理是因為你只看到當下的時間軸，沒有關注到未來至少一周的時間軸。簡單來說，就是有限的/被侷限的</p><p>代表你還沒有內化無限心態，因為遇到困難就會顯露本性</p><p>你可以犯錯，但保證不貳過。 </p><h2 id="Books-Blog"><a href="#Books-Blog" class="headerlink" title="Books / Blog"></a>Books / Blog</h2><p>這周依舊在閱讀&lt;隨機騙局&gt;</p><p>今天讀到的章節很豐富，敘述了隨機性的謬誤和一些反常識的警句</p><ol><li>由於波動性的存在，分析樣本越多，那些「表現好」的人的絕對數目也就越多</li><li>有些人是因為自身特質剛好適合現代社會的隨機性結構而成功的</li><li>非人為的自然資料，會因為實務上的限制(參考案例問題)形成某種程度的關聯，不論是相關性或隨機性。所以，如果有資料宣稱自身是完全沒有關聯或形態，那很可能被人為動過手腳。</li></ol><h3 id="來自一些碎片…"><a href="#來自一些碎片…" class="headerlink" title="來自一些碎片…"></a>來自一些碎片…</h3><ul><li>「最好的學習環境來自壓力促使你去做事的地方，而不是完美的地方。There’s space for ypur performance to really make impact.」</li><li>能夠獲取他人的主觀能動性，是再多金錢也買不到的珍貴事物。所以，不要太快使用物質獎勵，有實驗證明，在那之後他人的表現會大幅下降</li><li>一個名詞只能代表過去的里程碑/成績/累積。但未必代表他現在的實力，他現在做甚麼。要看動詞，不看名詞</li><li>要從過程中享受，而不是終點的獎勵，可以用多巴胺的機制來解釋。簡單來說，只從目標的完成感獲得情緒獎勵的人，一輩子會活在多數的失敗狀態中，因為成功帶來的喜悅只有一下子，當擬定立下一個目標，你又進入了下一個循環</li><li>除非你意識到自己的潛意識，否則它會一直影響著你的生活，然後你說那是命運。</li><li>能力三層次:資源→流程→優先順序   。適用於公司和個體。</li></ul><h2 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h2><p>因為下周要上機，所以花了大部分時間在寫OJ題，大概20小時有</p><p>這次的主題是Linked List。概念不困難，困難的是，如何把他們應用在題目中，並同時兼顧時間複雜度</p><p>有些技巧也並不直覺，需要有人提示才可能學到</p><p>這周也組了一個討論小組，覺得很愉悅充實。因為大家會互相幫忙</p><p>然後發現自己在寫扣的時候，會容易把問題複雜化</p><p>一個function會拆到三個function結果扣變得很醜</p><p>我要做的事應該像今天一樣，先釐清大方向，有選定的資料結構和實作方法後，再開始上手打扣</p><p>看似有點慢，卻是提升解題效率的不二法門</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Weekly-Review-3&quot;&gt;&lt;a href=&quot;#Weekly-Review-3&quot; class=&quot;headerlink&quot; title=&quot;Weekly Review #3&quot;&gt;&lt;/a&gt;Weekly Review #3&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;202</summary>
-      
-    
-    
-    
-    <category term="Review" scheme="https://lzydaphne.github.io/categories/Review/"/>
-    
-    
-    <category term="Weekly" scheme="https://lzydaphne.github.io/tags/Weekly/"/>
     
   </entry>
   

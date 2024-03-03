@@ -16,24 +16,24 @@
   <meta name="author" content="lzydaphne">
   <meta name="keywords" content="">
   
-    <meta name="description" content="快速整理一下困擾許久的 binary search template 這個演算法的提出早至 1946 年，雖然原理並不難，但是真的很難 bug free 一次寫好 主要問題來自很容易犯下 Off-by-one error 以至於圖靈獎得主高德納在他 The Art of Computer Programming 3 中如此描述二分搜尋：  Although the basic idea of bi">
+    <meta name="description" content="Complete notes can be found here (Mandarin) : Ch2 Programming Model Brief overview of chapter2:Chapter 2 dives into the fascinating world of GPU computing, unraveling how GPUs manage to perform comple">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BinarySearch模板">
-<meta property="og:url" content="https://lzydaphne.github.io/2024/01/21/BinarySearch%E6%A8%A1%E6%9D%BF/index.html">
+<meta property="og:title" content="GPGPU-Ch2-Programming-Model">
+<meta property="og:url" content="https://lzydaphne.github.io/2024/03/02/GPGPU-Ch2-Programming-Model/index.html">
 <meta property="og:site_name" content="On the Road">
-<meta property="og:description" content="快速整理一下困擾許久的 binary search template 這個演算法的提出早至 1946 年，雖然原理並不難，但是真的很難 bug free 一次寫好 主要問題來自很容易犯下 Off-by-one error 以至於圖靈獎得主高德納在他 The Art of Computer Programming 3 中如此描述二分搜尋：  Although the basic idea of bi">
+<meta property="og:description" content="Complete notes can be found here (Mandarin) : Ch2 Programming Model Brief overview of chapter2:Chapter 2 dives into the fascinating world of GPU computing, unraveling how GPUs manage to perform comple">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://lzydaphne.github.io/assets/240121.png">
-<meta property="article:published_time" content="2024-01-21T07:51:38.000Z">
-<meta property="article:modified_time" content="2024-01-21T08:11:15.959Z">
+<meta property="og:image" content="https://lzydaphne.github.io/assets/240120.png">
+<meta property="article:published_time" content="2024-03-02T07:07:24.000Z">
+<meta property="article:modified_time" content="2024-03-03T15:40:06.706Z">
 <meta property="article:author" content="lzydaphne">
-<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="GPU">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://lzydaphne.github.io/assets/240121.png">
+<meta name="twitter:image" content="https://lzydaphne.github.io/assets/240120.png">
   
   
   
-  <title>BinarySearch模板 | On the Road</title>
+  <title>GPGPU-Ch2-Programming-Model | On the Road</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -204,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="BinarySearch模板"></span>
+            <span id="subtitle" data-typed-text="GPGPU-Ch2-Programming-Model"></span>
           
         </div>
 
@@ -215,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-21 15:51" pubdate>
-          2024年1月21日 下午
+        <time datetime="2024-03-02 15:07" pubdate>
+          2024年3月2日 下午
         </time>
       </span>
     
@@ -228,7 +228,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.1k 字
+          2.7k 字
         
       </span>
     
@@ -240,7 +240,7 @@
         
         
           <!-- compatible with older versions-->
-          18 分鐘
+          23 分鐘
         
       </span>
     
@@ -278,13 +278,13 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">BinarySearch模板</h1>
+            <h1 style="display: none">GPGPU-Ch2-Programming-Model</h1>
             
               <p class="note note-info">
                 
                   
                     <!-- compatible with older versions-->
-                    本文最後更新於：2024年1月21日 下午
+                    本文最後更新於：2024年3月3日 晚上
                   
                 
               </p>
@@ -292,70 +292,14 @@
             
               <div class="markdown-body">
                 
-                <p>快速整理一下困擾許久的 binary search template</p>
-<p>這個演算法的提出早至 1946 年，雖然原理並不難，但是真的很難 bug free 一次寫好</p>
-<p>主要問題來自很容易犯下 Off-by-one error</p>
-<p>以至於圖靈獎得主高德納在他 The Art of Computer Programming 3 中如此描述二分搜尋：</p>
-<blockquote>
-<p>Although the basic idea of binary search is comparatively straightforward, the details can be surprisingly tricky…</p>
-</blockquote>
-<p>以下統一使用「左閉右閉」區間</p>
-<p>之前本來慣用「左閉右開」，但發現在某些情況下，會需要特別向上取整，或是給出不同返回值，太瑣碎了，乾脆換一套新的，更容易理解。</p>
-<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>第一組:</p>
-<p>返回值 &lt;= target</p>
-<p>返回值 &gt; target</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs CPP"><span class="hljs-keyword">if</span>( nums[mid] &lt;= target ) l = c + <span class="hljs-number">1</span>;<br><span class="hljs-keyword">else</span> r = c - <span class="hljs-number">1</span>;<br><br><span class="hljs-comment">//...</span><br>    <br><span class="hljs-comment">//返回值 &lt;= target</span><br><span class="hljs-keyword">return</span> r;<br><span class="hljs-comment">//返回值 &gt; target</span><br><span class="hljs-keyword">return</span> l;<br></code></pre></td></tr></table></figure>
-
-
-
-<p>第二組:</p>
-<p>返回值 &lt; target</p>
-<p>返回值 &gt;= target</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">if</span>( nums[mid] &lt;= target ) l = c + <span class="hljs-number">1</span>;<br><span class="hljs-keyword">else</span> r = c - <span class="hljs-number">1</span>;<br><br><span class="hljs-comment">//...</span><br>    <br><span class="hljs-comment">//返回值 &lt; target</span><br><span class="hljs-keyword">return</span> r;<br><span class="hljs-comment">//返回值 &gt;= target</span><br><span class="hljs-keyword">return</span> l;<br></code></pre></td></tr></table></figure>
-
-
-
-<p>這些都不是通靈，是一步一步推論後整理出來，方便記憶的結論！</p>
-<h2 id="細節討論"><a href="#細節討論" class="headerlink" title="細節討論"></a>細節討論</h2><p>通常有【相等返回】，和四個【一般情況】</p>
-<ul>
-<li>相等返回: 若找到 <code>nums[mid] == target</code> 就返回 <code>mid</code></li>
-<li>一般情況<ol>
-<li>返回值 &gt;= target</li>
-<li>返回值 &gt; target</li>
-<li>返回值 &lt;= target</li>
-<li>返回值 &lt; target</li>
-</ol>
-</li>
-</ul>
-<h2 id="相等返回"><a href="#相等返回" class="headerlink" title="相等返回"></a>相等返回</h2><p>通常是一開始練習二分搜就會寫到的題目</p>
-<p>蠻簡單的，檢查到  <code>nums[mid] == target</code> 就返回 <code>mid</code></p>
-<h2 id="情況一-返回值-gt-target"><a href="#情況一-返回值-gt-target" class="headerlink" title="情況一: 返回值 &gt;= target"></a>情況一: 返回值 &gt;= target</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 模版一「一般」情形1: 大於等於</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> </span>&#123;<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = nums.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(l &lt;= r)&#123;<br>            <span class="hljs-type">int</span> c = l + (r - l) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(nums[c] &lt; target) l = c + <span class="hljs-number">1</span>; <span class="hljs-comment">// #1 更新後l左側元素「必」小於target</span><br>            <span class="hljs-keyword">else</span> r = c - <span class="hljs-number">1</span>; <span class="hljs-comment">// #2 更新後r右側「必」大於等於target</span><br>        &#125;<br>        <span class="hljs-comment">// return (l == nums.length || nums[l] != target) ? -1 : l; // 704題的返回，處理:相等/不等</span><br>        <span class="hljs-keyword">return</span> l == nums.length ? <span class="hljs-number">-1</span> : l; <span class="hljs-comment">// 處理: 相等/剛好大於/不存在</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="情況二-返回值-gt-target"><a href="#情況二-返回值-gt-target" class="headerlink" title="情況二: 返回值 &gt; target"></a>情況二: 返回值 &gt; target</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 模版一「一般」情形2: 大於</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> </span>&#123;<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = nums.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(l &lt;= r)&#123;<br>            <span class="hljs-type">int</span> c = l + (r - l) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(nums[c] &lt;= target) l = c + <span class="hljs-number">1</span>; <span class="hljs-comment">// #1 更新後l左側元素「必」小於等於target</span><br>            <span class="hljs-keyword">else</span> r = c - <span class="hljs-number">1</span>; <span class="hljs-comment">// #2 更新後r右側「必」大於target</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> l == nums.length ? <span class="hljs-number">-1</span> : l; <span class="hljs-comment">// 處理: 剛好大於/不存在</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="情況三-返回值-lt-target"><a href="#情況三-返回值-lt-target" class="headerlink" title="情況三: 返回值 &lt;= target"></a>情況三: 返回值 &lt;= target</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 模版一「一般」情形3: 小於等於</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> </span>&#123;<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = nums.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(l &lt;= r)&#123;<br>            <span class="hljs-type">int</span> c = l + (r - l) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(nums[c] &lt;= target) l = c + <span class="hljs-number">1</span>; <span class="hljs-comment">// #1 更新後l左側「必」小於等於target</span><br>            <span class="hljs-keyword">else</span> r = c - <span class="hljs-number">1</span>; <span class="hljs-comment">// #2 更新後r右側「必」大於target</span><br>        &#125;<br>        <span class="hljs-comment">// return (r == -1 || nums[r] != target) ? -1 : r; // 704題的返回，處理:相等/不等</span><br>        <span class="hljs-keyword">return</span> r; <span class="hljs-comment">// 處理: 相等/剛好小於/不存在</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="情況四-返回值-lt-target"><a href="#情況四-返回值-lt-target" class="headerlink" title="情況四: 返回值 &lt; target"></a>情況四: 返回值 &lt; target</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 模版一「一般」情形4: 小於</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> </span>&#123;<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = nums.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(l &lt;= r)&#123;<br>            <span class="hljs-type">int</span> c = l + (r - l) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(nums[c] &lt; target) l = c + <span class="hljs-number">1</span>; <span class="hljs-comment">// #1 更新後l左側元素「必」小於target</span><br>            <span class="hljs-keyword">else</span> r = c - <span class="hljs-number">1</span>; <span class="hljs-comment">// #2 更新後r右側「必」大於等於target</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> r; <span class="hljs-comment">// 處理: 相等/剛好小於/不存在</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/circle/discuss/ooxfo8/#%E6%A8%A1%E7%89%88%E4%B8%89-%E7%9B%B8%E9%82%BB%E7%BB%88%E6%AD%A2/%E5%B7%A6%E5%BC%80%E5%8F%B3%E5%BC%80">二分查找从入门到入睡 - 力扣（LeetCode）</a></li>
-</ul>
+                <p>Complete notes can be found here (Mandarin) :</p>
+<p><a target="_blank" rel="noopener" href="https://hackmd.io/@YWDEoiCeQdGIyz04HFQMIw/SkpTDZdtT">Ch2 Programming Model</a></p>
+<h2 id="Brief-overview-of-chapter2"><a href="#Brief-overview-of-chapter2" class="headerlink" title="Brief overview of chapter2:"></a>Brief overview of chapter2:</h2><p>Chapter 2 dives into the fascinating world of GPU computing, unraveling how GPUs manage to perform complex calculations at breakneck speeds. It kicks off by introducing us to the magic behind GPUs: their ability to handle thousands of tasks simultaneously without breaking a sweat. This capability is powered by clever tricks like creating threads with minimal fuss, scheduling them effortlessly, and synchronizing tasks swiftly, allowing for an incredible level of detail and speed in processing.</p>
+<p>Imagine a bustling city where every inhabitant has a specific task. In this city, there are neighborhoods (thread blocks) where tasks are finely detailed and closely related (fine-grained parallelism), and there are entire districts (independent thread blocks) where tasks are more varied but still connected by a common goal (coarse-grained parallelism). Even broader, the city comprises multiple regions (independent grids) each taking on different large-scale projects (task parallelism).</p>
+<p>The chapter then shines a spotlight on SIMD (Single Instruction, Multiple Data), a smart architecture that lets a single command work on multiple pieces of data at once. This is particularly handy for tasks that need the same operation repeated over and over on lots of data points. Modern GPUs are built on this principle, but they smartly hide the complexity and instead present a more versatile model through programming interfaces like CUDA and OpenCL. This model is like having an army of tiny, efficient workers (scalar threads) each capable of taking their own path and accessing any information they need to get the job done.</p>
+<p>Next, we explore how GPUs fit into the bigger picture alongside CPUs. Whether we’re talking about standalone GPUs or those integrated directly with CPUs, the dance between allocating memory, transferring data, and launching computational kernels (the actual computations running on the GPU) is beautifully orchestrated to ensure everything runs smoothly. The chapter uses the example of a simple mathematical operation (SAXPY) to show how these calculations are split up and run in parallel across thousands of threads, demonstrating the power and efficiency of GPU processing.</p>
+<p>In an exciting turn, the chapter delves into the nuts and bolts of GPU instruction sets, comparing NVIDIA’s approach with AMD’s. It introduces us to PTX and SASS, two levels of instruction within NVIDIA’s ecosystem, showing us how high-level programming commands are translated into the language that the GPU hardware actually understands. This process is a bit like translating a novel into multiple languages, each more detailed and closer to the action.</p>
+<p>Lastly, the comparison with AMD’s Graphics Core Next ISA offers a glimpse into the diverse strategies tech giants use to push the boundaries of what GPUs can achieve. This deep dive into the inner workings of GPUs showcases the constant innovation and the intricate dance between software and hardware that powers the stunning graphics and lightning-fast computations we’ve come to rely on in gaming, scientific research, and so much more.</p>
 
                 
               </div>
@@ -364,11 +308,32 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Research/" class="category-chain-item">Research</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/leetcode/">#leetcode</a>
+        <a href="/tags/GPU/">#GPU</a>
       
     </div>
   
@@ -382,9 +347,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/03/02/GPGPU-Ch3-SIMT-Core-Instruction-and-Register-Data-flow/" title="GPGPU-Ch3-SIMT-Core:Instruction-and-Register-Data-flow">
+                      <a href="/2024/03/02/GPGPU-Ch4-Memory-System/" title="GPGPU-Ch4-Memory-System">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">GPGPU-Ch3-SIMT-Core:Instruction-and-Register-Data-flow</span>
+                        <span class="hidden-mobile">GPGPU-Ch4-Memory-System</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -392,8 +357,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/20/GPGPU-CH1-GPU%20Hardware%20/" title="GPGPU-CH1-GPU Hardware">
-                        <span class="hidden-mobile">GPGPU-CH1-GPU Hardware</span>
+                      <a href="/2024/03/02/GPGPU-Ch3-SIMT-Core-Instruction-and-Register-Data-flow/" title="GPGPU-Ch3-SIMT-Core:Instruction-and-Register-Data-flow">
+                        <span class="hidden-mobile">GPGPU-Ch3-SIMT-Core:Instruction-and-Register-Data-flow</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
